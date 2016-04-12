@@ -39,7 +39,7 @@ class IndexController extends HomeController {
     	$answer=M('book')->where($map)->order('id desc')->select();
         foreach ($answer as $key => $value) {//实现关联查询
 
-            $data['bid'] = $value['id'];
+            $data['book_id'] = $value['id'];
             $result = M('Book_info')->where($data)->Field('publish,pub_date')->find();
             $answer[$key]['publish'] = $result['publish'];
             $answer[$key]['pub_date']=$result['pub_date'];
@@ -48,22 +48,46 @@ class IndexController extends HomeController {
     }
     public function bookinfo(){
         $bookid=I('id');
-        $map['bid']=array('EQ',$bookid);
+        $userid=is_login();
+        $map['book_id']=array('EQ',$bookid);
         $this->info=M('book_info')->where($map)->find();//find返回一行数据
+        $map['user_id']=$userid;
+        $this->state=M('book_record')->where($map)->getField('type');//返回当前用户这本书的借阅状态
+        $this->userid=$userid;
         $this->display();
     }
+/*    public function _before_borrow(){
+        is_login() || $this->error('您还没有登录，请先登录！', U('User/login'));
+    }
+    public function _before_returnbook(){
+        is_login() || $this->error('您还没有登录，请先登录！', U('User/login'));
+    }
+*/
     public function borrow(){
-        $bookid=I('id');
-        $map['bid']=array('EQ',$bookid);
+        $bookid=I('book_id');
+        $userid=I('user_id');
+        $map['book_id']=array('EQ',$bookid);
         M('book_info')->where($map)->setDec('remainnum');//统计字段更新
         $num=M('book_info')->where($map)->getField('remainnum');
+
+        $record=M('book_record');
+        if($record->create()){
+            $record->add();
+        }
+
         $this->ajaxReturn($num);
     }
      public function returnbook(){
-        $bookid=I('id');
-        $map['bid']=array('EQ',$bookid);
+        $bookid=I('book_id');
+         $userid=I('user_id');
+        $map['book_id']=array('EQ',$bookid);
         M('book_info')->where($map)->setInc('remainnum');
         $num=M('book_info')->where($map)->getField('remainnum');//获取指定字段的值
+
+        $map['user_id']=$userid;
+ 
+        M('book_record')->where($map)->setField('type',0);//更新指定字段
+
         $this->ajaxReturn($num);
     }
 

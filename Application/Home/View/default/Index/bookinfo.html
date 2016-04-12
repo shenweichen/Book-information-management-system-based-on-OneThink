@@ -34,6 +34,8 @@
                 <th>出版日期</th>
                 <th>总量</th>
                 <th>余量</th>
+                <th>状态</th>
+                <th>当前登录用户ID</th>
                 <tr>
                     <td align="center" id="bookid">{$info.id}</td>
                     <td>{$info.name}</td>
@@ -44,6 +46,8 @@
                     <td>{$info.pub_date}</td>
                     <td id="totalnum">{$info.totalnum}</td>
                     <td id="remainnum">{$info.remainnum}</td>
+                    <td id="state">{$state}</td>
+                    <td id="userid">{$userid}</td>
                     <td>
                         <button  id="borrow">借阅</button>
                     </td>
