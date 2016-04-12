@@ -1,105 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script language="javascript" type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-    <style> 
-.table {border:1px solid black} 
-.table td{border:solid blue; border-width:0px 1px 1px 0px;}
-</style>
+<extend name="Base/common"/>
 
-</head>
-<body>
-    <table class="table">
-        <th>ID</th>
-        <th>书名</th>
-        <th>作者名</th>
-        <foreach name='books' item='v'>
-            <tr>
-                <td align="center">{$v.id}</td>
-                <td>{$v.name}</td>
-                <td align="center">{$v.author}</td>
-                <br/>
-            </tr>
-        </foreach>
+<block name="header">
+    <header class="jumbotron subhead" id="overview">
+        <div class="container">
+            <h2>基于ThinkPHP的图书信息管理系统</h2>
+            <p class="lead"></p>
+        </div>
+    </header>
+</block>
 
-        <tr>
-            <th>输入关键字：</th>
-      <select id="select">
-       <option style="width:200px">题名</option>
-       <option style="width:200px">作者</option>
-       <option style="width:200px">编号</option>
-      </select>
-        </tr>
-        <tr>
-            <td>
+<block name="side">
+    <!-- 左侧 nav
+================================================== -->
+    <div class="span3 bs-docs-sidebar">
+        <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul> -->
+         <table class="book_table">
+                <th>ID</th>
+                <th>书名</th>
+                <th>作者名</th>
+                <foreach name='books' item='v'>
+                    <tr>
+                        <td align="center">{$v.id}</td>
+                        <td>{$v.name}</td>
+                        <td align="center">{$v.author}</td>
+                        <br/>
+                    </tr>
+                </foreach>
+            </table>
+            
+    </div>
+</block>
+
+<block name="body">
+    <div class="span9">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
+            -->
+            <div >
+                <select id="field_select" style="width:70px">
+                    <option >题名</option>
+                    <option >作者</option>
+                    <option >编号</option>
+                </select>
+                   <select id="rule_select" style="width:100px">
+                    <option >任意匹配</option>
+                    <option >完全匹配</option>
+                    <option >前方一致</option>
+                </select>
                 <input type="text" name="word" id="word"/>
-            </td>
+                <button  id="search_button" class="btn">检索</button>
 
-        </tr>
-        <tr>
-            <td>
-                <button  id="button">搜索</button>
-            </td>
-        </tr>
-    </table>
-
-    <table id="answer">
-        
-    </table>
-
-</body>
-
-    <script type="text/javascript">
-$('#button').click(function(){
- var keyword = $('#word').val();
-
-        if (keyword!="") {
-            var sid=$('#select').get(0).selectedIndex;
-            var query_field;
-            switch(sid){/*判断搜索字段*/
-                case 0:query_field="name";break;
-                case 1:query_field="author";break;
-                case 2:query_field="id";break;
-            }
-            $.ajax({/*ajax异步刷新*/
-                type: "GET",
-                url: "index.php?s=/Home/Index/search",
-                data: {
-                    keyword:keyword,
-                    query_field:query_field
-                },
-                dataType: "json",
-                success: function(data){/*将搜索结果返回*/
-                  //  alert("callback"); 
-                  $('#answer').empty();   
-                    var title=' <th>ID</th><th>书名</th><th>作者名</th>';
-                    $('#answer').append(title);
-                    for (var i = data.length - 1; i >= 0; i--) {
-                      var id=data[i]['id'];
-                      var name=data[i]['name'];
-                      var author=data[i]['author'];
-    
-                        var str="";
-                        str+='<tr>';
-                        str+='<td align="center">'+id+'</td>';
-                        str+='<td><a href="index.php?s=/home/index/bookinfo/id/'+id+'">'+name+'</a></td>';/*将id作为参数拼接*/
-                        str+='<td align="center">'+author+'</td>';
-                        str+='<br/></tr>'
-                        $('#answer').append(str);
-                    }
-                    }
-                });
-            }
-
-        else{
-
-            alert("请输入书籍名称！");
-        }
-});
-
-
-</script>
-
-</html>
+            </div>
+            <table id="answer"></table>
+        </section>
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/index.js"></script>
+</block>

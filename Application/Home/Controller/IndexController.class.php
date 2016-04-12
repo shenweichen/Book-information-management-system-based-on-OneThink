@@ -20,7 +20,6 @@ class IndexController extends HomeController {
     public function index(){
     	$this->books=M('book')->select();//select返回多行数据
     	$this->display();
-
         /*$category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
 
@@ -33,10 +32,18 @@ class IndexController extends HomeController {
     }
 
     public function search(){
+
     	$word=I('keyword');
         $query_field=I('query_field');
     	$map[$query_field]=array('LIKE','%'.$word.'%');
     	$answer=M('book')->where($map)->order('id desc')->select();
+        foreach ($answer as $key => $value) {//实现关联查询
+
+            $data['bid'] = $value['id'];
+            $result = M('Book_info')->where($data)->Field('publish,pub_date')->find();
+            $answer[$key]['publish'] = $result['publish'];
+            $answer[$key]['pub_date']=$result['pub_date'];
+        }
     	$this->ajaxReturn($answer);
     }
     public function bookinfo(){
