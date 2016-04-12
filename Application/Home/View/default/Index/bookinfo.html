@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script language="javascript" type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+	<table>
+		<th>ID</th>
+		<th>书名</th>
+		<th>作者名</th>
+		<th>总量</th>
+		<th>余量</th>
+		<tr>
+			<td align="center" id="bookid">{$info.id}</td>
+			<td>{$info['introduction']}</td>
+			<br/>
+			<td>
+				<a href="{:U('Home/Index/index')}">返回</a>
+			</td>
+			<td id="totalnum">{$info.totalnum}</td>
+			<td id="remainnum">{$info.remainnum}</td>
+			<td>
+				<button  id="borrow">借阅</button>
+			</td>
+			<td>
+				<button  id="return">归还</button>
+			</td>
+		</tr>
+
+	</table>
+</body>
+	<script type="text/javascript">
+ var bookid = $('#bookid').html();
+var remainnum=$('#remainnum').html();
+var totalnum=$('#totalnum').html();
+$('#borrow').click(function(){
+        if (remainnum>0) {
+            $.ajax({/*ajax异步刷新*/
+                type: "POST",
+                url: "index.php?s=/Home/Index/borrow",
+                data: {
+                    id:bookid,
+                },
+                dataType: "json",
+                success: function(data){
+                $('#remainnum').html(data);
+                remainnum=$('#remainnum').html();
+                    }
+                });
+            }
+        else{
+            alert("该书没有余量");
+        }
+});
+
+$('#return').click(function(){
+        if (eval(remainnum)<eval(totalnum)) {
+        	/*不能直接比较大写，因为是字符串，先转换成数字*/
+            $.ajax({/*ajax异步刷新*/
+                type: "POST",
+                url: "index.php?s=/Home/Index/returnbook",
+                data: {
+                    id:bookid,
+                },
+                dataType: "json",
+                success: function(data){
+                $('#remainnum').html(data);
+                remainnum=$('#remainnum').html();
+                    }
+                });
+            }
+        else{
+
+            alert("该书不可还");
+        }
+});
+
+
+</script></html>

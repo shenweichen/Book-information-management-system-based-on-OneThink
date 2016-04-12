@@ -58,12 +58,12 @@ $('#button').click(function(){
         if (keyword!="") {
             var sid=$('#select').get(0).selectedIndex;
             var query_field;
-            switch(sid){//判断搜索字段
+            switch(sid){/*判断搜索字段*/
                 case 0:query_field="name";break;
                 case 1:query_field="author";break;
                 case 2:query_field="id";break;
             }
-            $.ajax({//ajax异步刷新
+            $.ajax({/*ajax异步刷新*/
                 type: "GET",
                 url: "index.php?s=/Home/Index/search",
                 data: {
@@ -71,7 +71,7 @@ $('#button').click(function(){
                     query_field:query_field
                 },
                 dataType: "json",
-                success: function(data){//将搜索结果返回
+                success: function(data){/*将搜索结果返回*/
                   //  alert("callback"); 
                   $('#answer').empty();   
                     var title=' <th>ID</th><th>书名</th><th>作者名</th>';
@@ -80,10 +80,11 @@ $('#button').click(function(){
                       var id=data[i]['id'];
                       var name=data[i]['name'];
                       var author=data[i]['author'];
+    
                         var str="";
                         str+='<tr>';
                         str+='<td align="center">'+id+'</td>';
-                        str+='<td >'+name+'</td>';
+                        str+='<td><a href="index.php?s=/home/index/bookinfo/id/'+id+'">'+name+'</a></td>';/*将id作为参数拼接*/
                         str+='<td align="center">'+author+'</td>';
                         str+='<br/></tr>'
                         $('#answer').append(str);

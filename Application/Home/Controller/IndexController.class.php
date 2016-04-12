@@ -18,9 +18,9 @@ class IndexController extends HomeController {
 
 	//系统首页
     public function index(){
-    	$this->books=M('book')->select();
+    	$this->books=M('book')->select();//select返回多行数据
     	$this->display();
-    	//die;
+
         /*$category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
 
@@ -37,10 +37,28 @@ class IndexController extends HomeController {
         $query_field=I('query_field');
     	$map[$query_field]=array('LIKE','%'.$word.'%');
     	$answer=M('book')->where($map)->order('id desc')->select();
-    	// echo json_encode($answer);
     	$this->ajaxReturn($answer);
-
-    	// var_dump($answer);die;
     }
+    public function bookinfo(){
+        $bookid=I('id');
+        $map['bid']=array('EQ',$bookid);
+        $this->info=M('book_info')->where($map)->find();//find返回一行数据
+        $this->display();
+    }
+    public function borrow(){
+        $bookid=I('id');
+        $map['bid']=array('EQ',$bookid);
+        M('book_info')->where($map)->setDec('remainnum');//统计字段更新
+        $num=M('book_info')->where($map)->getField('remainnum');
+        $this->ajaxReturn($num);
+    }
+     public function returnbook(){
+        $bookid=I('id');
+        $map['bid']=array('EQ',$bookid);
+        M('book_info')->where($map)->setInc('remainnum');
+        $num=M('book_info')->where($map)->getField('remainnum');//获取指定字段的值
+        $this->ajaxReturn($num);
+    }
+
 
 }
