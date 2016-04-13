@@ -45,3 +45,16 @@ $('#search_button').click(function(){
             alert("请输入书籍名称！");
         }
 });
+
+
+  //提交按钮,所有验证通过方可提交
+$('.submit').click(function(){
+     var keyword = $('#word').val();
+    if(keyword!=""){
+        $('form').submit();
+    }else{
+        alert("字段不能为空!");
+        return false;
+    }
+});
+

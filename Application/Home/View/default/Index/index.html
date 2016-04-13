@@ -1,3 +1,4 @@
+<!-- 这是Index控制器的index页面 -->
 <extend name="Base/common"/>
 
 <block name="header">
@@ -9,10 +10,10 @@
     </header>
 </block>
 
-<block name="side">
+<block name="side" >
     <!-- 左侧 nav
 ================================================== -->
-    <div class="span3 bs-docs-sidebar">
+    <div class="span3 bs-docs-sidebar" >
         <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul> -->
          <table class="book_table">
                 <th>ID</th>
@@ -38,20 +39,22 @@
         <section id="contents">
             <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
             -->
-            <div >
-                <select id="field_select" style="width:70px">
-                    <option >题名</option>
-                    <option >作者</option>
-                    <option >编号</option>
+            <div>
+                <form action="{:U('Home/List/index')}" method="post" id="searchlist">
+                <select id="field_select" name="query_field" style="width:70px">
+                    <option value="name">题名</option>
+                    <option value="author">作者</option>
+                    <option value="id">编号</option>
                 </select>
                    <select id="rule_select" style="width:100px">
                     <option >任意匹配</option>
                     <option >完全匹配</option>
                     <option >前方一致</option>
                 </select>
-                <input type="text" name="word" id="word"/>
+                <input type="text" name="keyword" id="word"/>
+                <input type="submit" class="submit" value="提交到List"/>
                 <button  id="search_button" class="btn">检索</button>
-
+        </form>
             </div>
             <table id="answer"></table>
         </section>

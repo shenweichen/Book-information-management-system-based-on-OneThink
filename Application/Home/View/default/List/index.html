@@ -1,0 +1,82 @@
+<!-- 这是List控制器的index页面 -->
+<extend name="Base/common"/>
+
+<block name="header">
+    <header class="jumbotron subhead" id="overview">
+        <div class="container">
+            <h2>基于ThinkPHP的图书信息管理系统</h2>
+            <p class="lead"></p>
+        </div>
+    </header>
+</block>
+
+<block name="side"  >
+    <!-- 左侧 nav
+================================================== -->
+    <div class="span3 bs-docs-sidebar" >
+        <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
+    -->
+</div>
+</block>
+
+<block name="body">
+<div class="span9">
+    <!-- Contents
+        ================================================== -->
+    <section id="contents">
+        <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
+        -->
+        <div style="background-color: ">
+            <form action="{:U('Home/List/index')}" method="post" id="searchlist" align="center">
+                <select id="field_select" name="query_field" style="width:70px">
+                    <option value="name">题名</option>
+                    <option value="author">作者</option>
+                    <option value="id">编号</option>
+                </select>
+                <select id="rule_select" style="width:100px">
+                    <option >任意匹配</option>
+                    <option >完全匹配</option>
+                    <option >前方一致</option>
+                </select>
+                <input type="text" name="keyword" id="word"/>
+                <input type="submit" class="submit" value="提交到List"/>
+                <button  id="search_button" class="btn">检索</button>
+            </form>
+
+            <table id="answer" align="center" cellpadding="5 20 " style="">
+                <tr >
+                    <td>
+                        检索到 <strong style="color: red">{$count}</strong>
+                        条&nbsp;
+                        <span style="color: red">{$query_field}={$word}</span>
+                        &nbsp;的结果
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>书名</th>
+                    <th>作者名</th>
+                    <th>出版社</th>
+                    <th>出版时间</th>
+                </tr>
+                <foreach name='book' item='v'>
+                    <tr>
+                        <td align="center">
+                            <a href="index.php?s=/home/index/bookinfo/book_id/{$v.id}">{$v.name}</a>
+                        </td>
+                        <td>{$v.author}</td>
+                        <td>{$v.publish}</td>
+                        <td>{$v.pub_date}</td>
+                    </tr>
+                </foreach>
+                <tr style="position:fixed;bottom:90px;">
+                    <td colspan='5' align='center' style="font-size:medium;">{$page}</td>
+                </tr>
+
+            </table>
+        </div>
+
+    </section>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/js/index.js"></script>
+</block>

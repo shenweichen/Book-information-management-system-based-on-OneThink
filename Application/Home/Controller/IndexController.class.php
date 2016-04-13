@@ -18,6 +18,7 @@ class IndexController extends HomeController {
 
 	//系统首页
     public function index(){
+        session('uid',is_login());//将当前用户ID存在session中
     	$this->books=M('book')->select();//select返回多行数据
     	$this->display();
         /*$category = D('Category')->getTree();
@@ -37,20 +38,13 @@ class IndexController extends HomeController {
         $query_field=I('query_field');
     	$map[$query_field]=array('LIKE','%'.$word.'%');
     	$answer=M('book')->where($map)->order('id desc')->select();
-        foreach ($answer as $key => $value) {//实现关联查询
-
-            $data['book_id'] = $value['id'];
-            $result = M('Book_info')->where($data)->Field('publish,pub_date')->find();
-            $answer[$key]['publish'] = $result['publish'];
-            $answer[$key]['pub_date']=$result['pub_date'];
-        }
     	$this->ajaxReturn($answer);
     }
     public function bookinfo(){
-        $bookid=I('id');
-        $userid=is_login();
+        $bookid=I('book_id');
+        $userid = session('uid');
         $map['book_id']=array('EQ',$bookid);
-        $this->info=M('book_info')->where($map)->find();//find返回一行数据
+        $this->info=M('book')->where($map)->find();//find返回一行数据
         $map['user_id']=$userid;
         $this->state=M('book_record')->where($map)->getField('type');//返回当前用户这本书的借阅状态
         $this->userid=$userid;
@@ -67,8 +61,8 @@ class IndexController extends HomeController {
         $bookid=I('book_id');
         $userid=I('user_id');
         $map['book_id']=array('EQ',$bookid);
-        M('book_info')->where($map)->setDec('remainnum');//统计字段更新
-        $num=M('book_info')->where($map)->getField('remainnum');
+        M('book')->where($map)->setDec('remainnum');//统计字段更新
+        $num=M('book')->where($map)->getField('remainnum');
 
         $record=M('book_record');
         if($record->create()){
@@ -81,8 +75,8 @@ class IndexController extends HomeController {
         $bookid=I('book_id');
          $userid=I('user_id');
         $map['book_id']=array('EQ',$bookid);
-        M('book_info')->where($map)->setInc('remainnum');
-        $num=M('book_info')->where($map)->getField('remainnum');//获取指定字段的值
+        M('book')->where($map)->setInc('remainnum');
+        $num=M('book')->where($map)->getField('remainnum');//获取指定字段的值
 
         $map['user_id']=$userid;
  
