@@ -18,7 +18,8 @@ class IndexController extends HomeController {
 
 	//系统首页
     public function index(){
-        session('uid',is_login());//将当前用户ID存在session中
+        session('user_id',is_login());
+        //将当前用户ID存在session中
     	$this->books=M('book')->select();//select返回多行数据
     	$this->display();
         /*$category = D('Category')->getTree();
@@ -37,17 +38,17 @@ class IndexController extends HomeController {
     	$word=I('keyword');
         $query_field=I('query_field');
     	$map[$query_field]=array('LIKE','%'.$word.'%');
-    	$answer=M('book')->where($map)->order('id desc')->select();
+    	$answer=M('book')->where($map)->select();
     	$this->ajaxReturn($answer);
     }
     public function bookinfo(){
-        $bookid=I('book_id');
-        $userid = session('uid');
-        $map['book_id']=array('EQ',$bookid);
+        $ISBN=I('ISBN');
+        $user_id = session('user_id');
+        $map['ISBN']=array('EQ',$ISBN);
         $this->info=M('book')->where($map)->find();//find返回一行数据
-        $map['user_id']=$userid;
-        $this->state=M('book_record')->where($map)->getField('type');//返回当前用户这本书的借阅状态
-        $this->userid=$userid;
+        $map['user_id']=intval($user_id);
+        $this->state=M('borrow')->where($map)->getField('book_id');//返回当前用户这本书的借阅状态
+        $this->userid=$user_id;
         $this->display();
     }
 /*    public function _before_borrow(){
@@ -58,31 +59,43 @@ class IndexController extends HomeController {
     }
 */
     public function borrow(){
-        $bookid=I('book_id');
-        $userid=I('user_id');
-        $map['book_id']=array('EQ',$bookid);
+        $ISBN=I('ISBN');
+        $user_id=session('user_id');
+        $map['ISBN']=$ISBN;
+    //找到一本在库的书借出设置状态为借出
+        $bookid_isbn=M('bookid_isbn');
+        $book_id=$bookid_isbn->where($map)->where('state=0')->getField('book_id');
+        $bookid_isbn-> where("book_id=%d",$book_id)->setField('state',1);
+
         M('book')->where($map)->setDec('remainnum');//统计字段更新
-        $num=M('book')->where($map)->getField('remainnum');
-
-        $record=M('book_record');
-        if($record->create()){
-            $record->add();
-        }
-
-        $this->ajaxReturn($num);
+        $answer['remainnum']=M('book')->where($map)->getField('remainnum');
+        $answer['book_id']=$book_id;
+    //将借书记录插入至借阅表
+        $map['user_id']=intval($user_id);//session里存的user_id为字符串型，这里需要转换成整型
+        $map['book_id']=$book_id;
+       // 日期时间在数据库中设置了自动获取
+        M('borrow')->add($map);
+        $this->ajaxReturn($answer);
     }
+
      public function returnbook(){
-        $bookid=I('book_id');
-         $userid=I('user_id');
-        $map['book_id']=array('EQ',$bookid);
+         $ISBN=I('ISBN');
+         $user_id=session('user_id');
+         $book_id=I('book_id');
+
+        $map['ISBN']=array('EQ',$ISBN);
         M('book')->where($map)->setInc('remainnum');
-        $num=M('book')->where($map)->getField('remainnum');//获取指定字段的值
+        $remainnum=M('book')->where($map)->getField('remainnum');//获取指定字段的值
 
-        $map['user_id']=$userid;
- 
-        M('book_record')->where($map)->setField('type',0);//更新指定字段
+        $map['user_id']=$user_id;
+        $map['book_id']=$book_id;
 
-        $this->ajaxReturn($num);
+        $record=M('borrow')->where($map)->find();//找到该条借阅记录
+
+        M('borrow_history')->add($record);//插入到还书表
+        M('borrow')->where($map)->delete();//删除该条借阅记录
+
+        $this->ajaxReturn($remainnum);
     }
 
 

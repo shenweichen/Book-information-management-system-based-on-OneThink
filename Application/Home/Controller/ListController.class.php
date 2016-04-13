@@ -17,7 +17,7 @@ class ListController extends HomeController{
     	$Page->parameter['keyword']   = urlencode($word);
     	$Page->parameter['query_field']   = urlencode($query_field);
 
-    	$list=$book->where($map)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$list=$book->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
     	$this->count=$count;
     	$this->query_field=$query_field;
     	$this->word=$word;

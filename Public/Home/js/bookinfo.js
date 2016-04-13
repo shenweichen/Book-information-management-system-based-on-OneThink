@@ -1,9 +1,9 @@
-var bookid = $('#bookid').html();
+var ISBN = $('#ISBN').html();
 var remainnum=$('#remainnum').html();
 var totalnum=$('#totalnum').html();
 var userid=$('#userid').html();
+var book_id=$('#state').html();
 $('#borrow').click(function(){
-
     if(userid==0){
         alert("该用户还未登录");
     }
@@ -13,14 +13,13 @@ $('#borrow').click(function(){
                 type: "POST",
                 url: "index.php?s=/Home/Index/borrow",
                 data: {
-                    book_id:bookid,
-                    user_id:userid,
+                    ISBN:ISBN,
                 },
                 dataType: "json",
                 success: function(data){
-                $('#remainnum').html(data);
+                $('#remainnum').html(data.remainnum);
                 remainnum=$('#remainnum').html();
-                $('#state').html(1);
+                $('#state').html(data.book_id);
                     }
                 });
             }
@@ -40,8 +39,8 @@ $('#return').click(function(){
                 type: "POST",
                 url: "index.php?s=/Home/Index/returnbook",
                 data: {
-                    book_id:bookid,
-                    user_id:userid,
+                    ISBN:ISBN,
+                    book_id:book_id,
                 },
                 dataType: "json",
                 success: function(data){

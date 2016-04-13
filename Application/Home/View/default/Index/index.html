@@ -16,13 +16,13 @@
     <div class="span3 bs-docs-sidebar" >
         <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul> -->
          <table class="book_table">
-                <th>ID</th>
+                <th>ISBN</th>
                 <th>书名</th>
                 <th>作者名</th>
                 <foreach name='books' item='v'>
                     <tr>
-                        <td align="center">{$v.id}</td>
-                        <td>{$v.name}</td>
+                        <td align="center">{$v.ISBN}</td>
+                        <td>{$v.book_name}</td>
                         <td align="center">{$v.author}</td>
                         <br/>
                     </tr>
@@ -42,9 +42,9 @@
             <div>
                 <form action="{:U('Home/List/index')}" method="post" id="searchlist">
                 <select id="field_select" name="query_field" style="width:70px">
-                    <option value="name">题名</option>
+                    <option value="book_name">题名</option>
                     <option value="author">作者</option>
-                    <option value="id">编号</option>
+                    <option value="ISBN">ISBN编号</option>
                 </select>
                    <select id="rule_select" style="width:100px">
                     <option >任意匹配</option>

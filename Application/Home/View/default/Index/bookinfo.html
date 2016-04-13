@@ -26,23 +26,23 @@
 
         <div > <strong>书籍详情</strong>
             <table>
-                <th>BOOK_ID</th>
+                <th>ISBN</th>
                 <th>书名</th>
-                <th>作者名</th>
+                <th>作者</th>
                 <th>介绍</th>
                 <th>出版社</th>
                 <th>出版日期</th>
                 <th>总量</th>
                 <th>余量</th>
-                <th>状态</th>
-                <th>当前登录用户ID</th>
+                <th>借阅状态</th>
+                <th>用户ID</th>
                 <tr>
-                    <td align="center" id="bookid">{$info.id}</td>
-                    <td>{$info.name}</td>
+                    <td align="center" id="ISBN">{$info.ISBN}</td>
+                    <td>{$info.book_name}</td>
 
                     <td>{$info.author}</td>
-                    <td>{$info['introduction']}</td>
-                    <td>{$info.publish}</td>
+                    <td>{$info.introduction}</td>
+                    <td>{$info.pub}</td>
                     <td>{$info.pub_date}</td>
                     <td id="totalnum">{$info.totalnum}</td>
                     <td id="remainnum">{$info.remainnum}</td>
