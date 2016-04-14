@@ -19,8 +19,12 @@ class IndexController extends HomeController {
 	//系统首页
     public function index(){
         session('user_id',is_login());
-        //将当前用户ID存在session中
-    	$this->books=M('book')->select();//select返回多行数据
+           //将当前用户ID存在session中
+        $user_id=session('user_id');
+     
+       //显示热门图书
+    	$this->books=M('borrowrank_view')->order('rank desc')->select();
+        $this->userid=$user_id;
     	$this->display();
         /*$category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
@@ -28,8 +32,6 @@ class IndexController extends HomeController {
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
         $this->assign('page',D('Document')->page);//分页
-
-                 
         $this->display();*/
     }
 

@@ -18,7 +18,11 @@ class UserController extends HomeController {
 
 	/* 用户中心首页 */
 	public function index(){
-		
+		parent::login();
+		$user_id=session('user_id');
+		$this->userid=$user_id;
+		$this->books=M('current_borrow_view')->where('user_id=%d',$user_id)->select();
+		$this->display();
 	}
 
 	/* 注册页面 */

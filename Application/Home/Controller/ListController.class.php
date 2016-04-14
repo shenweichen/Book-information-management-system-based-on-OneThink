@@ -53,15 +53,14 @@ class ListController extends HomeController{
         $map['ISBN']=$ISBN;
     //找到一本在库的书借出并设置状态为借出
         $bookid_isbn=M('bookid_isbn');
-        $book_id=$bookid_isbn->where($map)->where('state=0')->getField('book_id');
-        $bookid_isbn-> where("book_id=%d",$book_id)->setField('state',1);
+        $book_id=$bookid_isbn->where($map)->where('state=1')->getField('book_id');
+        $map['book_id']=$book_id;
+        $bookid_isbn-> where($map)->setField('state',0);//数据库内部设置了触发器,当状态字段改变会自动修改库存数量
 
-        M('book')->where($map)->setDec('remainnum');//统计字段更新
         $answer['remainnum']=M('book')->where($map)->getField('remainnum');
         $answer['book_id']=$book_id;
     //将借书记录插入至借阅表
         $map['user_id']=intval($user_id);//session里存的user_id为字符串型，这里需要转换成整型
-        $map['book_id']=$book_id;
        // 日期时间在数据库中设置了自动获取
         M('borrow')->add($map);
         $this->ajaxReturn($answer);
@@ -73,17 +72,17 @@ class ListController extends HomeController{
          $book_id=I('book_id');
 
         $map['ISBN']=array('EQ',$ISBN);
-        M('book')->where($map)->setInc('remainnum');
+        $map['book_id']=$book_id;
+         M('bookid_isbn')->where($map)->setField('state',1);//将bookid表中的借阅状态设置为0，同时触发器自动更新库存数量
         $remainnum=M('book')->where($map)->getField('remainnum');//获取指定字段的值
 
         $map['user_id']=$user_id;
-        $map['book_id']=$book_id;
         $borrow=M('borrow');
         $record= $borrow->where($map)->find();//找到该条借阅记录
 
         M('borrow_history')->add($record);//插入到还书表
          $borrow->where($map)->delete();//删除该条借阅记录
-         M('bookid_isbn')->where("book_id=%d",$book_id)->setField('state',0);//将bookid表中的借阅状态设置为0
+     
 
         $this->ajaxReturn($remainnum);
     }

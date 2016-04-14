@@ -12,12 +12,19 @@
 <block name="side" >
     <!-- 左侧 nav
 ================================================== -->
-  <!--   <div class="span3 bs-docs-sidebar">
-      <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
-  </div> -->
-  <div style=" float:left ;width: 220px;height: 200px ;background-color: blue">
-      
-  </div>
+    <!--   <div class="span3 bs-docs-sidebar">
+    <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
+</div>
+-->
+<div style=" float:left ;width: 220px;height: 200px ;">
+    <if condition="is_login()">
+        <span>当前用户ID为{$userid}</span>
+        <else />
+        您还未登录,现在
+        <a href="{:U('User/login')}">登录</a>
+    </if>
+
+</div>
 </block>
 
 <block name="body">
@@ -36,7 +43,7 @@
                 <th>出版日期</th>
                 <th>总量</th>
                 <th>余量</th>
-                <th>借阅状态</th>
+                <th>书籍ID</th>
                 <th>用户ID</th>
                 <tr>
                     <td align="center" id="ISBN">{$info.ISBN}</td>
@@ -60,12 +67,26 @@
                         <a href="{:U('Home/Index/index')}">返回</a>
                     </td>
                 </tr>
+                <tr>
+                    <if condition="is_login()">
+                        <td>
+                            <button  id="borrow">借阅</button>
+                        </td>
+                        <td>
+                            <button  id="return">归还</button>
+                        </td>
+                        <td>
+                            <else />
+                            您还未登录,现在
+                            <a href="{:U('User/login')}">登录</a>
+                        </if>
+                    </tr>
 
-            </table>
+                </table>
 
-        </div>
-        <table id="answer"></table>
-    </section>
-</div>
-<script type="text/javascript" src="__PUBLIC__/Home/js/bookinfo.js"></script>
+            </div>
+            <table id="answer"></table>
+        </section>
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/bookinfo.js"></script>
 </block>

@@ -19,6 +19,7 @@ $('#borrow').click(function(){
                 },
                 dataType: "json",
                 success: function(data){
+                    alert("借阅成功!");
                 $('#remainnum').html(data.remainnum);
                 remainnum=$('#remainnum').html();
                 $('#state').html(data.book_id);
@@ -32,10 +33,12 @@ $('#borrow').click(function(){
 });
 
 $('#return').click(function(){
+
     if(userid==0){
           alert("该用户还未登录");
       }else{
-        if (eval(remainnum)<eval(totalnum)) {
+         var  book_id=$('#state').html();
+        if (eval(book_id)!=0) {
         	/*不能直接比较大小，因为是字符串，先转换成数字*/
           var  book_id=$('#state').html();
             $.ajax({/*ajax异步刷新*/
@@ -56,7 +59,7 @@ $('#return').click(function(){
             }
         else{
 
-            alert("该书不可还");
+            alert("该书不可还，您尚未借阅此书");
         }
     }
 });
