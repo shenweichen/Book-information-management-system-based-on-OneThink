@@ -55,14 +55,14 @@
                 </tr>
                 <tr>
                     <th>书名</th>
-                    <th>作者名</th>
+                    <th>作者</th>
                     <th>出版社</th>
                     <th>出版时间</th>
                 </tr>
                 <foreach name='book' item='v'>
                     <tr>
                         <td align="center">
-                            <a href="index.php?s=/home/index/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
+                            <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
                         </td>
                         <td>{$v.author}</td>
                         <td>{$v.pub}</td>
