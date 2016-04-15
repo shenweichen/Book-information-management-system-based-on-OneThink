@@ -1,4 +1,16 @@
-$('#search_button').click(function(){
+//提交按钮,所有验证通过方可提交
+$('.submit').click(function(){
+     var keyword = $('#word').val();
+    if(keyword!=""){
+        $('form').submit();
+    }else{
+        alert("字段不能为空!");
+        return false;
+    }
+});
+
+
+$('#null').click(function(){
  var keyword = $('#word').val();
         if (keyword!="") {
             var sid=$('#field_select').get(0).selectedIndex;
@@ -46,15 +58,4 @@ $('#search_button').click(function(){
         }
 });
 
-
-  //提交按钮,所有验证通过方可提交
-$('.submit').click(function(){
-     var keyword = $('#word').val();
-    if(keyword!=""){
-        $('form').submit();
-    }else{
-        alert("字段不能为空!");
-        return false;
-    }
-});
 

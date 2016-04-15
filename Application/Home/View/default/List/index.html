@@ -39,11 +39,10 @@
                     <option >前方一致</option>
                 </select>
                 <input type="text" name="keyword" id="word"/>
-                <input type="submit" class="submit" value="提交到List"/>
-                <button  id="search_button" class="btn">检索</button>
+                <input type="submit" class="btn" value="检索"/>
             </form>
 
-            <table id="answer" align="center" cellpadding="5 20 " style="">
+            <table id="answer" align="center" cellpadding="5 20 " class="table-hover">
                 <tr >
                     <td>
                         检索到 <strong style="color: red">{$count}</strong>
@@ -66,7 +65,7 @@
                         </td>
                         <td>{$v.author}</td>
                         <td>{$v.pub}</td>
-                        <td>{$v.pub_date}</td>
+                        <td>{$v.pub_date|date="Y-m-d H:i:s",###}</td>
                     </tr>
                 </foreach>
                 <tr style="position:fixed;bottom:90px;">

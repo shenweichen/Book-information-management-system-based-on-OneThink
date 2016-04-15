@@ -3,7 +3,7 @@
 <block name="header">
     <header class="jumbotron subhead" id="overview">
         <div class="container">
-            <h2>基于ThinkPHP的图书信息管理系统</h2>
+            <h2>基于ThinkPHP的图书信息管理系统----书籍详情</h2>
             <p class="lead"></p>
         </div>
     </header>
@@ -33,7 +33,7 @@
         ================================================== -->
     <section id="contents">
 
-        <div > <strong>书籍详情</strong>
+        <div >
             <table>
                 <th>ISBN</th>
                 <th>书名</th>
@@ -52,16 +52,16 @@
                     <td>{$info.author}</td>
                     <td>{$info.introduction}</td>
                     <td>{$info.pub}</td>
-                    <td>{$info.pub_date}</td>
+                    <td>{$info.pub_date|date="Y-m-d H:i:s",###}</td>
                     <td id="totalnum">{$info.totalnum}</td>
                     <td id="remainnum">{$info.remainnum}</td>
                     <td id="state">{$state}</td>
                     <td id="userid">{$userid}</td>
                     <td>
-                        <button  id="borrow">借阅</button>
+                        <button  id="borrow" class="btn">借阅</button>
                     </td>
                     <td>
-                        <button  id="return">归还</button>
+                        <button  id="return" class="btn">归还</button>
                     </td>
                     <td>
                         <a href="{:U('Home/Index/index')}">返回</a>
@@ -85,7 +85,6 @@
                 </table>
 
             </div>
-            <table id="answer"></table>
         </section>
     </div>
     <script type="text/javascript" src="__PUBLIC__/Home/js/bookinfo.js"></script>

@@ -61,7 +61,7 @@ class ListController extends HomeController{
         $answer['book_id']=$book_id;
     //将借书记录插入至借阅表
         $map['user_id']=intval($user_id);//session里存的user_id为字符串型，这里需要转换成整型
-       // 日期时间在数据库中设置了自动获取
+       $map['borrow_time']=time();//获取当前时间戳
         M('borrow')->add($map);
         $this->ajaxReturn($answer);
     }
@@ -79,7 +79,7 @@ class ListController extends HomeController{
         $map['user_id']=$user_id;
         $borrow=M('borrow');
         $record= $borrow->where($map)->find();//找到该条借阅记录
-
+        $record['return_time']=time();
         M('borrow_history')->add($record);//插入到还书表
          $borrow->where($map)->delete();//删除该条借阅记录
      

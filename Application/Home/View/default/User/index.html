@@ -21,23 +21,7 @@
         <else />
         您还未登录,现在
         <a href="{:U('User/login')}">登录</a>
-
     </if>
-
-    <h3 align="center" style="color: red">借阅信息</h3>
-    <table class="book_table" style="margin-top: -25px;">
-        <th>书名</th>
-        <th>借阅时间</th>
-        <foreach name='books' item='v'>
-            <tr>
-                <td align="center">
-                    <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
-                </td>
-                <td align="center">{$v.borrow_time}</td>
-                <br/>
-            </tr>
-        </foreach>
-    </table>
 
 </div>
 </block>
@@ -49,10 +33,44 @@
     <section id="contents">
         <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
         -->
-        <div>
-            
+        <div  style="width: 700px">
+            <div style="float: left;width: 200px;">
+                <h3 align="center" style="color: red">当前正在借阅</h3>
+                <table class="book_table" style="margin-top: -20px;">
+                    <th>书名</th>
+                    <th>借阅时间</th>
+                    <foreach name='books' item='v'>
+                        <tr>
+                            <td align="center">
+                                <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
+                            </td>
+                            <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
+                            <br/>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
+            <div style="float: right;width: 400px;">
+                <h3 align="center" style="color: red">历史借阅记录</h3>
+                <table class="book_table" style="margin-top: -20px;">
+                    <th>书名</th>
+                    <th>借阅时间</th>
+                    <th>归还时间</th>
+                    <foreach name='history' item='v'>
+                        <tr>
+                            <td align="center">
+                                <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
+                            </td>
+                            <td align="center">{$v.borrow_time|date="Y-m-d",###}</td>
+                            <br/>
+                            <td align="center">{$v.return_time|date="Y-m-d",###}</td>
+                            <br/>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
         </div>
-        <table id="answer"></table>
+
     </section>
 </div>
 <script type="text/javascript" src="__PUBLIC__/Home/js/index.js"></script>

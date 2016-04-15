@@ -99,7 +99,6 @@ class ThinkController extends AdminController {
                 ->page($page, $row)
                 /* 执行查询 */
                 ->select();
-
         } else {
             in_array('id', $fields) || array_push($fields, 'id');
             $name = parse_name(get_table_name($model['id']), true);

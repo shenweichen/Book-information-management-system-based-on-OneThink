@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-04-14 18:03:17
+-- Generation Time: 2016-04-15 18:29:50
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ot_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=105 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=118 ;
 
 --
 -- 转存表中的数据 `ot_action_log`
@@ -199,7 +199,20 @@ INSERT INTO `ot_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`,
 (101, 8, 1, 0, 'attribute', 60, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460649445),
 (102, 8, 1, 0, 'attribute', 61, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460649445),
 (103, 8, 1, 0, 'attribute', 62, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460649445),
-(104, 7, 1, 0, 'model', 9, '操作url：/onethink/index.php?s=/Admin/Model/update.html', 1, 1460649547);
+(104, 7, 1, 0, 'model', 9, '操作url：/onethink/index.php?s=/Admin/Model/update.html', 1, 1460649547),
+(105, 1, 1, 0, 'member', 1, 'admin在2016-04-15 10:27登录了后台', 1, 1460687243),
+(106, 1, 1, 0, 'member', 1, 'admin在2016-04-15 11:42登录了后台', 1, 1460691744),
+(107, 8, 1, 0, 'attribute', 63, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(108, 8, 1, 0, 'attribute', 64, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(109, 8, 1, 0, 'attribute', 65, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(110, 8, 1, 0, 'attribute', 66, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(111, 8, 1, 0, 'attribute', 67, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(112, 8, 1, 0, 'attribute', 68, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(113, 8, 1, 0, 'attribute', 69, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(114, 8, 1, 0, 'attribute', 70, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
+(115, 7, 1, 0, 'model', 10, '操作url：/onethink/index.php?s=/Admin/Model/update.html', 1, 1460691871),
+(116, 11, 1, 0, 'category', 39, '操作url：/onethink/index.php?s=/Admin/Category/add.html', 1, 1460693046),
+(117, 11, 1, 0, 'category', 39, '操作url：/onethink/index.php?s=/Admin/Category/edit.html', 1, 1460693052);
 
 -- --------------------------------------------------------
 
@@ -288,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `ot_attribute` (
   `auto_type` varchar(25) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `model_id` (`model_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='模型属性表' AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='模型属性表' AUTO_INCREMENT=71 ;
 
 --
 -- 转存表中的数据 `ot_attribute`
@@ -326,7 +339,15 @@ INSERT INTO `ot_attribute` (`id`, `name`, `title`, `field`, `type`, `value`, `re
 (29, 'template', '详情页显示模板', 'varchar(100) NOT NULL ', 'string', '', '', 1, '', 3, 0, 1, 1383896429, 1383891252, '', 0, '', '', '', 0, ''),
 (30, 'file_id', '文件ID', 'int(10) unsigned NOT NULL ', 'file', '0', '需要函数处理', 1, '', 3, 0, 1, 1383896415, 1383891252, '', 0, '', '', '', 0, ''),
 (31, 'download', '下载次数', 'int(10) unsigned NOT NULL ', 'num', '0', '', 1, '', 3, 0, 1, 1383896380, 1383891252, '', 0, '', '', '', 0, ''),
-(32, 'size', '文件大小', 'bigint(20) unsigned NOT NULL ', 'num', '0', '单位bit', 1, '', 3, 0, 1, 1383896371, 1383891252, '', 0, '', '', '', 0, '');
+(32, 'size', '文件大小', 'bigint(20) unsigned NOT NULL ', 'num', '0', '单位bit', 1, '', 3, 0, 1, 1383896371, 1383891252, '', 0, '', '', '', 0, ''),
+(70, 'pub_date', '出版日期', 'int(11) NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(69, 'pub', '出版社', 'varchar(30) NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(67, 'totalnum', '总量', 'smallint(5) unsigned NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(68, 'remainnum', '在馆数目', 'smallint(5) unsigned NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(63, 'ISBN', 'ISBN', 'varchar(17) NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(64, 'book_name', '书名', 'varchar(40) NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(65, 'author', '作者', 'varchar(20) NOT NULL ', 'string', '', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, ''),
+(66, 'introduction', '简介', 'varchar(100) NOT NULL ', 'string', 'this is a book', '', 1, '', 10, 0, 1, 1460691829, 1460691829, '', 0, '', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -647,7 +668,7 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
   `totalnum` smallint(5) unsigned NOT NULL COMMENT '总量',
   `remainnum` smallint(5) unsigned NOT NULL COMMENT '在馆数目',
   `pub` varchar(30) NOT NULL COMMENT '出版社',
-  `pub_date` date NOT NULL COMMENT '出版日期',
+  `pub_date` int(11) NOT NULL COMMENT '出版日期',
   PRIMARY KEY (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -656,11 +677,11 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
 --
 
 INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`) VALUES
-('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 1, '人民邮电出版社', '2015-06-01'),
-('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 2, '人民邮电出版社', '2015-06-01'),
-('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', '2015-06-01'),
-('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 2, '电子工业出版社', '2015-11-01'),
-('9787121280764', '疯狂Swift讲义(第2版)', '李刚', '基于Swift 2.1版本写成，针对Swift 1.x和2.x变化比较大的特点进行了彻底升级。', 2, 2, '电子工业出版社', '2016-02-01');
+('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 1, '人民邮电出版社', 1454281200),
+('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 2, '人民邮电出版社', 1454281200),
+('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', 1454281200),
+('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 2, '电子工业出版社', 1454281200),
+('9787121280764', '疯狂Swift讲义(第2版)', '李刚', '基于Swift 2.1版本写成，针对Swift 1.x和2.x变化比较大的特点进行了彻底升级。', 2, 2, '电子工业出版社', 1454281200);
 
 -- --------------------------------------------------------
 
@@ -732,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `ot_borrow` (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
   `book_id` smallint(10) NOT NULL COMMENT 'book_id',
-  `borrow_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '借书时间',
+  `borrow_time` int(11) NOT NULL COMMENT '借书时间',
   PRIMARY KEY (`user_id`,`ISBN`,`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -741,7 +762,7 @@ CREATE TABLE IF NOT EXISTS `ot_borrow` (
 --
 
 INSERT INTO `ot_borrow` (`user_id`, `ISBN`, `book_id`, `borrow_time`) VALUES
-(2, '9787115308276', 1, '2016-04-14 08:58:49');
+(1, '9787115308276', 1, 1460696040);
 
 -- --------------------------------------------------------
 
@@ -763,8 +784,8 @@ CREATE TABLE IF NOT EXISTS `ot_borrow_history` (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
   `book_id` smallint(10) NOT NULL COMMENT 'book_id',
-  `borrow_time` timestamp NOT NULL COMMENT '借书时间',
-  `return_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '还书时间',
+  `borrow_time` int(11) NOT NULL COMMENT '借书时间',
+  `return_time` int(11) NOT NULL COMMENT '还书时间',
   PRIMARY KEY (`user_id`,`ISBN`,`book_id`,`borrow_time`,`return_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -773,10 +794,7 @@ CREATE TABLE IF NOT EXISTS `ot_borrow_history` (
 --
 
 INSERT INTO `ot_borrow_history` (`user_id`, `ISBN`, `book_id`, `borrow_time`, `return_time`) VALUES
-(1, '9787115391872', 1, '2016-04-14 11:22:51', '2016-04-14 11:23:53'),
-(1, '9787115392602', 1, '2016-04-14 15:25:16', '2016-04-14 15:28:28'),
-(2, '9787115308276', 1, '2016-04-14 08:56:17', '2016-04-14 08:56:20'),
-(2, '9787115308276', 1, '2016-04-14 08:56:22', '2016-04-14 08:56:26');
+(1, '9787115308276', 1, 1460695858, 1460695992);
 
 -- --------------------------------------------------------
 
@@ -814,7 +832,7 @@ CREATE TABLE IF NOT EXISTS `ot_category` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`),
   KEY `pid` (`pid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='分类表' AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='分类表' AUTO_INCREMENT=40 ;
 
 --
 -- 转存表中的数据 `ot_category`
@@ -822,7 +840,8 @@ CREATE TABLE IF NOT EXISTS `ot_category` (
 
 INSERT INTO `ot_category` (`id`, `name`, `title`, `pid`, `sort`, `list_row`, `meta_title`, `keywords`, `description`, `template_index`, `template_lists`, `template_detail`, `template_edit`, `model`, `type`, `link_id`, `allow_publish`, `display`, `reply`, `check`, `reply_model`, `extend`, `create_time`, `update_time`, `status`, `icon`) VALUES
 (1, 'blog', '博客', 0, 0, 10, '', '', '', '', '', '', '', '2', '2,1', 0, 0, 1, 0, 0, '1', '', 1379474947, 1382701539, 1, 0),
-(2, 'default_blog', '默认分类', 1, 1, 10, '', '', '', '', '', '', '', '2', '2,1,3', 0, 1, 1, 0, 1, '1', '', 1379475028, 1386839751, 1, 31);
+(2, 'default_blog', '默认分类', 1, 1, 10, '', '', '', '', '', '', '', '2', '2,1,3', 0, 1, 1, 0, 1, '1', '', 1379475028, 1386839751, 1, 31),
+(39, 'book', '图书', 0, 1, 10, '', '', '', '', '', '', '', '2', '2', 0, 1, 1, 1, 0, '', '', 1460693046, 1460693052, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -920,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `ot_current_borrow_view` (
 `user_id` int(11)
 ,`book_name` varchar(40)
 ,`ISBN` varchar(17)
-,`borrow_time` timestamp
+,`borrow_time` int(11)
 );
 -- --------------------------------------------------------
 
@@ -1028,6 +1047,18 @@ CREATE TABLE IF NOT EXISTS `ot_file` (
 -- --------------------------------------------------------
 
 --
+-- 替换视图以便查看 `ot_history_borrow_view`
+--
+CREATE TABLE IF NOT EXISTS `ot_history_borrow_view` (
+`book_name` varchar(40)
+,`user_id` int(11)
+,`borrow_time` int(11)
+,`return_time` int(11)
+,`ISBN` varchar(17)
+);
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `ot_hooks`
 --
 
@@ -1087,7 +1118,7 @@ CREATE TABLE IF NOT EXISTS `ot_member` (
 --
 
 INSERT INTO `ot_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
-(1, 'admin', 0, '0000-00-00', '', 10, 51, 0, 1460367803, 0, 1460647858, 1),
+(1, 'admin', 0, '0000-00-00', '', 10, 53, 0, 1460367803, 0, 1460691744, 1),
 (2, 'swc', 0, '0000-00-00', '', 10, 16, 0, 0, 0, 1460623551, 1);
 
 -- --------------------------------------------------------
@@ -1255,7 +1286,7 @@ CREATE TABLE IF NOT EXISTS `ot_model` (
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `engine_type` varchar(25) NOT NULL DEFAULT 'MyISAM' COMMENT '数据库引擎',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文档模型表' AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文档模型表' AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `ot_model`
@@ -1264,7 +1295,8 @@ CREATE TABLE IF NOT EXISTS `ot_model` (
 INSERT INTO `ot_model` (`id`, `name`, `title`, `extend`, `relation`, `need_pk`, `field_sort`, `field_group`, `attribute_list`, `template_list`, `template_add`, `template_edit`, `list_grid`, `list_row`, `search_key`, `search_list`, `create_time`, `update_time`, `status`, `engine_type`) VALUES
 (1, 'document', '基础文档', 0, '', 1, '{"1":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"]}', '1:基础', '', '', '', '', 'id:编号\r\ntitle:标题:article/index?cate_id=[category_id]&pid=[id]\r\ntype|get_document_type:类型\r\nlevel:优先级\r\nupdate_time|time_format:最后更新\r\nstatus_text:状态\r\nview:浏览\r\nid:操作:[EDIT]&cate_id=[category_id]|编辑,article/setstatus?status=-1&ids=[id]|删除', 0, '', '', 1383891233, 1384507827, 1, 'MyISAM'),
 (2, 'article', '文章', 1, '', 1, '{"1":["3","24","2","5"],"2":["9","13","19","10","12","16","17","26","20","14","11","25"]}', '1:基础,2:扩展', '', '', '', '', 'id:编号\r\ntitle:标题:article/edit?cate_id=[category_id]&id=[id]\r\ncontent:内容', 0, '', '', 1383891243, 1387260622, 1, 'MyISAM'),
-(3, 'download', '下载', 1, '', 1, '{"1":["3","28","30","32","2","5","31"],"2":["13","10","27","9","12","16","17","19","11","20","14","29"]}', '1:基础,2:扩展', '', '', '', '', 'id:编号\r\ntitle:标题', 0, '', '', 1383891252, 1387260449, 1, 'MyISAM');
+(3, 'download', '下载', 1, '', 1, '{"1":["3","28","30","32","2","5","31"],"2":["13","10","27","9","12","16","17","19","11","20","14","29"]}', '1:基础,2:扩展', '', '', '', '', 'id:编号\r\ntitle:标题', 0, '', '', 1383891252, 1387260449, 1, 'MyISAM'),
+(10, 'book', 'book', 0, '', 1, '{"1":["70","69","67","68","63","64","65","66"]}', '1:基础', '', '', '', '', 'ISBN:ISBN\r\nbook_name:书名', 10, '', '', 1460691829, 1460691871, 1, 'MyISAM');
 
 -- --------------------------------------------------------
 
@@ -1346,7 +1378,7 @@ CREATE TABLE IF NOT EXISTS `ot_ucenter_member` (
 --
 
 INSERT INTO `ot_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
-(1, 'admin', 'af7da48ffaf33684501acc93d1841ae0', '519589356@qq.com', '', 1460367803, 0, 1460647858, 0, 1460367803, 1),
+(1, 'admin', 'af7da48ffaf33684501acc93d1841ae0', '519589356@qq.com', '', 1460367803, 0, 1460691744, 0, 1460367803, 1),
 (2, 'swc', '40e39b0c33d00449776fdc77604e412c', 'last.fantasy@qq.com', '', 1460461790, 0, 1460623551, 0, 1460461790, 1);
 
 -- --------------------------------------------------------
@@ -1408,6 +1440,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `ot_current_borrow_view`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_current_borrow_view` AS select `ot_borrow`.`user_id` AS `user_id`,`ot_book`.`book_name` AS `book_name`,`ot_borrow`.`ISBN` AS `ISBN`,`ot_borrow`.`borrow_time` AS `borrow_time` from (`ot_borrow` join `ot_book`) where (`ot_borrow`.`ISBN` = `ot_book`.`ISBN`);
+
+-- --------------------------------------------------------
+
+--
+-- 视图结构 `ot_history_borrow_view`
+--
+DROP TABLE IF EXISTS `ot_history_borrow_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_history_borrow_view` AS select `ot_book`.`book_name` AS `book_name`,`ot_borrow_history`.`user_id` AS `user_id`,`ot_borrow_history`.`borrow_time` AS `borrow_time`,`ot_borrow_history`.`return_time` AS `return_time`,`ot_borrow_history`.`ISBN` AS `ISBN` from (`ot_book` join `ot_borrow_history`) where (`ot_borrow_history`.`ISBN` = `ot_book`.`ISBN`);
 
 --
 -- 限制导出的表

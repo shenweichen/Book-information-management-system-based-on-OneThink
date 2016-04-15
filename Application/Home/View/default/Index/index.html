@@ -49,7 +49,7 @@
         <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
         -->
         <div>
-            <form action="{:U('Home/List/index')}" method="post" id="searchlist">
+            <form action="{:U('Home/List/index')}" method="post" id="searchlist" >
                 <select id="field_select" name="query_field" style="width:70px">
                     <option value="book_name">题名</option>
                     <option value="author">作者</option>
@@ -61,8 +61,7 @@
                     <option >前方一致</option>
                 </select>
                 <input type="text" name="keyword" id="word"/>
-                <input type="submit" class="submit" value="提交到List"/>
-                <button  id="search_button" class="btn">检索</button>
+                <input type="submit" class="btn" value="检索"/>
             </form>
         </div>
         <table id="answer"></table>
