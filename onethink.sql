@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-04-15 18:29:50
+-- Generation Time: 2016-04-16 16:22:04
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ot_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=118 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=119 ;
 
 --
 -- 转存表中的数据 `ot_action_log`
@@ -212,7 +212,8 @@ INSERT INTO `ot_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`,
 (114, 8, 1, 0, 'attribute', 70, '操作url：/onethink/index.php?s=/Admin/Model/generate.html', 1, 1460691829),
 (115, 7, 1, 0, 'model', 10, '操作url：/onethink/index.php?s=/Admin/Model/update.html', 1, 1460691871),
 (116, 11, 1, 0, 'category', 39, '操作url：/onethink/index.php?s=/Admin/Category/add.html', 1, 1460693046),
-(117, 11, 1, 0, 'category', 39, '操作url：/onethink/index.php?s=/Admin/Category/edit.html', 1, 1460693052);
+(117, 11, 1, 0, 'category', 39, '操作url：/onethink/index.php?s=/Admin/Category/edit.html', 1, 1460693052),
+(118, 1, 1, 0, 'member', 1, 'admin在2016-04-16 20:40登录了后台', 1, 1460810428);
 
 -- --------------------------------------------------------
 
@@ -669,6 +670,7 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
   `remainnum` smallint(5) unsigned NOT NULL COMMENT '在馆数目',
   `pub` varchar(30) NOT NULL COMMENT '出版社',
   `pub_date` int(11) NOT NULL COMMENT '出版日期',
+  `call` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -676,12 +678,12 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
 -- 转存表中的数据 `ot_book`
 --
 
-INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`) VALUES
-('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 1, '人民邮电出版社', 1454281200),
-('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 2, '人民邮电出版社', 1454281200),
-('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', 1454281200),
-('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 2, '电子工业出版社', 1454281200),
-('9787121280764', '疯狂Swift讲义(第2版)', '李刚', '基于Swift 2.1版本写成，针对Swift 1.x和2.x变化比较大的特点进行了彻底升级。', 2, 2, '电子工业出版社', 1454281200);
+INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`, `call`) VALUES
+('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 1, '人民邮电出版社', 1454281200, 'TP312/0246 '),
+('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 1, '人民邮电出版社', 1454281200, 'TP317.6/4402 '),
+('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', 1454281200, ' TP312SW/420 '),
+('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 2, '电子工业出版社', 1454281200, 'TP312SW/424 '),
+('9787121280764', '疯狂Swift讲义(第2版)', '李刚', '基于Swift 2.1版本写成，针对Swift 1.x和2.x变化比较大的特点进行了彻底升级。', 2, 2, '电子工业出版社', 1454281200, ' TP312/6301 ');
 
 -- --------------------------------------------------------
 
@@ -703,7 +705,7 @@ CREATE TABLE IF NOT EXISTS `ot_bookid_isbn` (
 
 INSERT INTO `ot_bookid_isbn` (`ISBN`, `book_id`, `state`) VALUES
 ('9787115308276', 1, 0),
-('9787115391872', 1, 1),
+('9787115391872', 1, 0),
 ('9787115392602', 1, 1),
 ('9787121275821', 1, 1),
 ('9787121280764', 1, 1),
@@ -762,7 +764,8 @@ CREATE TABLE IF NOT EXISTS `ot_borrow` (
 --
 
 INSERT INTO `ot_borrow` (`user_id`, `ISBN`, `book_id`, `borrow_time`) VALUES
-(1, '9787115308276', 1, 1460696040);
+(1, '9787115308276', 1, 1460696040),
+(1, '9787115391872', 1, 1460813332);
 
 -- --------------------------------------------------------
 
@@ -794,7 +797,9 @@ CREATE TABLE IF NOT EXISTS `ot_borrow_history` (
 --
 
 INSERT INTO `ot_borrow_history` (`user_id`, `ISBN`, `book_id`, `borrow_time`, `return_time`) VALUES
-(1, '9787115308276', 1, 1460695858, 1460695992);
+(1, '9787115308276', 1, 1460695858, 1460695992),
+(1, '9787115391872', 1, 1460810434, 1460810449),
+(1, '9787115391872', 1, 1460813316, 1460813322);
 
 -- --------------------------------------------------------
 
@@ -1118,7 +1123,7 @@ CREATE TABLE IF NOT EXISTS `ot_member` (
 --
 
 INSERT INTO `ot_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
-(1, 'admin', 0, '0000-00-00', '', 10, 53, 0, 1460367803, 0, 1460691744, 1),
+(1, 'admin', 0, '0000-00-00', '', 20, 54, 0, 1460367803, 0, 1460810428, 1),
 (2, 'swc', 0, '0000-00-00', '', 10, 16, 0, 0, 0, 1460623551, 1);
 
 -- --------------------------------------------------------
@@ -1378,7 +1383,7 @@ CREATE TABLE IF NOT EXISTS `ot_ucenter_member` (
 --
 
 INSERT INTO `ot_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
-(1, 'admin', 'af7da48ffaf33684501acc93d1841ae0', '519589356@qq.com', '', 1460367803, 0, 1460691744, 0, 1460367803, 1),
+(1, 'admin', 'af7da48ffaf33684501acc93d1841ae0', '519589356@qq.com', '', 1460367803, 0, 1460810428, 0, 1460367803, 1),
 (2, 'swc', '40e39b0c33d00449776fdc77604e412c', 'last.fantasy@qq.com', '', 1460461790, 0, 1460623551, 0, 1460461790, 1);
 
 -- --------------------------------------------------------

@@ -27,7 +27,7 @@
         <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
         -->
         <div style="background-color: ">
-            <form action="{:U('Home/List/index')}" method="post" id="searchlist" align="center">
+            <form class="form-horizontal" action="{:U('Home/List/index')}" method="post" id="searchlist" align="center">
                 <select id="field_select" name="query_field" style="width:70px">
                     <option value="book_name">题名</option>
                     <option value="author">作者</option>
@@ -41,17 +41,13 @@
                 <input type="text" name="keyword" id="word"/>
                 <input type="submit" class="btn" value="检索"/>
             </form>
-
-            <table id="answer" align="center" cellpadding="5 20 " class="table-hover">
-                <tr >
-                    <td>
-                        检索到 <strong style="color: red">{$count}</strong>
-                        条&nbsp;
-                        <span style="color: red">{$query_field}={$word}</span>
-                        &nbsp;的结果
-                    </td>
-
-                </tr>
+            <table id="answer" class="table table-striped table-bordered table-hover" align="center" cellpadding="5 20 " >
+                <h4 align="center">
+                    检索到 <strong style="color: red">{$count}</strong>
+                    条&nbsp;
+                    <span style="color: red">{$query_field}={$word}</span>
+                    &nbsp;的结果
+                </h4>
                 <tr>
                     <th>书名</th>
                     <th>作者</th>
@@ -68,12 +64,72 @@
                         <td>{$v.pub_date|date="Y-m-d H:i:s",###}</td>
                     </tr>
                 </foreach>
-                <tr style="position:fixed;bottom:90px;">
-                    <td colspan='5' align='center' style="font-size:medium;">{$page}</td>
-                </tr>
-
             </table>
+            <span colspan='5' align='center' style="font-size:medium;">{$page}</span>
+
         </div>
+
+        <div class="book_article">
+                <ol id="search_book_list" class="list-group">
+                <foreach name="book" item="v">
+                    <li class="list-group-item list-group-item-success">
+                        <h3 class="list-group-item-heading">
+                            <span>中文图书</span>
+                            <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}"> <b>{$v.book_name}</b> 
+                            </a>
+                            {$v.call}
+                        </h3>
+                        <p class="list-group-item-text">
+                            <span>
+                                馆藏复本：2
+                                <br>可借复本：1</span>
+                            {$v.author}
+                            <br>
+                            {$v.pub}&nbsp;{$v.pub_date|date="Y-m",###}
+                            <br>
+                            <img src="./杭州电子科技大学图书馆v5.0书目检索系统_files/star0.gif" title="总体评分及评价人数">
+                            (0)
+                            <a href="http://210.32.33.91:8080/opac/item.php?marc_no=0000604098" class="tooltip" onmouseover="showDetail(&#39;0000604098&#39;)" onmouseout="hideDetail(&#39;0000604098&#39;)">
+                                馆藏
+                                <s></s>
+                            </a>
+                        </p>
+                        <div id="detail0000604098" style="display: none;" class="prompt">
+                            <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" id="item">
+                                <tbody>
+                                    <tr align="left" class="greytext1">
+                                        <td>索书号</td>
+                                        <td>条码号</td>
+                                        <td>年卷期</td>
+                                        <td>馆藏地</td>
+                                        <td>书刊状态</td>
+                                    </tr>
+                                    <tr align="left" class="whitetext">
+                                        <td width="10%">TP312/0246</td>
+                                        <td width="15%">72096228</td>
+                                        <td width="15%">&nbsp;-</td>
+                                        <td width="25%" title="自然书库（3F东）">
+                                            <img src="./杭州电子科技大学图书馆v5.0书目检索系统_files/place_marker.gif">自然书库（3F东）</td>
+                                        <td width="25%">借出-应还日期：2016-05-12</td>
+                                    </tr>
+                                    <tr align="left" class="whitetext">
+                                        <td width="10%">TP312/0246</td>
+                                        <td width="15%">72096229</td>
+                                        <td width="15%">&nbsp;-</td>
+                                        <td width="25%" title="自然书库（3F东）">
+                                            <img src="./杭州电子科技大学图书馆v5.0书目检索系统_files/place_marker.gif">自然书库（3F东）</td>
+                                        <td width="25%"> <font color="green">可借</font>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </li>
+                </foreach>
+                   <span colspan='5' align='center' style="font-size:medium;">{$page}</span>
+                </ol>
+            </div>
 
     </section>
 </div>

@@ -58,13 +58,11 @@
                     <td id="state">{$state}</td>
                     <td id="userid">{$userid}</td>
                     <td>
-                        <button  id="borrow" class="btn">借阅</button>
-                    </td>
-                    <td>
-                        <button  id="return" class="btn">归还</button>
-                    </td>
-                    <td>
-                        <a href="{:U('Home/Index/index')}">返回</a>
+                        <div class="btn-group">
+                            <button  id="borrow" class="btn ">借阅</button>
+                            <button  id="return" class="btn ">归还</button>
+                            <a class="btn" href="{:U('Home/Index/index')}">返回</a>
+                        </div>
                     </td>
                 </tr>
                 <tr>
