@@ -46,7 +46,7 @@
                 <th>书籍ID</th>
                 <th>用户ID</th>
                 <tr>
-                    <td align="center" id="ISBN">{$info.ISBN}</td>
+                    <td align="center" id="ISBN">{$info.isbn}</td>
                     <td>{$info.book_name}</td>
 
                     <td>{$info.author}</td>
@@ -73,7 +73,6 @@
                         <td>
                             <button  id="return">归还</button>
                         </td>
-                        <td>
                             <else />
                             您还未登录,现在
                             <a href="{:U('User/login')}">登录</a>

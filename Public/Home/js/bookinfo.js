@@ -33,7 +33,6 @@ $('#borrow').click(function(){
 });
 
 $('#return').click(function(){
-
     if(userid==0){
           alert("该用户还未登录");
       }else{

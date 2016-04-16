@@ -9,7 +9,6 @@ $('.submit').click(function(){
     }
 });
 
-
 $('#null').click(function(){
  var keyword = $('#word').val();
         if (keyword!="") {

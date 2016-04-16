@@ -57,7 +57,7 @@
                 <foreach name='book' item='v'>
                     <tr>
                         <td align="center">
-                            <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
+                            <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.isbn}">{$v.book_name}</a>
                         </td>
                         <td>{$v.author}</td>
                         <td>{$v.pub}</td>
@@ -75,7 +75,7 @@
                     <li class="list-group-item list-group-item-success">
                         <h3 class="list-group-item-heading">
                             <span>中文图书</span>
-                            <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}"> <b>{$v.book_name}</b> 
+                            <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.isbn}"> <b>{$v.book_name}</b> 
                             </a>
                             {$v.call}
                         </h3>
