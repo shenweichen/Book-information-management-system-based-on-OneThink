@@ -9,17 +9,15 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 namespace Think;
-
 // 分布式文件存储类
-class Storage
-{
+class Storage {
 
     /**
      * 操作句柄
      * @var string
      * @access protected
      */
-    protected static $handler;
+    static protected $handler    ;
 
     /**
      * 连接分布式文件系统
@@ -28,17 +26,15 @@ class Storage
      * @param array $options  配置数组
      * @return void
      */
-    public static function connect($type = 'File', $options = array())
-    {
-        $class         = 'Think\\Storage\\Driver\\' . ucwords($type);
+    static public function connect($type='File',$options=array()) {
+        $class  =   'Think\\Storage\\Driver\\'.ucwords($type);
         self::$handler = new $class($options);
     }
 
-    public static function __callstatic($method, $args)
-    {
+    static public function __callstatic($method,$args){
         //调用缓存驱动的方法
-        if (method_exists(self::$handler, $method)) {
-            return call_user_func_array(array(self::$handler, $method), $args);
+        if(method_exists(self::$handler, $method)){
+           return call_user_func_array(array(self::$handler,$method), $args);
         }
     }
 }

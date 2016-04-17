@@ -1,8 +1,8 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header class="jumbotron subhead" id="overview">
-		<div class="container">
+    <header class="page-header bg-primary" id="overview">
+		<div class="container-fluid">
 			<h2>{$info.title}</h2>
 			<p>
 				<span  class="pull-left">
@@ -23,7 +23,7 @@
 </block>
 
 <block name="body">
-    <div class="span9 main-content">
+    <div class="col-md-9 main-content">
         <!-- Contents
         ================================================== -->
         <section id="contents">{$info.content}</section>

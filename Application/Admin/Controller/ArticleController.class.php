@@ -682,7 +682,7 @@ class ArticleController extends AdminController {
 
                 $result   =  $Model->add($data);
                 if($result){
-                    $logic      =   logic($data['model_id']);
+                    $logic      =   D(get_document_model($data['model_id'],'name'),'Logic');
                     $data       =   $logic->detail($value); //获取指定ID的扩展数据
                     $data['id'] =   $result;
                     $res        =   $logic->add($data);
@@ -702,17 +702,12 @@ class ArticleController extends AdminController {
      * @author huajie <banhuajie@163.com>
      */
     protected function checkPaste($list, $cate_id, $pid){
-        $return     =   array('status'=>1);
-        $Document   =   D('Document');
+        $return = array('status'=>1);
+        $Document = D('Document');
 
         // 检查支持的文档模型
-        if($pid){
-            $modelList =   M('Category')->getFieldById($cate_id,'model_sub');   // 当前分类支持的文档模型
-        }else{
-            $modelList =   M('Category')->getFieldById($cate_id,'model');   // 当前分类支持的文档模型
-        }
-        
-        foreach ($list as $key => $value){
+        $modelList =   M('Category')->getFieldById($cate_id,'model');   // 当前分类支持的文档模型
+        foreach ($list as $key=>$value){
             //不能将自己粘贴为自己的子内容
             if($value == $pid){
                 $return['status'] = 0;

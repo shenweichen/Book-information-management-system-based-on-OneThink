@@ -10,9 +10,7 @@
 // +----------------------------------------------------------------------
 
 namespace Think\Upload\Driver;
-
-class Local
-{
+class Local{
     /**
      * 上传文件根目录
      * @var string
@@ -28,8 +26,7 @@ class Local
     /**
      * 构造函数，用于设置上传根路径
      */
-    public function __construct($config = null)
-    {
+    public function __construct($config = null){
 
     }
 
@@ -38,10 +35,9 @@ class Local
      * @param string $rootpath   根目录
      * @return boolean true-检测通过，false-检测失败
      */
-    public function checkRootPath($rootpath)
-    {
-        if (!(is_dir($rootpath) && is_writable($rootpath))) {
-            $this->error = '上传根目录不存在！请尝试手动创建:' . $rootpath;
+    public function checkRootPath($rootpath){
+        if(!(is_dir($rootpath) && is_writable($rootpath))){
+            $this->error = '上传根目录不存在！请尝试手动创建:'.$rootpath;
             return false;
         }
         $this->rootPath = $rootpath;
@@ -53,8 +49,7 @@ class Local
      * @param  string $savepath 上传目录
      * @return boolean          检测结果，true-通过，false-失败
      */
-    public function checkSavePath($savepath)
-    {
+    public function checkSavePath($savepath){
         /* 检测并创建目录 */
         if (!$this->mkdir($savepath)) {
             return false;
@@ -75,11 +70,10 @@ class Local
      * @param  boolean $replace 同名文件是否覆盖
      * @return boolean          保存状态，true-成功，false-失败
      */
-    public function save($file, $replace = true)
-    {
+    public function save($file, $replace=true) {
         $filename = $this->rootPath . $file['savepath'] . $file['savename'];
 
-        /* 不覆盖同名文件 */
+        /* 不覆盖同名文件 */ 
         if (!$replace && is_file($filename)) {
             $this->error = '存在同名文件' . $file['savename'];
             return false;
@@ -90,23 +84,22 @@ class Local
             $this->error = '文件上传保存错误！';
             return false;
         }
-
+        
         return true;
     }
 
     /**
      * 创建目录
-     * @param  string $savepath 要创建的目录
+     * @param  string $savepath 要创建的穆里
      * @return boolean          创建状态，true-成功，false-失败
      */
-    public function mkdir($savepath)
-    {
+    public function mkdir($savepath){
         $dir = $this->rootPath . $savepath;
-        if (is_dir($dir)) {
+        if(is_dir($dir)){
             return true;
         }
 
-        if (mkdir($dir, 0777, true)) {
+        if(mkdir($dir, 0777, true)){
             return true;
         } else {
             $this->error = "目录 {$savepath} 创建失败！";
@@ -118,8 +111,7 @@ class Local
      * 获取最后一次上传错误信息
      * @return string 错误信息
      */
-    public function getError()
-    {
+    public function getError(){
         return $this->error;
     }
 

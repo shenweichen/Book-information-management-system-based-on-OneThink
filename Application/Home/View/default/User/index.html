@@ -13,7 +13,7 @@
 <block name="side" >
     <!-- 左侧 nav
 ================================================== -->
-    <div class="span3 bs-docs-sidebar" >
+    <div class="col-md-3 bs-docs-sidebar" >
         <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
     -->
     <if condition="is_login()">
@@ -27,7 +27,7 @@
 </block>
 
 <block name="body">
-<div class="span9">
+<div class="col-md-9">
     <!-- Contents
         ================================================== -->
     <section id="contents">
@@ -42,7 +42,7 @@
                     <foreach name='books' item='v'>
                         <tr>
                             <td align="center">
-                                <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
+                                <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.isbn}">{$v.book_name}</a>
                             </td>
                             <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
                             <br/>
@@ -59,7 +59,7 @@
                     <foreach name='history' item='v'>
                         <tr>
                             <td align="center">
-                                <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.ISBN}">{$v.book_name}</a>
+                                <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.isbn}">{$v.book_name}</a>
                             </td>
                             <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
                             <br/>

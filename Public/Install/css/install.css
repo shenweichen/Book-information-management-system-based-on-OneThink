@@ -88,47 +88,7 @@ hr.soften {
 
 /* Base class
 ------------------------- */
-.jumbotron {
-    position: relative;
-    padding: 40px 0;
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
-    background: #378503; /* Old browsers */
-    background: -moz-linear-gradient(45deg, #1F221F 0%, #0CA818 100%);
-    background: -webkit-linear-gradient(45deg, #1F221F 0%,#0CA818 100%);
-    background: -o-linear-gradient(45deg, #1F221F 0%,#0CA818 100%);
-    background: -ms-linear-gradient(45deg, #1F221F 0%,#0CA818 100%);
-    background: linear-gradient(45deg, #1F221F 0%,#0CA818 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1F221F', endColorstr='#0CA818',GradientType=1 );
-    -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-    -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-    box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-}
-.jumbotron h1 {
-    font-size: 80px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    line-height: 1;
-}
-.jumbotron p {
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 1.25;
-    margin-bottom: 30px;
-}
-
-/* Link styles (used on .masthead-links as well) */
-.jumbotron a {
-    color: #fff;
-    color: rgba(255,255,255,.5);
-    -webkit-transition: all .2s ease-in-out;
-         -moz-transition: all .2s ease-in-out;
-                    transition: all .2s ease-in-out;
-}
-.jumbotron a:hover {
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255,255,255,.25);
-}
+/*原子力量：remove Jumbotrons definition since BT3 defined it */
 
 /* Download button */
 .masthead .btn {
@@ -217,9 +177,15 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 /* Masthead (docs home)
 ------------------------- */
 .masthead {
-    padding: 70px 0 80px;
+    padding: 10px 0 80px;
     margin-bottom: 0;
     color: #fff;
+}
+.masthead a{
+    color: orange;
+    margin-left:10px;
+    margin-right:10px;
+    text-decoration: underline;
 }
 .masthead h1 {
     font-size: 64px;
@@ -231,6 +197,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
     font-size: 28px;
     font-weight: 400;
     line-height: 1.6;
+    color: #bdc3c7;
 }
 
 
@@ -269,8 +236,9 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
     *zoom: 1;
 }
 
-/* Subhead (other pages)
+/*cleanbing Subhead (other pages)
 ------------------------- */
+/*cleanbing
 .subhead {
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -283,7 +251,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 }
 .subhead .navbar {
     display: none;
-}
+}*/
 
 
 
@@ -876,10 +844,10 @@ form.bs-docs-example {
 /* Ads in headers
 -------------------------------------------------- */
 
-.subhead h1,
+/*cleanbing.subhead h1,
 .subhead .lead {
     margin-right: 340px;
-}
+}*/
 
 .carbonad {
     position: absolute;
@@ -964,10 +932,10 @@ form.bs-docs-example {
         margin-right: 0;
     }
 
-    .subhead h1,
+/*cleanbing    .subhead h1,
     .subhead .lead {
         margin-right: 0;
-    }
+    }*/
 
     .carbonad {
         position: static;
@@ -1091,10 +1059,10 @@ form.bs-docs-example {
     }
 
     /* center align subhead text like the masthead */
-    .subhead h1,
+/*cleanbing    .subhead h1,
     .subhead p {
         text-align: center;
-    }
+    }*/
 
     /* Marketing on home */
     .marketing h1 {
