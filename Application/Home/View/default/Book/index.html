@@ -1,5 +1,5 @@
+<!-- 这是Book控制器的index页面 -->
 <extend name="Base/common"/>
-
 <block name="header">
     <header class="jumbotron subhead" id="overview">
         <div class="container">
@@ -44,7 +44,6 @@
                 <th>总量</th>
                 <th>余量</th>
                 <th>书籍ID</th>
-                <th>用户ID</th>
                 <tr>
                     <td align="center" id="ISBN">{$info.isbn}</td>
                     <td>{$info.book_name}</td>
@@ -56,12 +55,11 @@
                     <td id="totalnum">{$info.totalnum}</td>
                     <td id="remainnum">{$info.remainnum}</td>
                     <td id="state">{$state}</td>
-                    <td id="userid">{$userid}</td>
                     <td>
                         <div class="btn-group">
-                            <button  id="borrow" class="btn ">借阅</button>
-                            <button  id="return" class="btn ">归还</button>
-                            <a class="btn" href="{:U('Home/Index/index')}">返回</a>
+                            <button  id="borrow" class="btn btn-default">借阅</button>
+                            <button  id="return" class="btn btn-default">归还</button>
+                            <a class="btn btn-default" href="{:U('Home/Index/index')}">返回</a>
                         </div>
                     </td>
                 </tr>
@@ -84,5 +82,5 @@
             </div>
         </section>
     </div>
-    <script type="text/javascript" src="__PUBLIC__/Home/js/bookinfo.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/Book_index.js"></script>
 </block>

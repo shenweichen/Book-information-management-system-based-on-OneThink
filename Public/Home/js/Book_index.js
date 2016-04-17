@@ -13,7 +13,7 @@ $('#borrow').click(function(){
         if (remainnum>0) {
             $.ajax({/*ajax异步刷新*/
                 type: "POST",
-                url: "index.php?s=/Home/List/borrow",
+                url: "index.php?s=/Home/Book/borrow",
                 data: {
                     ISBN:ISBN,
                 },
@@ -42,7 +42,7 @@ $('#return').click(function(){
           var  book_id=$('#state').html();
             $.ajax({/*ajax异步刷新*/
                 type: "POST",
-                url: "index.php?s=/Home/List/returnbook",
+                url: "index.php?s=/Home/Book/returnbook",
                 data: {
                     ISBN:ISBN,
                     book_id:book_id,

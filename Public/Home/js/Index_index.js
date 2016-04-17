@@ -1,13 +1,15 @@
 //提交按钮,所有验证通过方可提交
-$('.submit').click(function(){
+$('#submit').click(function(){
      var keyword = $('#word').val();
     if(keyword!=""){
+        
         $('form').submit();
     }else{
         alert("字段不能为空!");
         return false;
     }
 });
+
 
 $('#null').click(function(){
  var keyword = $('#word').val();

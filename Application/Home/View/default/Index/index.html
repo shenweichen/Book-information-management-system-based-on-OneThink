@@ -31,7 +31,7 @@
         <foreach name='books' item='v'>
             <tr>
                 <td align="center">
-                    <a href="index.php?s=/home/list/bookinfo/ISBN/{$v.isbn}">{$v.book_name}</a>
+                    <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
                 </td>
                 <td align="center">{$v.rank}</td>
                 <br/>
@@ -49,24 +49,24 @@
     <section id="contents">
         <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
         -->
-        <div>
-            <form  class="form-horizontal" action="{:U('Home/List/index')}" method="post" id="searchlist" >
-                <select id="field_select" name="query_field" style="width:70px">
+            <form  class=" form-inline" action="{:U('Home/List/index')}" method="post" id="searchlist" >
+             <div class="form-group">
+                <select id="field_select" class="form-control" name="query_field" >
                     <option value="book_name">题名</option>
                     <option value="author">作者</option>
                     <option value="ISBN">ISBN编号</option>
                 </select>
-                <select id="rule_select" style="width:100px">
+                <select id="rule_select" class="form-control">
                     <option >任意匹配</option>
                     <option >完全匹配</option>
                     <option >前方一致</option>
                 </select>
-                <input type="text" name="keyword" id="word"/>
-                <input type="submit" class="btn" value="检索"/>
+                <input type="text" class="form-control" name="keyword" id="word" placeholder="查询条件"/>
+                <input type="submit" class="form-control" id="submit"value="检索"/>
+                  </div>
             </form>
-        </div>
         <table id="answer"></table>
     </section>
 </div>
-<script type="text/javascript" src="__PUBLIC__/Home/js/index.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/Index_index.js"></script>
 </block>
