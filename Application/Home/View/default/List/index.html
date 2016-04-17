@@ -79,19 +79,19 @@
                             <span style="float: right;">中文图书</span>
                             <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}"> <b>{$v.book_name}</b>
                             </a>
-                            {$v.call}
+                            {$v.callnum}
                         </h4>
                         <p class="list-group-item-text">
                             <span style="float: right;">
-                                馆藏复本：2
-                                <br>可借复本：1</span>
+                                馆藏复本：{$v.totalnum}
+                                <br>可借复本：{$v.remainnum}</span>
                             {$v.author}著
                             <br>
                             {$v.pub}&nbsp;{$v.pub_date|date="Y-m",###}
                             <br>
                            <!--  <img src="./杭州电子科技大学图书馆v5.0书目检索系统_files/star0.gif" title="总体评分及评价人数">
                            (0) -->
-                            <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}" id="test" ISBN="{$v.isbn}">馆藏<span class="caret"></span></a>
+                            <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}" id="test" ISBN="{$v.isbn}"><span class="caret"></span>馆藏</a>
 
                         </p>
                         <div id="{$v.isbn}" style="display: none;" class="prompt">

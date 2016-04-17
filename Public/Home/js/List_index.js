@@ -35,6 +35,11 @@ function unix_to_datetime(unix) {
 
 /*var datetime = '2012-11-16 10:36:50';
 var unix = datetime_to_unix(datetime);*/
+/*num传入的数字，n需要的字符长度*/
+         function PrefixInteger(num, n) {
+             return (Array(n).join(0) + num).slice(-n);
+
+        }
 
 
 $('#search_list>p>a').mouseover(function() {
@@ -48,16 +53,16 @@ $('#search_list>p>a').mouseover(function() {
                 dataType: "json",
                 success: function(data){/*将搜索结果返回*/
                     $("div[id="+isbn+"] tbody tr:gt(0)").remove();//删除数据
-                    for (var i = data.length - 1; i >= 0; i--) {
-                      var call=data[i]['call'];
+                    for (var i = 0; i < data.length; i++) {
+                      var callnum=data[i]['callnum'];
                       var book_id=data[i]['book_id'];
                       var collection=data[i]['collection'];
                       var state=data[i]['state'];
                       var borrow_time=data[i]['borrow_time'];
                       var back_time=data[i]['back_time'];
                 var str = ' <tr align="left" class="whitetext">' +
-                    '<td width="10%">'+call+'</td>' +
-                    '<td align="center"width="15%">'+book_id+'</td>' +
+                    '<td width="10%">'+callnum+'</td>' +
+                    '<td align="center"width="15%">'+PrefixInteger(book_id,4)+'</td>' +
                     '<td width="15%">&nbsp;-</td>' +
                     '<td width="25%" title="'+collection+'">' +
                     '<span class="glyphicon glyphicon-book"></span>'+collection+'</td>' +

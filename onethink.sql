@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-04-17 17:08:36
+-- Generation Time: 2016-04-17 19:08:32
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ot_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `ot_action_log`
@@ -102,7 +102,8 @@ INSERT INTO `ot_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`,
 (4, 1, 1, 0, 'member', 1, 'admin在2016-04-17 16:06登录了后台', 1, 1460880404),
 (5, 1, 1, 0, 'member', 1, 'admin在2016-04-17 16:38登录了后台', 1, 1460882318),
 (6, 1, 1, 0, 'member', 1, 'admin在2016-04-17 22:13登录了后台', 1, 1460902427),
-(7, 1, 1, 0, 'member', 1, 'admin在2016-04-17 22:23登录了后台', 1, 1460903025);
+(7, 1, 1, 0, 'member', 1, 'admin在2016-04-17 22:23登录了后台', 1, 1460903025),
+(8, 1, 1, 0, 'member', 1, 'admin在2016-04-17 23:26登录了后台', 1, 1460906779);
 
 -- --------------------------------------------------------
 
@@ -551,7 +552,7 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
   `remainnum` smallint(5) unsigned NOT NULL COMMENT '在馆数目',
   `pub` varchar(30) NOT NULL COMMENT '出版社',
   `pub_date` int(11) NOT NULL COMMENT '出版日期',
-  `call` varchar(20) NOT NULL DEFAULT '',
+  `callnum` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -559,8 +560,8 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
 -- 转存表中的数据 `ot_book`
 --
 
-INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`, `call`) VALUES
-('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 2, '人民邮电出版社', 1454281200, 'TP312/0246 '),
+INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`, `callnum`) VALUES
+('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 1, '人民邮电出版社', 1454281200, 'TP312/0246 '),
 ('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 2, '人民邮电出版社', 1454281200, 'TP317.6/4402 '),
 ('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', 1454281200, ' TP312SW/420 '),
 ('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 2, '电子工业出版社', 1454281200, 'TP312SW/424 '),
@@ -574,38 +575,32 @@ INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`
 
 CREATE TABLE IF NOT EXISTS `ot_bookid_isbn` (
   `ISBN` varchar(16) NOT NULL COMMENT 'ISBN',
-  `book_id` smallint(10) NOT NULL COMMENT '条码号',
+  `book_id` smallint(10) NOT NULL AUTO_INCREMENT COMMENT '条码号',
   `collection` varchar(30) NOT NULL COMMENT '馆藏地',
   `state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '借阅状态',
-  PRIMARY KEY (`book_id`,`ISBN`),
+  PRIMARY KEY (`book_id`),
   KEY `ISBN` (`ISBN`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `ot_bookid_isbn`
 --
 
 INSERT INTO `ot_bookid_isbn` (`ISBN`, `book_id`, `collection`, `state`) VALUES
-('9787115308276', 1, '自然书库（3F东）', 1),
-('9787115391872', 1, '自然书库（3F西）', 1),
-('9787115392602', 1, '社会书库（4F东）', 1),
-('9787121275821', 1, '文一校区书库（信息工程学院）', 1),
-('9787121280764', 1, '自然书库（3F东）', 1),
+('9787115308276', 1, '自然书库（3F东）', 0),
 ('9787115308276', 2, '自然书库（3F东）', 1),
-('9787115391872', 2, '自然书库（3F西）', 1),
-('9787115392602', 2, '社会书库（4F东）', 1),
-('9787121275821', 2, '文一校区书库（信息工程学院）', 1),
-('9787121280764', 2, '自然书库（3F东）', 1);
+('9787115391872', 3, '自然书库（3F西）', 1),
+('9787115391872', 4, '自然书库（3F西）', 1),
+('9787115392602', 5, '社会书库（4F东）', 1),
+('9787115392602', 6, '社会书库（4F东）', 1),
+('9787121275821', 7, '文一校区书库（信息工程学院）', 1),
+('9787121275821', 8, '文一校区书库（信息工程学院）', 1),
+('9787121280764', 9, '自然书库（3F东）', 1),
+('9787121280764', 10, '自然书库（3F东）', 1);
 
 --
 -- 触发器 `ot_bookid_isbn`
 --
-DROP TRIGGER IF EXISTS `get_bookid`;
-DELIMITER //
-CREATE TRIGGER `get_bookid` BEFORE INSERT ON `ot_bookid_isbn`
- FOR EACH ROW set new.book_id =(select totalnum from ot_book where isbn=new.isbn)+1
-//
-DELIMITER ;
 DROP TRIGGER IF EXISTS `update_num_delete`;
 DELIMITER //
 CREATE TRIGGER `update_num_delete` AFTER DELETE ON `ot_bookid_isbn`
@@ -633,13 +628,12 @@ DELIMITER ;
 -- 替换视图以便查看 `ot_bookinfo_view`
 --
 CREATE TABLE IF NOT EXISTS `ot_bookinfo_view` (
-`call` varchar(20)
+`callnum` varchar(20)
 ,`book_id` smallint(10)
 ,`collection` varchar(30)
 ,`state` tinyint(1)
-,`borrow_time` int(11)
-,`back_time` int(11)
 ,`ISBN` varchar(16)
+,`back_time` int(11)
 );
 -- --------------------------------------------------------
 
@@ -653,8 +647,16 @@ CREATE TABLE IF NOT EXISTS `ot_borrow` (
   `book_id` smallint(10) NOT NULL COMMENT 'book_id',
   `borrow_time` int(11) NOT NULL COMMENT '借书时间',
   `back_time` int(11) NOT NULL COMMENT '应还时间',
-  PRIMARY KEY (`user_id`,`ISBN`,`book_id`)
+  `book_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`user_id`,`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `ot_borrow`
+--
+
+INSERT INTO `ot_borrow` (`user_id`, `ISBN`, `book_id`, `borrow_time`, `back_time`, `book_name`) VALUES
+(1, '9787115308276', 1, 1460912873, 1463504873, 'Swift语言实战入门（第2版）');
 
 -- --------------------------------------------------------
 
@@ -673,25 +675,23 @@ CREATE TABLE IF NOT EXISTS `ot_borrowrank_view` (
 --
 
 CREATE TABLE IF NOT EXISTS `ot_borrow_history` (
+  `book_name` varchar(40) NOT NULL,
   `user_id` int(11) NOT NULL COMMENT '用户id',
-  `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
-  `book_id` smallint(10) NOT NULL COMMENT 'book_id',
   `borrow_time` int(11) NOT NULL COMMENT '借书时间',
   `return_time` int(11) NOT NULL COMMENT '还书时间',
-  PRIMARY KEY (`user_id`,`ISBN`,`book_id`,`borrow_time`,`return_time`)
+  `book_id` smallint(10) NOT NULL COMMENT 'book_id',
+  `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
+  PRIMARY KEY (`user_id`,`book_id`,`borrow_time`,`return_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `ot_borrow_history`
 --
 
-INSERT INTO `ot_borrow_history` (`user_id`, `ISBN`, `book_id`, `borrow_time`, `return_time`) VALUES
-(1, '9787115308276', 1, 1460879004, 1460880411),
-(1, '9787115308276', 1, 1460902972, 1460902976),
-(1, '9787115308276', 1, 1460902978, 1460902980),
-(1, '9787115308276', 1, 1460903785, 1460903856),
-(1, '9787115308276', 1, 1460904008, 1460904010),
-(1, '9787115392602', 1, 1460824305, 1460824306);
+INSERT INTO `ot_borrow_history` (`book_name`, `user_id`, `borrow_time`, `return_time`, `book_id`, `ISBN`) VALUES
+('Swift语言实战入门（第2版）', 1, 1460910696, 1460910697, 1, '9787115308276'),
+('Swift语言实战入门（第2版）', 1, 1460911092, 1460911093, 1, '9787115308276'),
+('Swift与Cocoa框架开发', 1, 1460911324, 1460911418, 3, '9787115391872');
 
 -- --------------------------------------------------------
 
@@ -831,17 +831,6 @@ INSERT INTO `ot_config` (`id`, `name`, `type`, `title`, `group`, `extra`, `remar
 -- --------------------------------------------------------
 
 --
--- 替换视图以便查看 `ot_current_borrow_view`
---
-CREATE TABLE IF NOT EXISTS `ot_current_borrow_view` (
-`user_id` int(11)
-,`book_name` varchar(40)
-,`ISBN` varchar(17)
-,`borrow_time` int(11)
-);
--- --------------------------------------------------------
-
---
 -- 表的结构 `ot_document`
 --
 
@@ -949,18 +938,6 @@ CREATE TABLE IF NOT EXISTS `ot_file` (
 -- --------------------------------------------------------
 
 --
--- 替换视图以便查看 `ot_history_borrow_view`
---
-CREATE TABLE IF NOT EXISTS `ot_history_borrow_view` (
-`book_name` varchar(40)
-,`user_id` int(11)
-,`borrow_time` int(11)
-,`return_time` int(11)
-,`ISBN` varchar(17)
-);
--- --------------------------------------------------------
-
---
 -- 表的结构 `ot_hooks`
 --
 
@@ -1021,7 +998,7 @@ CREATE TABLE IF NOT EXISTS `ot_member` (
 --
 
 INSERT INTO `ot_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
-(1, 'admin', 0, '0000-00-00', '', 10, 7, 0, 1460863718, 0, 1460903025, 1);
+(1, 'admin', 0, '0000-00-00', '', 10, 8, 0, 1460863718, 0, 1460906779, 1);
 
 -- --------------------------------------------------------
 
@@ -1282,7 +1259,7 @@ CREATE TABLE IF NOT EXISTS `ot_ucenter_member` (
 --
 
 INSERT INTO `ot_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
-(1, 'admin', 'ab51f9d10187832ceb782655beae0eb3', '519589356@qq.com', '', 1460863718, 0, 1460903025, 0, 1460863718, 1);
+(1, 'admin', 'ab51f9d10187832ceb782655beae0eb3', '519589356@qq.com', '', 1460863718, 0, 1460906779, 0, 1460863718, 1);
 
 -- --------------------------------------------------------
 
@@ -1333,7 +1310,7 @@ CREATE TABLE IF NOT EXISTS `ot_userdata` (
 --
 DROP TABLE IF EXISTS `ot_bookinfo_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_bookinfo_view` AS select `ot_book`.`call` AS `call`,`ot_bookid_isbn`.`book_id` AS `book_id`,`ot_bookid_isbn`.`collection` AS `collection`,`ot_bookid_isbn`.`state` AS `state`,`ot_borrow`.`borrow_time` AS `borrow_time`,`ot_borrow`.`back_time` AS `back_time`,`ot_bookid_isbn`.`ISBN` AS `ISBN` from ((`ot_bookid_isbn` left join `ot_borrow` on(((`ot_bookid_isbn`.`book_id` = `ot_borrow`.`book_id`) and (`ot_bookid_isbn`.`ISBN` = `ot_borrow`.`ISBN`)))) join `ot_book`) where (`ot_bookid_isbn`.`ISBN` = `ot_book`.`ISBN`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_bookinfo_view` AS select `ot_book`.`callnum` AS `callnum`,`ot_bookid_isbn`.`book_id` AS `book_id`,`ot_bookid_isbn`.`collection` AS `collection`,`ot_bookid_isbn`.`state` AS `state`,`ot_bookid_isbn`.`ISBN` AS `ISBN`,`ot_borrow`.`back_time` AS `back_time` from ((`ot_bookid_isbn` left join `ot_borrow` on((`ot_bookid_isbn`.`book_id` = `ot_borrow`.`book_id`))) join `ot_book`) where (`ot_bookid_isbn`.`ISBN` = `ot_book`.`ISBN`);
 
 -- --------------------------------------------------------
 
@@ -1343,24 +1320,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `ot_borrowrank_view`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_borrowrank_view` AS select `ot_book`.`book_name` AS `book_name`,`ot_borrow_history`.`ISBN` AS `ISBN`,count(`ot_borrow_history`.`ISBN`) AS `rank` from (`ot_borrow_history` join `ot_book`) where (`ot_borrow_history`.`ISBN` = `ot_book`.`ISBN`) group by `ot_borrow_history`.`ISBN`,`ot_borrow_history`.`ISBN`;
-
--- --------------------------------------------------------
-
---
--- 视图结构 `ot_current_borrow_view`
---
-DROP TABLE IF EXISTS `ot_current_borrow_view`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_current_borrow_view` AS select `ot_borrow`.`user_id` AS `user_id`,`ot_book`.`book_name` AS `book_name`,`ot_borrow`.`ISBN` AS `ISBN`,`ot_borrow`.`borrow_time` AS `borrow_time` from (`ot_borrow` join `ot_book`) where (`ot_borrow`.`ISBN` = `ot_book`.`ISBN`);
-
--- --------------------------------------------------------
-
---
--- 视图结构 `ot_history_borrow_view`
---
-DROP TABLE IF EXISTS `ot_history_borrow_view`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_history_borrow_view` AS select `ot_book`.`book_name` AS `book_name`,`ot_borrow_history`.`user_id` AS `user_id`,`ot_borrow_history`.`borrow_time` AS `borrow_time`,`ot_borrow_history`.`return_time` AS `return_time`,`ot_borrow_history`.`ISBN` AS `ISBN` from (`ot_book` join `ot_borrow_history`) where (`ot_borrow_history`.`ISBN` = `ot_book`.`ISBN`);
 
 --
 -- 限制导出的表

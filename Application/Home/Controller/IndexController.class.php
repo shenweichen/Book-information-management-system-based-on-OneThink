@@ -40,8 +40,8 @@ class IndexController extends HomeController {
     	$word=I('keyword');
         $query_field=I('query_field');
     	$map[$query_field]=array('LIKE','%'.$word.'%');
-    	$answer=M('book')->where($map)->select();
-    	$this->ajaxReturn($answer);
+    	$result=M('book')->where($map)->select();
+    	$this->ajaxReturn($result);
     }
   
 
