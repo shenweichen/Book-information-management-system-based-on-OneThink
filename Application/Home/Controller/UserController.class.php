@@ -23,7 +23,7 @@ class UserController extends HomeController {
 		$this->userid=$user_id;
 
 		$this->books=M('current_borrow_view')->where('user_id=%d',$user_id)->select();//分配当前正在借阅的图书给模板
-		$this->history=M('borrow_history')->where('user_id=%d',$user_id)->select();
+		$this->history=M('history_borrow_view')->where('user_id=%d',$user_id)->select();
 		$this->display();
 	}
 
