@@ -1,64 +1,96 @@
 var ISBN = $('#ISBN').html();
-var remainnum=$('#remainnum').html();
-var totalnum=$('#totalnum').html();
-var userid=$('#userid').html();
-$('#borrow').click(function(){
-    var  book_id=$('#state').html();
-    if(userid==0){
+var remainnum = $('#remainnum').html();
+var totalnum = $('#totalnum').html();
+var userid = $('#userid').html();
+
+function unix_to_datetime(unix) {
+
+    var now = new Date(parseInt(unix) * 1000);
+
+    return now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+
+}
+
+
+$('#borrow').click(function() {
+    var book_id = $('#state').html();
+    if (userid == 0) {
         alert("该用户还未登录");
-    }else if(book_id!=0){
-    alert("您当前正在借阅这本书!不可重复借阅")
-    }
-    else{
-        if (remainnum>0) {
-            $.ajax({/*ajax异步刷新*/
+    } else if (book_id != 0) {
+        alert("您当前正在借阅这本书!不可重复借阅")
+    } else {
+        if (remainnum > 0) {
+            $.ajax({ /*ajax异步刷新*/
                 type: "POST",
                 url: "index.php?s=/Home/Book/borrow",
                 data: {
-                    ISBN:ISBN,
+                    ISBN: ISBN,
                 },
                 dataType: "json",
-                success: function(data){
+                success: function(data) {
+
+                    var book_id = data.book_id;
+                    var back_time = unix_to_datetime(data.back_time);
+                    $('#remainnum').html(data.remainnum);
+                    remainnum = $('#remainnum').html();
+                    $('#state').html(book_id);
+                    $('#borrow').attr('disabled', 'disabled');
+                    $('#return').removeAttr('disabled');
+                    $('#' + book_id + '>td:last').html('借出-应还日期' + back_time);
+                    $("#bookstate").html(' <font color="red">借阅中</font>');
                     alert("借阅成功!");
-                $('#remainnum').html(data.remainnum);
-                remainnum=$('#remainnum').html();
-                $('#state').html(data.book_id);
-                    }
-                });
-            }
-        else{
+                }
+            });
+        } else {
             alert("该书没有余量");
         }
     }
 });
 
-$('#return').click(function(){
-    if(userid==0){
-          alert("该用户还未登录");
-      }else{
-         var  book_id=$('#state').html();
-        if (eval(book_id)!=0) {
-        	/*不能直接比较大小，因为是字符串，先转换成数字*/
-          var  book_id=$('#state').html();
-            $.ajax({/*ajax异步刷新*/
+$('#return').click(function() {
+    if (userid == 0) {
+        alert("该用户还未登录");
+    } else {
+        var book_id = $('#state').html();
+        if (eval(book_id) != 0) {
+            /*不能直接比较大小，因为是字符串，先转换成数字*/
+            $.ajax({ /*ajax异步刷新*/
                 type: "POST",
                 url: "index.php?s=/Home/Book/returnbook",
                 data: {
-                    ISBN:ISBN,
-                    book_id:book_id,
+                    ISBN: ISBN,
+                    book_id: book_id,
                 },
                 dataType: "json",
-                success: function(data){
+                success: function(data) {
+                    $('#remainnum').html(data);
+                    remainnum = $('#remainnum').html();
+                    $('#state').html(0);
+                    $('#borrow').removeAttr('disabled');
+                    $('#return').attr('disabled', 'disabled');
+                    var str = '<font color="green">可借</font>';
+                    $('#' + book_id + '>td:last').empty();
+                    $('#' + book_id + '>td:last').append(str);
+                    $("#bookstate").empty();
+                    $("#bookstate").append(str);
                     alert("还书成功");
-                $('#remainnum').html(data);
-                remainnum=$('#remainnum').html();
-                $('#state').html(0);
-                    }
-                });
-            }
-        else{
-
+                }
+            });
+        } else {
             alert("该书不可还，您尚未借阅此书");
         }
     }
+});
+
+
+
+$(function(){
+    var tab_child=$("#tab").children();
+    tab_child.click(function() {
+        var num=$(this).index();
+        $('#tab>li[class=active]').removeClass('active');
+        $('#tabs>div:visible').css("display", "none");
+        $('#tab>li:eq('+num+')').addClass('active');
+        $('#tabs>div:eq('+num+')').css("display", "block");
+    });
 });

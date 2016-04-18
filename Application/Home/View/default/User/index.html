@@ -11,11 +11,9 @@
 </block>
 
 <block name="side" >
-    <!-- 左侧 nav
-================================================== -->
-    <div class="col-md-3 bs-docs-sidebar" >
-        <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
-    -->
+    <!--  <div class="col-md-3 bs-docs-sidebar" >
+    <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
+
     <if condition="is_login()">
         <span>当前用户ID为{$userid}</span>
         <else />
@@ -24,53 +22,69 @@
     </if>
 
 </div>
+-->
+<div class="col-md-3">
+    <ul class="nav nav-tabs nav-stacked" id="tab">
+        <li class="active">
+            <a href="##">读者信息</a>
+        </li>
+        <li>
+            <a href="##">当前借阅</a>
+        </li>
+        <li>
+            <a href="##">借阅历史</a>
+        </li>
+        <li>
+            <a href="##">我的收藏</a>
+        </li>
+    </ul>
+</div>
 </block>
 
 <block name="body">
-<div class="col-md-9">
-    <!-- Contents
-        ================================================== -->
-    <section id="contents">
-        <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/index.css">
-        -->
-        <div  style="width: 700px">
-            <div style="float: left;width: 200px;">
-                <h3 align="center" style="color: red">当前正在借阅</h3>
-                <table class="table table-striped table-bordered table-hover" style="margin-top: -20px;">
-                    <th>书名</th>
-                    <th>借阅时间</th>
-                    <foreach name='books' item='v'>
-                        <tr>
-                            <td align="center">
-                                <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
-                            </td>
-                            <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
-                            <br/>
-                        </tr>
-                    </foreach>
-                </table>
-            </div>
-            <div style="float: right;width: 400px;">
-                <h3 align="center" style="color: red">历史借阅记录</h3>
-                <table class="table table-striped table-bordered table-hover" style="margin-top: -50px;">
-                    <th>书名</th>
-                    <th>借阅时间</th>
-                    <th>归还时间</th>
-                    <foreach name='history' item='v'>
-                        <tr>
-                            <td align="center">
-                                <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
-                            </td>
-                            <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
-                            <br/>
-                            <td align="center">{$v.return_time|date="Y-m-d H:i:s",###}</td>
-                            <br/>
-                        </tr>
-                    </foreach>
-                </table>
-            </div>
+<div class="container-fluid">
+<div class="col-md-9" id="contents">
+        <div style=" display: block;" >
+            <h4 align="center" style="color: red">我的个人信息</h4>
         </div>
-
-    </section>
+        <div style=" display: none;" >
+            <h3 align="center" style="color: red">当前正在借阅</h3>
+            <table class="table table-striped table-bordered table-hover table-condensed" style="margin-top: -20px;">
+                <th>书名</th>
+                <th>借阅时间</th>
+                <th>应还时间</th>
+                <foreach name='books' item='v'>
+                    <tr>
+                        <td align="center">
+                            <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                        </td>
+                        <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
+                        <td align="center">{$v.back_time|date="Y-m-d H:i:s",###}</td>
+                        <br/>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div style=" display: none;">
+            <h3 align="center" style="color: red">历史借阅记录</h3>
+            <table class="table table-striped table-bordered table-hover table-condensed" style="margin-top: -20px;">
+                <th>书名</th>
+                <th>借阅时间</th>
+                <th>归还时间</th>
+                <foreach name='history' item='v'>
+                    <tr>
+                        <td align="center">
+                            <a href="index.php?s=/home/Book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                        </td>
+                        <td align="center">{$v.borrow_time|date="Y-m-d H:i:s",###}</td>
+                        <br/>
+                        <td align="center">{$v.return_time|date="Y-m-d H:i:s",###}</td>
+                        <br/>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
 </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/js/User_index.js"></script>
 </block>

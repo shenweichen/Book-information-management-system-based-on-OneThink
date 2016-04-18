@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-04-17 19:08:32
+-- Generation Time: 2016-04-18 12:52:56
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ot_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `ot_action_log`
@@ -103,7 +103,10 @@ INSERT INTO `ot_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`,
 (5, 1, 1, 0, 'member', 1, 'admin在2016-04-17 16:38登录了后台', 1, 1460882318),
 (6, 1, 1, 0, 'member', 1, 'admin在2016-04-17 22:13登录了后台', 1, 1460902427),
 (7, 1, 1, 0, 'member', 1, 'admin在2016-04-17 22:23登录了后台', 1, 1460903025),
-(8, 1, 1, 0, 'member', 1, 'admin在2016-04-17 23:26登录了后台', 1, 1460906779);
+(8, 1, 1, 0, 'member', 1, 'admin在2016-04-17 23:26登录了后台', 1, 1460906779),
+(9, 1, 1, 0, 'member', 1, 'admin在2016-04-18 09:33登录了后台', 1, 1460943232),
+(10, 1, 1, 0, 'member', 1, 'admin在2016-04-18 10:53登录了后台', 1, 1460947988),
+(11, 1, 1, 0, 'member', 1, 'admin在2016-04-18 14:29登录了后台', 1, 1460960958);
 
 -- --------------------------------------------------------
 
@@ -547,12 +550,14 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
   `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
   `book_name` varchar(40) NOT NULL COMMENT '书名',
   `author` varchar(20) NOT NULL COMMENT '作者',
-  `introduction` varchar(100) NOT NULL DEFAULT 'this is a book' COMMENT '简介',
+  `introduction` text NOT NULL COMMENT '简介',
   `totalnum` smallint(5) unsigned NOT NULL COMMENT '总量',
   `remainnum` smallint(5) unsigned NOT NULL COMMENT '在馆数目',
   `pub` varchar(30) NOT NULL COMMENT '出版社',
   `pub_date` int(11) NOT NULL COMMENT '出版日期',
   `callnum` varchar(20) NOT NULL DEFAULT '',
+  `img` varchar(255) NOT NULL COMMENT '图片路径',
+  `catalog` text NOT NULL,
   PRIMARY KEY (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -560,12 +565,12 @@ CREATE TABLE IF NOT EXISTS `ot_book` (
 -- 转存表中的数据 `ot_book`
 --
 
-INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`, `callnum`) VALUES
-('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 1, '人民邮电出版社', 1454281200, 'TP312/0246 '),
-('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 2, '人民邮电出版社', 1454281200, 'TP317.6/4402 '),
-('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', 1454281200, ' TP312SW/420 '),
-('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 2, '电子工业出版社', 1454281200, 'TP312SW/424 '),
-('9787121280764', '疯狂Swift讲义(第2版)', '李刚', '基于Swift 2.1版本写成，针对Swift 1.x和2.x变化比较大的特点进行了彻底升级。', 2, 2, '电子工业出版社', 1454281200, ' TP312/6301 ');
+INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`, `remainnum`, `pub`, `pub_date`, `callnum`, `img`, `catalog`) VALUES
+('9787115308276', 'Swift语言实战入门（第2版）', '伍星', '读过这本诚意之作后，相信你能够有实际收获。', 2, 2, '人民邮电出版社', 1454281200, 'TP312/0246 ', 'https://images-cn.ssl-images-amazon.com/images/I/51TY1-qafUL._SX396_BO1,204,203,200_.jpg', ' 目录\n<br>\n<br>\n第1章　欢迎来到Swift语言的世界　1\n<br>\n1.1　起源　2\n<br>\n1.2　什么是Swift语言　3\n<br>\n1.3　特性　3\n<br>\n1.3.1　高级　4\n<br>\n1.3.2　易上手　4\n<br>\n1.3.3　兼容性　4\n<br>\n1.3.4　运行效率　5\n<br>\n1.3.5　运行时（Runtime）　5\n<br>\n1.3.6　可混编　5\n<br>\n1.3.7　开发工具　5\n<br>\n1.4　搭建Swift开发环境　6\n<br>\n1.4.1　Mac OS简介　6\n<br>\n1.4.2　Mac OS 下载安装　6\n<br>\n1.4.3　下载并安装Xcode　9\n<br>\n1.4.4　iOS开发者计划　11\n<br>\n1.5　熟悉Xcode及模拟器环境　11\n<br>\n1.5.1　升级和改变　11\n<br>\n1.5.2　第一个Swift语言程序　12\n<br>\n1.5.3　源代码文件基本组成　16\n<br>\n1.5.4　Xcode集成开发环境　17\n<br>\n1.5.5　iOS模拟器　18\n<br>\n1.5.6　体验Playground　19\n<br>\n1.5.7　关于程序调试　21\n<br>\n1.6　Apple产品历史　22\n<br>\n1.7　关于学习方法的一些讨论　23\n<br>\n1.8　小结　25\n<br>\n<br>\n第2章　Swift基础语法　26\n<br>\n2.1　语法入门　26\n<br>\n2.1.1　变量与常量　27\n<br>\n2.1.2　整型　29\n<br>\n2.1.3　浮点型　30\n<br>\n2.1.4　布尔型　31\n<br>\n2.1.5　字符串和字符　31\n<br>\n2.1.6　可选（optional）　39\n<br>\n2.1.7　元组　42\n<br>\n2.1.8　类型别名　43\n<br>\n2.1.9　类型转换　43\n<br>\n2.1.10　断言（assertion）　45\n<br>\n2.2　运算符　47\n<br>\n2.2.1　基础运算符　47\n<br>\n2.2.2　高级运算符　55\n<br>\n2.2.3　自定义运算符　60\n<br>\n2.2.4　运算符优先级和结合性　60\n<br>\n2.3　复杂数据类型　62\n<br>\n2.3.1　数组　62\n<br>\n2.3.2　字典　64\n<br>\n2.3.3　结构体　64\n<br>\n2.3.4　枚举　66\n<br>\n2.4　控制流　67\n<br>\n2.4.1　条件结构　67\n<br>\n2.4.2　值绑定（Value Bindings）　71\n<br>\n2.4.3　循环结构　72\n<br>\n2.4.4　控制转向语句　76\n<br>\n2.5　函数　80\n<br>\n2.5.1　函数的定义和调用　80\n<br>\n2.5.2　函数的形参和返回值　81\n<br>\n2.5.3　Currying　84\n<br>\n2.6　闭包　85\n<br>\n2.6.1　什么是闭包　85\n<br>\n2.6.2　trailing闭包　87\n<br>\n2.6.3　autoclosure　88\n<br>\n2.6.4　捕获　88\n<br>\n2.7　表达式　88\n<br>\n2.7.1　基本表达式　88\n<br>\n2.7.2　前缀表达式和后缀表达式　89\n<br>\n2.7.3　表达式解析　91\n<br>\n2.8　全局变量和局部变量　93\n<br>\n2.9　小结　95\n<br>\n<br>\n第3章　Swift面向对象编程基础　96\n<br>\n3.1　面向对象编程简介　96\n<br>\n3.1.1　面向对象编程的基本概念　99\n<br>\n3.1.2　面向对象编程的特点　101\n<br>\n3.1.3　为什么要使用面向对象编程　102\n<br>\n3.1.4　Swift语言中的面向对象概览　103\n<br>\n3.2　类、方法、属性介绍　103\n<br>\n3.2.1　编写第一个类　103\n<br>\n3.2.2　属性　105\n<br>\n3.3　方法　117\n<br>\n3.3.1　实例方法　117\n<br>\n3.3.2　类型方法　119\n<br>\n3.3.3　初始化方法和反初始化方法　120\n<br>\n3.3.4　下标脚本　127\n<br>\n3.4　枚举、类与结构体的对比　131\n<br>\n3.4.1　枚举与其他两者的关系　131\n<br>\n3.4.2　类与结构体的关系　132\n<br>\n3.5　小结　133\n<br>\n<br>\n第4章　Swift语言的语法高级特性　135\n<br>\n4.1　高级面向对象特性　135\n<br>\n4.1.1　继承　135\n<br>\n4.1.2　多态　141\n<br>\n4.1.3　封装　145\n<br>\n4.2　面向对象的高级用法　151\n<br>\n4.2.1　协议　151\n<br>\n4.2.2　类扩展　155\n<br>\n4.2.3　类组合　160\n<br>\n4.3　可选链　162\n<br>\n4.3.1　可选概念回顾　162\n<br>\n4.3.2　可选链　165\n<br>\n4.3.3　多级可选链　165\n<br>\n4.4　泛型　166\n<br>\n4.5　高级类型转换　170\n<br>\n4.6　小结　172\n<br>\n<br>\n第5章　Swift语言操作Cocoa底层库　173\n<br>\n5.1　Cocoa开发体系　173\n<br>\n5.1.1　Core OS层　174\n<br>\n5.1.2　Core Service层　174\n<br>\n5.1.3　媒体层　175\n<br>\n5.1.4　UIKit层　176\n<br>\n5.2　Swift语言调用Objective-C　176\n<br>\n5.3　字符串　178\n<br>\n5.3.1　NSString与String互相转换　178\n<br>\n5.3.2　拆分字符串　179\n<br>\n5.3.3　查找字符串　180\n<br>\n5.4　数字　181\n<br>\n5.5　数组　182\n<br>\n5.5.1　NSArray与Array的互相转换　182\n<br>\n5.5.2　NSArray的初始化方法　184\n<br>\n5.5.3　NSArray的常用属性和方法　184\n<br>\n5.6　词典　187\n<br>\n5.6.1　Dictionary和NSDictionary互相转换　187\n<br>\n5.6.2　NSDictionay的初始化方法　188\n<br>\n5.6.3　NSDictionary常用的属性和方法　189\n<br>\n5.7　集　190\n<br>\n5.7.1　初始化　190\n<br>\n5.7.2　常用属性和方法　191\n<br>\n5.7.3　集合元素计数　193\n<br>\n5.8　数据存储NSData　194\n<br>\n5.8.1　创建NSData　194\n<br>\n5.8.2　访问数据　195\n<br>\n5.8.3　字节数据与Base64编码字符串相互转换　196\n<br>\n5.8.4　字节数据存储　197\n<br>\n5.8.5　NSMutableData　198\n<br>\n5.9　文件　199\n<br>\n5.9.1　应用的目录结构　200\n<br>\n5.9.2　访问文件　201\n<br>\n5.9.3　NSURL和NSURLComponents　202\n<br>\n5.9.4　NSFileManager　209\n<br>\n5.9.5　NSFileHandle　217\n<br>\n5.9.6　NSBundle　220\n<br>\n5.10　小结　224\n<br>\n<br>\n第6章　Swift与Objective-C的互操作　225\n<br>\n6.1　Swift与Objective-C介绍　225\n<br>\n6.1.0　互操作简介　225\n<br>\n6.2　简单的互操作实践　225\n<br>\n6.2.1　Swift中调用Objective- C代码　226\n<br>\n6.2.2　Swift中调用C代码　230\n<br>\n6.2.3　Swift项目中的Objective- C代码调用Swift代码　231\n<br>\n6.2.4　Objective- C项目中调用Swift代码　236\n<br>\n6.3　Objective-C代码库的调用　237\n<br>\n6.3.1　理解框架代码相互调用过程　237\n<br>\n6.3.2　KKColorListPicker库的调用　238\n<br>\n6.3.3　SQLite3的引用　241\n<br>\n6.3.4　在Swift项目中引入GDataXML或DDXML　249\n<br>\n6.3.5　JSON解析及JSONKit的引用　253\n<br>\n6.4　Objective-C项目到Swift项目的迁移　256\n<br>\n6.5　小结　265\n<br>\n<br>\n第7章　普通UI控件的开发：UIKit第一部分　266\n<br>\n7.1　UIKit概述　266\n<br>\n7.1.1　应用的创建　266\n<br>\n7.1.2　如何创建UI控件　267\n<br>\n7.1.3　UIKit对象介绍　269\n<br>\n7.2　标签（UILabel）　271\n<br>\n7.2.1　标签的创建　271\n<br>\n7.2.2　背景颜色和文字颜色的设置　271\n<br>\n7.2.3　对齐方式的设置　272\n<br>\n7.2.4　文字阴影设置　272\n<br>\n7.2.5　字体的设置　272\n<br>\n7.2.6　文字的省略方式　273\n<br>\n7.2.7　文字的自动调整　273\n<br>\n7.2.8　多行字符串　274\n<br>\n7.3　按钮（UIButton）　274\n<br>\n7.3.1　按钮的创建　274\n<br>\n7.3.2　按钮的文字、颜色和状态　275\n<br>\n7.3.3　按钮的图片　275\n<br>\n7.3.4　按钮的触摸事件　277\n<br>\n7.4　文本框（UITextField）　277\n<br>\n7.4.1　文本框的创建　277\n<br>\n7.4.2　设置文本样式　278\n<br>\n7.4.3　键盘设置　279\n<br>\n7.4.4　清除按钮　280\n<br>\n7.4.5　背景设置　281\n<br>\n7.5　多行文本控件（UITextView）　281\n<br>\n7.5.1　创建多行文本控件　281\n<br>\n7.5.2　设置文字　282\n<br>\n7.5.3　光标和选择范围　282\n<br>\n7.5.4　委托事件　283\n<br>\n7.6　开关按钮（UISwitch）　284\n<br>\n7.7　选择控件（UISegmentedControl）　285\n<br>\n7.7.1　选择控件的创建　285\n<br>\n7.7.2　选择控件基本设置　286\n<br>\n7.7.3　选择控件选项的插入和删除　286\n<br>\n7.7.4　选择控件获得选择的值　286\n<br>\n7.8　图像控件（UIImageView）　287\n<br>\n7.8.1　图片的显示　287\n<br>\n7.8.2　使用图像控件实现动画　288\n<br>\n7.9　进度条（UIProgressView）　289\n<br>\n7.10　滑块（UISlider）　290\n<br>\n7.10.1　滑块的创建　290\n<br>\n7.10.2　滑块的值通知机制　291\n<br>\n7.10.3　制定滑块样式　291\n<br>\n7.11　警告框（UIAlertView）与操作表 （UIActionSheet）　292\n<br>\n7.11.1　警告框的使用　292\n<br>\n7.11.2　警告框的委托事件　292'),
+('9787115391872', 'Swift与Cocoa框架开发', '[澳] 曼宁', '本书会向你展示如何使用Cocoa和Cocoa Touch，用Swift语言开发出令人难以置信的iOS和OS X应用。', 2, 2, '人民邮电出版社', 1454281200, 'TP317.6/4402 ', 'https://images-cn.ssl-images-amazon.com/images/I/51I7IjlukgL._SX380_BO1,204,203,200_.jpg', ' 前 言\n<br>\n第1章 Cocoa开发工具\n<br>\n1.1 Mac和iOS开发者计划\n<br>\n1.2 用Xcode创建自己的第一个项目\n<br>\n1.3 开发一个简单的Swift应用程序\n<br>\n1.4 使用iOS模拟器\n<br>\n1.5 用TestFlight测试iOS App\n<br>\n第2章 用Swift设计程序\n<br>\n2.1 Swift程序设计语言\n<br>\n2.2 playground\n<br>\n2.3 变量和常量\n<br>\n2.4 类型\n<br>\n2.5 控制流\n<br>\n2.6 函数与闭包\n<br>\n2.7 对象\n<br>\n2.8 与Objective-C的互操作\n<br>\n2.9 在同一项目中使用Objective-C和Swift\n<br>\n2.10 模块\n<br>\n2.11 内存管理\n<br>\n2.12 字符串\n<br>\n2.13 数据\n<br>\n2.14 Cocoa中的设计模式\n<br>\n第3章 OS X和iOS上的应用程序\n<br>\n3.1 什么是应用程序\n<br>\n3.2 应用程序生命周期\n<br>\n3.3 应用程序沙盒\n<br>\n3.4 用NSNotification发送通知\n<br>\n第4章 图形用户界面\n<br>\n4.1 OS X和iOS中的界面\n<br>\n4.2 MVC和应用程序设计\n<br>\n4.3 nib文件和故事板\n<br>\n4.4 构建界面\n<br>\n4.5 构建具有nib和约束的App\n<br>\n4.6 iOS上的界面\n<br>\n4.7 UI Dynamics\n<br>\n4.8 Core Animation\n<br>\n第5章 闭包和操作队列\n<br>\n5.1 Cocoa中的闭包\n<br>\n5.2 操作队列中的并发\n<br>\n5.3 操作队列和NSOperation\n<br>\n5.4 在操作队列中执行工作\n<br>\n5.5 融会贯通\n<br>\n第6章 在视图上绘制图形\n<br>\n6.1 如何绘制\n<br>\n6.2 像素网格\n<br>\n6.3 在视图中绘制\n<br>\n6.4 创建自定义视图\n<br>\n第7章 SpriteKit\n<br>\n7.1 SpriteKit的体系结构\n<br>\n7.2 制作使用SpriteKit的App\n<br>\n7.3 使用SpriteKit场景\n<br>\n7.4 SpriteKit节点\n<br>\n7.5 将精灵放在场景中\n<br>\n7.6 对触碰作出响应\n<br>\n7.7 使用纹理\n<br>\n7.8 纹理贴图集\n<br>\n7.9 使用文本\n<br>\n7.10 用操作实现内容的动画\n<br>\n7.11 使用形状节点\n<br>\n7.12 使用图像特效节点\n<br>\n7.13 向SpirteKit对象增加物理属性\n<br>\n7.14 向SpriteKit对象添加接合\n<br>\n7.15 SpriteKit场景照明\n<br>\n7.16 约束\n<br>\n7.17 在SpriteKit中使用阴影\n<br>\n7.18 使用SpriteKit编辑器\n<br>\n第8章 SceneKit\n<br>\n8.1 SceneKit结构\n<br>\n8.2 使用SceneKit\n<br>\n8.3 添加SceneKit视图\n<br>\n8.4 添加场景\n<br>\n8.5 添加照相机\n<br>\n8.6 添加3D对象\n<br>\n8.7 添加光源\n<br>\n8.8 为场景中的内容实现动画\n<br>\n8.9 创建文本几何体\n<br>\n8.10 使用材料\n<br>\n8.11 命中检测\n<br>\n8.12 约束\n<br>\n8.13 从COLLADA文件中加载数据\n<br>\n8.14 向场景中添加物理仿真\n<br>\n第9章 音频与视频\n<br>\n9.1 AV Foundation\n<br>\n9.2 用AVPlayer播放视频\n<br>\n9.3 语音合成\n<br>\n9.4 使用照片库\n<br>\n第10章 iCloud和数据存储\n<br>\n10.1 偏好设置\n<br>\n10.2 使用文件系统\n<br>\n10.3 使用沙盒\n<br>\n10.4 iCould\n<br>\n10.5 iCloud存储什么\n<br>\n10.6 为iCloud进行设置\n<br>\n10.7 测试iCloud是否正常工作\n<br>\n10.8 存储设置\n<br>\n10.9 iCloud存储\n<br>\n10.10 文档选取器\n<br>\n10.11 iCloud的最 佳使用\n<br>\n第11章 Cocoa绑定\n<br>\n11.1 将视图绑定到模型\n<br>\n11.2 一个简单的绑定App\n<br>\n11.3 绑定到控制器\n<br>\n11.4 数组和对象控制器\n<br>\n11.5 一个更复杂的绑定App\n<br>\n第12章 表格视图和集合视图\n<br>\n12.1 数据源和委托\n<br>\n12.2 表格视图\n<br>\n12.3 集合视图\n<br>\n第13章 基于文档的应用程序\n<br>\n13.1 NSDocument和UIDocument类\n<br>\n13.2 MVC 中的文档对象\n<br>\n13.3 OS X上基于文档的应用程序\n<br>\n13.4 iOS上基于文档的应用程序\n<br>\n第14章 联网\n<br>\n14.1 连接\n<br>\n14.2 开发联网应用程序\n<br>\n14.3 Bonjour服务的发现\n<br>\n14.4 Multipeer Connectivity\n<br>\n第15章 与现实世界互动\n<br>\n15.1 使用位置\n<br>\n15.2 地理编码\n<br>\n15.3 区域监测和iBeacon\n<br>\n15.4 位置与隐私\n<br>\n15.5 地图\n<br>\n15.6 设备运动\n<br>\n15.7 打印文档\n<br>\n15.8 Game Controller\n<br>\n15.9 App Nap\n<br>\n15.10 用Touch ID验证\n<br>\n15.11 Handoff\n<br>\n第16章 EventKit\n<br>\n16.1 理解事件\n<br>\n16.2 访问事件存储库\n<br>\n16.3 访问日历\n<br>\n16.4 访问事件\n<br>\n16.5 处理事件\n<br>\n16.6 开发一个事件应用程序\n<br>\n16.7 用户隐私\n<br>\n第17章 Instruments和调试器\n<br>\n17.1 开始使用Instruments\n<br>\n17.2 用Instruments解决问题\n<br>\n17.3 循环保留和漏洞\n<br>\n17.4 使用调试器\n<br>\n17.5 视图调试\n<br>\n17.6 测试框架\n<br>\n17.7 调试仪表\n<br>\n17.8 性能优化\n<br>\n第18章 共享与通知\n<br>\n18.1 共享\n<br>\n18.2 在iOS上共享\n<br>\n18.3 在OS X上共享\n<br>\n18.4 通知\n<br>\n18.5 发送推送通知\n<br>\n18.6 设置接收推送通知\n<br>\n18.7 接收推送通知\n<br>\n18.8 本地通知\n<br>\n第19章 非标准App\n<br>\n19.1 命令行工具\n<br>\n19.2 偏好设置窗格\n<br>\n19.3 状态栏项目\n<br>\n19.4 多窗口iOS App\n<br>\n第20章 处理文本\n<br>\n20.1 国际化与本地化\n<br>\n20.2 用NSFormatter设定数据格式\n<br>\n20.3 设定数字、长度、质量、能量和数据的格式\n<br>\n20.4 用NSDataDetector检测数据\n<br>\n20.5 TextKit '),
+('9787115392602', 'Swift基础教程', '皮特 (Boisy G.Pitre)', '零基础上手Swift，大量代码+实例', 2, 2, '人民邮电出版社', 1454281200, ' TP312SW/420 ', 'https://images-cn.ssl-images-amazon.com/images/I/61DAEAj%2BCbL._SX396_BO1,204,203,200_.jpg', ' 第一部分 基础知识\n<br>\n第1章 Swift简介2\n<br>\n1.1 革命性的改良2\n<br>\n1.2 准备工作3\n<br>\n1.2.1 专业工具3\n<br>\n1.2.2 与Swift交互3\n<br>\n1.3 准备出发4\n<br>\n1.4 开始探索Swift6\n<br>\n1.4.1 帮助和退出6\n<br>\n1.4.2 Hello World6\n<br>\n1.5 声明的威力7\n<br>\n1.6 常量9\n<br>\n1.7 类型10\n<br>\n1.7.1 检查上限和下限11\n<br>\n1.7.2 类型转换11\n<br>\n1.7.3 显式地声明类型12\n<br>\n1.8 字符串13\n<br>\n1.8.1 字符串拼接13\n<br>\n1.8.2 Character类型14\n<br>\n1.9 数学运算符14\n<br>\n1.9.1 表达式15\n<br>\n1.9.2 混用不同的数值类型15\n<br>\n1.9.3 数值表示16\n<br>\n1.10 布尔类型17\n<br>\n1.11 轻松显示18\n<br>\n1.12 使用类型别名19\n<br>\n1.13 使用元组将数据编组19\n<br>\n1.14 可选类型20\n<br>\n1.15 小结22\n<br>\n第2章 使用集合23\n<br>\n2.1 糖果罐23\n<br>\n2.1.1 数组中所有元素的类型都必须相同26\n<br>\n2.1.2 增长数组26\n<br>\n2.1.3 替换和删除值27\n<br>\n2.1.4 将值插入到指定位置28\n<br>\n2.1.5 合并数组29\n<br>\n2.2 字典30\n<br>\n2.2.1 查找条目31\n<br>\n2.2.2 添加条目32\n<br>\n2.2.3 更新条目33\n<br>\n2.2.4 删除条目33\n<br>\n2.3 数组的数组34\n<br>\n2.4 创建空数组和空字典36\n<br>\n2.4.1 空数组36\n<br>\n2.4.2 空字典37\n<br>\n2.5 迭代集合38\n<br>\n2.5.1 迭代数组38\n<br>\n2.5.2 迭代字典39\n<br>\n2.6 小结40\n<br>\n第3章 流程控制41\n<br>\n3.1 for循环41\n<br>\n3.1.1 计数41\n<br>\n3.1.2 包含还是不包含结束数字42\n<br>\n3.1.3 老式for循环43\n<br>\n3.1.4 简写44\n<br>\n3.2 游乐场45\n<br>\n3.3 决策48\n<br>\n3.3.1 if语句48\n<br>\n3.3.2 检查多个条件52\n<br>\n3.3.3 switch语句53\n<br>\n3.3.4 while循环56\n<br>\n3.3.5 检查代码58\n<br>\n3.3.6 提早结束循环61\n<br>\n3.4 小结61\n<br>\n第4章 编写函数和闭包62\n<br>\n4.1 函数62\n<br>\n4.1.1 使用Swift编写函数63\n<br>\n4.1.2 执行函数64\n<br>\n4.1.3 参数并非只能是数字65\n<br>\n4.1.4 可变参数66\n<br>\n4.1.5 函数是一级对象69\n<br>\n4.1.6 从函数返回函数71\n<br>\n4.1.7 嵌套函数73\n<br>\n4.1.8 默认参数76\n<br>\n4.1.9 函数名包含哪些内容77\n<br>\n4.1.10 清晰程度79\n<br>\n4.1.11 用不用外部参数名80\n<br>\n4.1.12 变量参数81\n<br>\n4.1.13 inout参数84\n<br>\n4.2 闭包86\n<br>\n4.3 小结88\n<br>\n4.4 类89\n<br>\n第5章 使用类和结构组织代码90\n<br>\n5.1 对象无处不在90\n<br>\n5.2 Swift对象是使用类定义的91\n<br>\n5.2.1 定义类91\n<br>\n5.2.2 创建对象93\n<br>\n5.2.3 开门和关门93\n<br>\n5.2.4 锁门和开锁94\n<br>\n5.2.5 查看属性96\n<br>\n5.2.6 门应是各式各样的97\n<br>\n5.2.7 修改颜色99\n<br>\n5.3 继承99\n<br>\n5.3.1 创建基类100\n<br>\n5.3.2 创建子类103\n<br>\n5.3.3 实例化子类104\n<br>\n5.3.4 便利初始化方法109\n<br>\n5.3.5 枚举111\n<br>\n5.3.6 结构113\n<br>\n5.3.7 值类型和引用类型114\n<br>\n5.4 小结116\n<br>\n第6章 使用协议和扩展进行规范化117\n<br>\n6.1 遵循协议117\n<br>\n6.1.1 类还是协议117\n<br>\n6.1.2 协议并非只能定义方法119\n<br>\n6.1.3 遵循多个协议121\n<br>\n6.1.4 协议也可继承122\n<br>\n6.1.5 委托123\n<br>\n6.2 扩展126\n<br>\n6.2.1 扩展基本类型127\n<br>\n6.2.2 在扩展中使用闭包130\n<br>\n6.3 小结132\n<br>\n第二部分 使用Swift开发软件\n<br>\n第7章 使用Xcode134\n<br>\n7.1 Xcode简史134\n<br>\n7.2 创建第一个Swift项目135\n<br>\n7.3 Xcode界面136\n<br>\n7.3.1 与Xcode窗口交互138\n<br>\n7.3.2 运行应用程序139\n<br>\n7.4 开发应用程序140\n<br>\n7.4.1 腾出空间141\n<br>\n7.4.2 创建界面142\n<br>\n7.4.3 美化145\n<br>\n7.4.4 编写代码146\n<br>\n7.4.5 建立连接149\n<br>\n7.5 小结151\n<br>\n第8章 改进应用程序152\n<br>\n8.1 细节很重要152\n<br>\n8.1.1 显示金额152\n<br>\n8.1.2 再谈可选类型154\n<br>\n8.1.3 可选类型拆封154\n<br>\n8.1.4 美化155\n<br>\n8.1.5 另一种格式设置方法156\n<br>\n8.2 计算复利159\n<br>\n8.2.1 连接起来161\n<br>\n8.2.2 测试164\n<br>\n8.3 调试164\n<br>\n8.3.1 bug在哪里164\n<br>\n8.3.2 断点165\n<br>\n8.3.3 复杂的复利计算168\n<br>\n8.4 测试的价值169\n<br>\n8.4.1 单元测试169\n<br>\n8.4.2 编写测试169\n<br>\n8.4.3 如果测试未通过172\n<br>\n8.4.4 始终运行的测试173\n<br>\n8.5 小结174\n<br>\n第9章 Swift移动开发175\n<br>\n9.1 移动设备和台式机175\n<br>\n9.2 挑战记忆力175\n<br>\n9.2.1 考虑玩法176\n<br>\n9.2.2 设计UI176\n<br>\n9.3 创建项目177\n<br>\n9.4 创建用户界面179\n<br>\n9.4.1 创建按钮180\n<br>\n9.4.2 在模拟器中运行182\n<br>\n9.4.3 设置约束183\n<br>\n9.5 MVC186\n<br>\n9.6 编写游戏代码186\n<br>\n9.6.1 类189\n<br>\n9.6.2 枚举190\n<br>\n9.6.3 视图对象190\n<br>\n9.6.4 模型对象190\n<br>\n9.6.5 可重写的方法191\n<br>\n9.6.6 游戏的方法191\n<br>\n9.6.7 处理输赢195\n<br>\n9.7 回到故事板196\n<br>\n9.8 开玩198\n<br>\n第10章 其他主题199\n<br>\n10.1 Swift内存管理199\n<br>\n10.1.1 值和引用199\n<br>\n10.1.2 引用计数200\n<br>\n10.1.3 引用循环200\n<br>\n10.1.4 演示引用循环201\n<br>\n10.1.5 编写测试代码202\n<br>\n10.1.6 断开引用循环204\n<br>\n10.1.7 闭包中的引用循环205\n<br>\n10.1.8 感恩207\n<br>\n10.2 逻辑运算符207\n<br>\n10.2.1 逻辑非207\n<br>\n10.2.2 逻辑与208\n<br>\n10.2.3 逻辑或208\n<br>\n10.3 泛型209\n<br>\n10.4 运算符重载210\n<br>\n10.5 相等和相同213\n<br>\n10.6 Swift脚本编程214\n<br>\n10.6.1 编辑脚本215\n<br>\n10.6.2 设置权限216\n<br>\n10.6.3 运行脚本216\n<br>\n10.6.4 工作原理216\n<br>\n10.7 获取帮助218\n<br>\n10.8 独闯江湖219\n<br>\n10.8.1 研究苹果公司提供的框架219\n<br>\n10.8.2 加入苹果开发者计划220\n<br>\n10.8.3 成为社区的一分子220\n<br>\n10.8.4 活到老学到老220\n<br>\n10.8.5 一路平安220 '),
+('9787121275821', 'Swifter(第2版):100个Swift 2开发必备Tip', '王巍', '绝无仅有基于Swift 2的iOS开发图书', 2, 1, '电子工业出版社', 1454281200, 'TP312SW/424 ', 'https://images-na.ssl-images-amazon.com/images/I/51TqHT6Rx8L._SX384_BO1,204,203,200_.jpg', ' 1Swift新元素1\n<br>\nTip1柯里化（Currying）2\n<br>\nTip2将protocol的方法声明为mutating4\n<br>\nTip3Sequence5\n<br>\nTip4多元组（Tuple）7\n<br>\nTip5@autoclosure和？？9\n<br>\nTip6OptionalChaining12\n<br>\nTip7操作符14\n<br>\nTip8func的参数修饰17\n<br>\nTip9字面量转换19\n<br>\nTip10下标23\n<br>\nTip11方法嵌套25\n<br>\nTip12命名空间28\n<br>\nTip13Any和AnyObject30\n<br>\nTip14typealias和泛型接口33\n<br>\nTip15可变参数函数35\n<br>\nTip16初始化方法顺序37\n<br>\nTip17Designated，Convenience和Required39\n<br>\nTip18初始化返回nil42\n<br>\nTip19protocol组合45\n<br>\nTip20static和class49\n<br>\nTip21多类型和容器52\n<br>\nTip22default参数55\n<br>\nTip23正则表达式57\n<br>\nTip24模式匹配60\n<br>\nTip25…和..＜63\n<br>\nTip26AnyClass、元类型和.self65\n<br>\nTip27接口和类方法中的Self68\n<br>\nTip28动态类型和多方法71\n<br>\nTip29属性观察73\n<br>\nTip30final76\n<br>\nTip31lazy修饰符和lazy方法79\n<br>\nTip32Reflection和Mirror82\n<br>\nTip33隐式解包Optional85\n<br>\nTip34多重Optional87\n<br>\nTip35OptionaIMap89\n<br>\nTip36ProtocolExtension91\n<br>\nTip37where和模式匹配96\n<br>\nTip38indirect和嵌套enum99\n<br>\n2从Objective—C／C到Swift101\n<br>\nTip39Selector102\n<br>\nTip40实例方法的动态调用104\n<br>\nTip41单例106\n<br>\nTip42条件编译109\n<br>\nTip43编译标记111\n<br>\nTip44@UIApplicationMain113\n<br>\nTip45@objc和dynamic115\n<br>\nTip46可选接口和接口扩展118\n<br>\nTip47内存管理，weak和unowned120\n<br>\nTip48@autoreleasepool125\n<br>\nTip49值类型和引用类型128\n<br>\nTip50String还是NSString130\n<br>\nTip51UnsafePointer132\n<br>\nTip52C指针内存管理135\n<br>\nTip53COpaquePointer和Cconvention137\n<br>\nTip54GCD和延时调用139\n<br>\nTip55获取对象类型143\n<br>\nTip56自省145\n<br>\nTip57KVO147\n<br>\nTip58局部scope150\n<br>\nTip59判等153\n<br>\nTip60哈希156\n<br>\nTip61类簇158\n<br>\nTip62Swizzle160\n<br>\nTip63调用C动态库163\n<br>\nTip64输出格式化165\n<br>\nTip65Options167\n<br>\nTip66数组enumerate169\n<br>\nTip67类型编码@encode171\n<br>\nTip68C代码调用和@asmname173\n<br>\nTip69sizeof和sizeofValueP75\n<br>\nTip70delegate177\n<br>\nTip71Associated Object179\n<br>\nTip72Lock181\n<br>\nTip73Toll—Free Bridging和Unmanaged183\n<br>\n3Swift与开发环境及一些实践187\n<br>\nTip74Swift命令行工具188\n<br>\nTip75随机数生成190\n<br>\nTip76print和debugPrint192\n<br>\nTip77错误和异常处理194\n<br>\nTip78断言200\n<br>\nTip79fatalError202\n<br>\nTip80代码组织和Framework205\n<br>\nTip81Playground延时运行209\n<br>\nTip82Playground可视化211\n<br>\nTip83Playground与项目协作213\n<br>\nTip84数学和数字215\n<br>\nTip85JSON217\n<br>\nTip86NSNull219\n<br>\nTip87文档注释221\n<br>\nTip88性能考虑223\n<br>\nTip89Log输出225\n<br>\nTip90溢出227\n<br>\nTip91宏定义define229\n<br>\nTip92属性访问控制231\n<br>\nTip93Swift中的测试233\n<br>\nTip94Core Data235\n<br>\nTip95闭包歧义237\n<br>\nTip96泛型扩展241\n<br>\nTip97兼容性243\n<br>\nTip98列举enum类型245\n<br>\nTip99尾递归248\n<br>\nTip100安全的资源组织方式250\n<br>\n后记及致谢252 '),
+('9787121280764', '疯狂Swift讲义(第2版)', '李刚', 'Swift正逐步进入iOS APP的实际应用开发，而Apple在WWDC2015上发布了Swift 2.0版本，这也表明了Apple对Swift的支持决心，不难预测，Swift的市场份额肯定会超过传统的Objective-C。\n<br>\n本书是《疯狂Swift讲义》的第2版，本书以最新的OS X 10.11为平台、以Xcode 7.1为开发工具，全面介绍了Swift 2.1的语法以及使用Swift开发iOS应用的知识。本书全面覆盖了Swift的基本语法结构、Swift函数式编程特征、Swift的面向对象特征、Foundation框架的核心类库用法等知识，并通过示例介绍了如何在iOS应用中混合使用Swift与Objective-C进行开发。本书重点介绍了repeat while循环、guard语句、API检查、条件编译、Set集合、错误处理机制、协议扩展等Swift 2.x新增的内容，这样新增的内容使得Swift具有更强的生命力。\n<br>\n本书并不局限于介绍Swift的简单语法，而是从“项目驱动”的角度来讲授理论。全书为Swift所有语法提供了大量的示例程序，大部分地方甚至从正、反两方面举例，务求使读者能举一反三地真正掌握Swift编程。如果读者在阅读本书时遇到了技术问题，可以登录疯狂Java联盟发帖，笔者将会及时予以解答。', 2, 2, '电子工业出版社', 1454281200, ' TP312/6301 ', 'https://images-na.ssl-images-amazon.com/images/I/514dq7lnu7L._SX258_BO1,204,203,200_QL70_.jpg', ' 第1章 Swift语言与开发环境 1\n<br>\n1.1 Swift语言简介 2\n<br>\n1.1.1 Swift语言 2\n<br>\n1.1.2 关于Swift的几个误解 2\n<br>\n1.2 搭建Swift开发环境 3\n<br>\n1.2.1 下载和安装Xcode 4\n<br>\n1.2.2 安装辅助工具和文档 6\n<br>\n1.3 第一个Swift程序 7\n<br>\n1.3.1 Swift程序入口 7\n<br>\n1.3.2 使用Playground工具 8\n<br>\n1.3.3 开发Swift项目 10\n<br>\n1.4 使用终端窗口编译、运行Swift程序 12\n<br>\n1.4.1 使用swiftc编译Swift程序 12\n<br>\n1.4.2 使用swift交互命令 14\n<br>\n1.5 熟悉Xcode 14\n<br>\n1.5.1 创建iOS项目 14\n<br>\n1.5.2 熟悉导航面板 15\n<br>\n1.5.3 熟悉检查器面板 18\n<br>\n1.5.4 熟悉库面板 20\n<br>\n1.5.5 使用Xcode的帮助系统 22\n<br>\n1.6 本章小结 24\n<br>\n第2章 Swift的基本数据类型 25\n<br>\n2.1 注释 26\n<br>\n2.2 变量与常量 27\n<br>\n2.2.1 分隔符 27\n<br>\n2.2.2 标识符规则 29\n<br>\n2.2.3 Swift的关键字 29\n<br>\n2.2.4 声明变量和常量 30\n<br>\n2.2.5 输出变量和常量 32\n<br>\n2.3 整型 32\n<br>\n2.4 浮点型 34\n<br>\n2.5 数值型之间的类型转换 35\n<br>\n2.5.1 整型之间的转换 35\n<br>\n2.5.2 浮点型与整型之间的转换 37\n<br>\n2.6 Bool型 38\n<br>\n2.7 元组（tuple）类型 38\n<br>\n2.7.1 定义元组类型的变量 39\n<br>\n2.7.2 获取元组中的元素值 39\n<br>\n2.7.3 为元组中的元素命名 40\n<br>\n2.8 可选类型 40\n<br>\n2.8.1 可选和nil 41\n<br>\n2.8.2 强制解析 42\n<br>\n2.8.3 可选绑定 43\n<br>\n2.8.4 隐式可选类型 43\n<br>\n2.9 类型别名 45\n<br>\n2.10 字符和字符串 45\n<br>\n2.10.1 字符类型 45\n<br>\n2.10.2 字符串类型 46\n<br>\n2.10.3 字符串的可变性 48\n<br>\n2.10.4 字符串的基本操作 48\n<br>\n2.10.5 字符串比较 50\n<br>\n2.10.6 获取字符串中字符的Unicode编码 50\n<br>\n2.11 本章小结 51\n<br>\n第3章 运算符和表达式 52\n<br>\n3.1 赋值运算符 53\n<br>\n3.2 算术运算符 54\n<br>\n3.3 溢出运算符 57\n<br>\n3.3.1 值的上溢 57\n<br>\n3.3.2 值的下溢 58\n<br>\n3.4 位运算符 58\n<br>\n3.5 扩展后的赋值运算符 61\n<br>\n3.6 范围运算符 61\n<br>\n3.6.1 闭范围运算符 61\n<br>\n3.6.2 半开范围运算符 61\n<br>\n3.7 比较运算符 62\n<br>\n3.8 逻辑运算符 63\n<br>\n3.8.1 Swift的3个逻辑运算符 63\n<br>\n3.8.2 组合逻辑与括号 63\n<br>\n3.9 三目运算符 64\n<br>\n3.10 nil合并运算符 65\n<br>\n3.11 运算符的结合性和优先级 66\n<br>\n3.12 本章小结 67\n<br>\n第4章 流程控制 68\n<br>\n4.1 顺序结构 69\n<br>\n4.2 分支结构 69\n<br>\n4.2.1 if条件语句 69\n<br>\n4.2.2 switch分支语句 72\n<br>\n4.2.3 switch不存在隐式贯穿（fallthrough）和显式贯穿 73\n<br>\n4.2.4 使用break结束switch 74\n<br>\n4.2.5 switch的范围匹配 75\n<br>\n4.2.6 switch的元组匹配 75\n<br>\n4.2.7 case的值绑定 77\n<br>\n4.2.8 case的where子句 78\n<br>\n4.3 循环结构 79\n<br>\n4.3.1 while循环语句 79\n<br>\n4.3.2 repeat while循环语句 80\n<br>\n4.3.3 for循环 81\n<br>\n4.3.4 for-in循环 83\n<br>\n4.3.5 嵌套循环 83\n<br>\n4.4 控制循环结构 84\n<br>\n4.4.1 使用break结束循环 84\n<br>\n4.4.2 使用continue忽略本次循环的剩下语句 85\n<br>\n4.4.3 使用return结束方法 86\n<br>\n4.5 Swift 2新增的guard语句 87\n<br>\n4.6 Swift 2新增的API检查 88\n<br>\n4.7 条件编译 89\n<br>\n4.8 本章小结 90\n<br>\n第5章 集合 91\n<br>\n5.1 数组 92\n<br>\n5.1.1 声明和创建数组 92\n<br>\n5.1.2 使用数组 93\n<br>\n5.1.3 使用for-in遍历数组 95\n<br>\n5.1.4 数组的可变性和数组的修改 95\n<br>\n5.1.5 多维数组 98\n<br>\n5.1.6 数组的应用举例 101\n<br>\n5.2 Set集合 102\n<br>\n5.2.1 声明和创建Set 102\n<br>\n5.2.2 使用Set 103\n<br>\n5.2.3 使用for-in遍历Set 104\n<br>\n5.2.4 Set的可变性和Set的修改 104\n<br>\n5.2.5 Set集合元素与hashValue 106\n<br>\n5.2.6 Set支持的集合运算 106\n<br>\n5.2.7 Set集合的关系运算 107\n<br>\n5.3 字典 108\n<br>\n5.3.1 声明和创建字典 109\n<br>\n5.3.2 使用字典 110\n<br>\n5.3.3 使用for-in遍历字典 111\n<br>\n5.3.4 单独使用字典的keys或values 111\n<br>\n5.3.5 字典的可变性和字典的修改 112\n<br>\n5.3.6 字典的应用举例 113\n<br>\n5.4 集合的复制 114\n<br>\n5.4.1 数组与Set的复制 114\n<br>\n5.4.2 字典的复制 116\n<br>\n5.5 本章小结 117\n<br>\n第6章 函数和闭包 118\n<br>\n6.1 函数入门 119\n<br>\n6.1.1 定义和调用函数 119\n<br>\n6.1.2 函数返回值 120\n<br>\n6.1.3 递归函数 122\n<br>\n6.2 函数的形参 123\n<br>\n6.2.1 外部形参名 123\n<br>\n6.2.2 形参默认值 124\n<br>\n6.2.3 个数可变的形参 125\n<br>\n6.2.4 常量形参和变量形参 126\n<br>\n6.2.5 In-Out形参 126\n<br>\n6.3 函数类型 130\n<br>\n6.3.1 使用函数类型 130\n<br>\n6.3.2 使用函数类型作为形参类型 131\n<br>\n6.3.3 使用函数类型作为返回值类型 133\n<br>\n6.4 函数重载 133\n<br>\n6.5 嵌套函数 135\n<br>\n6.6 嵌套函数与闭包 137\n<br>\n6.6.1 回顾嵌套函数 137\n<br>\n6.6.2 使用闭包表达式代替嵌套函数 137\n<br>\n6.6.3 闭包的escape 138\n<br>\n6.7 闭包表达式 139\n<br>\n6.7.1 调用闭包（使用闭包返回值） 139\n<br>\n6.7.2 利用上下文推断类型 140\n<br>\n6.7.3 省略return 141\n<br>\n6.7.4 省略形参名 141\n<br>\n6.7.5 尾随闭包 142\n<br>\n6.8 捕获上下文中的变量和常量 143\n<br>\n6.9 闭包是引用类型 144\n<br>\n6.10 自动闭包 145\n<br>\n6.11 本章小结 146\n<br>\n第7章 面向对象编程（上） 147\n<br>\n7.1 Swift的面向对象支持 148\n<br>\n7.1.1 面向对象概述 148\n<br>\n7.1.2 Swift的面向对象类型 148\n<br>\n7.2 枚举 149\n<br>\n7.2.1 定义枚举 149\n<br>\n7.2.2 枚举值和switch语句 151\n<br>\n7.2.3 原始值 152\n<br>\n7.2.4 关联值 153\n<br>\n7.2.5 递归枚举 155\n<br>\n7.3 类和结构体 156\n<br>\n7.3.1 定义结构体和类 156\n<br>\n7.3.2 创建实例 160\n<br>\n7.3.3 值类型与引用类型 161\n<br>\n7.3.4 引用类型的比较 163\n<br>\n7.3.5 self关键字 165\n<br>\n7.3.6 类和结构体的选择 167\n<br>\n7.4 存储属性 167\n<br>\n7.4.1 实例存储属性与实例变量 167\n<br>\n7.4.2 结构体常量与实例属性 169\n<br>\n7.4.3 延迟存储属性 169\n<br>\n7.5 计算属性 170\n<br>\n7.5.1 定义计算属性 170\n<br>\n7.5.2 set部分的简化 172\n<br>\n7.5.3 只读的计算属性 173\n<br>\n7.6 属性观察者 173\n<br>\n7.7 方法 175\n<br>\n7.7.1 方法的所属性 176\n<br>\n7.7.2 将方法转换为函数 176\n<br>\n7.7.3 方法的外部形参名 177\n<br>\n7.7.4 Swift方法的命名习惯 179\n<br>\n7.7.5 值类型的可变方法 180\n<br>\n7.7.6 属性和方法的统一 182\n<br>\n7.8 下标 183\n<br>\n7.8.1 下标的基本用法 183\n<br>\n7.8.2 下标重载 185\n<br>\n7.9 可选链 187\n<br>\n7.9.1 使用可选链代替强制解析 187\n<br>\n7.9.2 使用可选链调用方法 189\n<br>\n7.9.3 使用可选链调用下标 190\n<br>\n7.10 类型属性和类型方法 190\n<br>\n7.10.1 类型成员的修饰符 191\n<br>\n7.10.2 值类型的类型属性 191\n<br>\n7.10.3 类的类型属性 192\n<br>\n7.10.4 值类型的类型方法 193\n<br>\n7.10.5 类的类型方法 194\n<br>\n7.11 错误处理 194\n<br>\n7.11.1 抛出错误 195\n<br>\n7.11.2 声明抛出错误 195\n<br>\n7.11.3 使用do-catch捕捉错误 196\n<br>\n7.11.4 将错误转为可选值 197\n<br>\n7.11.5 使错误失效 198\n<br>\n7.11.6 使用defer回收资源 199\n<br>\n7.12 构造器 200\n<br>\n7.12.1 类和结构体的构造器 200\n<br>\n7.12.2 构造器的外部形参名 201\n<br>\n7.12.3 使用闭包或函数为属性设置初始值 203\n<br>\n7.12.4 值类型的构造器重载 204\n<br>\n7.13 可能失败的构造器 205\n<br>\n7.13.1 结构体与可能失败的构造器 206\n<br>\n7.13.2 枚举与可能失败的构造器 207\n<br>\n7.14 本章小结 208\n<br>\n第8章 面向对象编程（下） 209\n<br>\n8.1 继承 210\n<br>\n8.1.1 继承的特点 210\n<br>\n8.1.2 重写父类的方法 211\n<br>\n8.1.3 重写父类的属性 212\n<br>\n8.1.4 重写属性观察者 214\n<br>\n8.1.5 重写父类的下标 214\n<br>\n8.1.6 使用final防止重写 215\n<br>\n8.2 类的构造与析构 217\n<br>\n8.2.1 类的指定构造器和便利构造器 217\n<br>\n8.2.2 类的构造器链 218\n<br>\n8.2.3 两段式构造 220\n<br>\n8.2.4 构造器的继承和重写 223\n<br>\n8.2.5 类与可能失败的构造器 226\n<br>\n8.2.6 可能失败的构造器的传 ');
 
 -- --------------------------------------------------------
 
@@ -575,7 +580,7 @@ INSERT INTO `ot_book` (`ISBN`, `book_name`, `author`, `introduction`, `totalnum`
 
 CREATE TABLE IF NOT EXISTS `ot_bookid_isbn` (
   `ISBN` varchar(16) NOT NULL COMMENT 'ISBN',
-  `book_id` smallint(10) NOT NULL AUTO_INCREMENT COMMENT '条码号',
+  `book_id` smallint(10) unsigned zerofill NOT NULL AUTO_INCREMENT COMMENT '条码号',
   `collection` varchar(30) NOT NULL COMMENT '馆藏地',
   `state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '借阅状态',
   PRIMARY KEY (`book_id`),
@@ -587,16 +592,16 @@ CREATE TABLE IF NOT EXISTS `ot_bookid_isbn` (
 --
 
 INSERT INTO `ot_bookid_isbn` (`ISBN`, `book_id`, `collection`, `state`) VALUES
-('9787115308276', 1, '自然书库（3F东）', 0),
-('9787115308276', 2, '自然书库（3F东）', 1),
-('9787115391872', 3, '自然书库（3F西）', 1),
-('9787115391872', 4, '自然书库（3F西）', 1),
-('9787115392602', 5, '社会书库（4F东）', 1),
-('9787115392602', 6, '社会书库（4F东）', 1),
-('9787121275821', 7, '文一校区书库（信息工程学院）', 1),
-('9787121275821', 8, '文一校区书库（信息工程学院）', 1),
-('9787121280764', 9, '自然书库（3F东）', 1),
-('9787121280764', 10, '自然书库（3F东）', 1);
+('9787115308276', 0000000001, '自然书库（3F东）', 1),
+('9787115308276', 0000000002, '自然书库（3F东）', 1),
+('9787115391872', 0000000003, '自然书库（3F西）', 1),
+('9787115391872', 0000000004, '自然书库（3F西）', 1),
+('9787115392602', 0000000005, '社会书库（4F东）', 1),
+('9787115392602', 0000000006, '社会书库（4F东）', 1),
+('9787121275821', 0000000007, '文一校区书库（信息工程学院）', 0),
+('9787121275821', 0000000008, '文一校区书库（信息工程学院）', 1),
+('9787121280764', 0000000009, '自然书库（3F东）', 1),
+('9787121280764', 0000000010, '自然书库（3F东）', 1);
 
 --
 -- 触发器 `ot_bookid_isbn`
@@ -629,11 +634,12 @@ DELIMITER ;
 --
 CREATE TABLE IF NOT EXISTS `ot_bookinfo_view` (
 `callnum` varchar(20)
-,`book_id` smallint(10)
+,`book_id` smallint(10) unsigned zerofill
 ,`collection` varchar(30)
 ,`state` tinyint(1)
 ,`ISBN` varchar(16)
 ,`back_time` int(11)
+,`img` varchar(255)
 );
 -- --------------------------------------------------------
 
@@ -644,7 +650,7 @@ CREATE TABLE IF NOT EXISTS `ot_bookinfo_view` (
 CREATE TABLE IF NOT EXISTS `ot_borrow` (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
-  `book_id` smallint(10) NOT NULL COMMENT 'book_id',
+  `book_id` smallint(10) unsigned zerofill NOT NULL COMMENT 'book_id',
   `borrow_time` int(11) NOT NULL COMMENT '借书时间',
   `back_time` int(11) NOT NULL COMMENT '应还时间',
   `book_name` varchar(40) NOT NULL,
@@ -656,7 +662,7 @@ CREATE TABLE IF NOT EXISTS `ot_borrow` (
 --
 
 INSERT INTO `ot_borrow` (`user_id`, `ISBN`, `book_id`, `borrow_time`, `back_time`, `book_name`) VALUES
-(1, '9787115308276', 1, 1460912873, 1463504873, 'Swift语言实战入门（第2版）');
+(1, '9787121275821', 0000000007, 1460975202, 1463567202, 'Swifter(第2版):100个Swift 2开发必备Tip');
 
 -- --------------------------------------------------------
 
@@ -667,6 +673,7 @@ CREATE TABLE IF NOT EXISTS `ot_borrowrank_view` (
 `book_name` varchar(40)
 ,`ISBN` varchar(17)
 ,`rank` bigint(21)
+,`img` varchar(255)
 );
 -- --------------------------------------------------------
 
@@ -679,7 +686,7 @@ CREATE TABLE IF NOT EXISTS `ot_borrow_history` (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `borrow_time` int(11) NOT NULL COMMENT '借书时间',
   `return_time` int(11) NOT NULL COMMENT '还书时间',
-  `book_id` smallint(10) NOT NULL COMMENT 'book_id',
+  `book_id` smallint(10) unsigned zerofill NOT NULL COMMENT 'book_id',
   `ISBN` varchar(17) NOT NULL COMMENT 'ISBN',
   PRIMARY KEY (`user_id`,`book_id`,`borrow_time`,`return_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -689,9 +696,8 @@ CREATE TABLE IF NOT EXISTS `ot_borrow_history` (
 --
 
 INSERT INTO `ot_borrow_history` (`book_name`, `user_id`, `borrow_time`, `return_time`, `book_id`, `ISBN`) VALUES
-('Swift语言实战入门（第2版）', 1, 1460910696, 1460910697, 1, '9787115308276'),
-('Swift语言实战入门（第2版）', 1, 1460911092, 1460911093, 1, '9787115308276'),
-('Swift与Cocoa框架开发', 1, 1460911324, 1460911418, 3, '9787115391872');
+('Swift语言实战入门（第2版）', 1, 1460974357, 1460975109, 0000000001, '9787115308276'),
+('Swift语言实战入门（第2版）', 1, 1460975989, 1460975991, 0000000001, '9787115308276');
 
 -- --------------------------------------------------------
 
@@ -998,7 +1004,7 @@ CREATE TABLE IF NOT EXISTS `ot_member` (
 --
 
 INSERT INTO `ot_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
-(1, 'admin', 0, '0000-00-00', '', 10, 8, 0, 1460863718, 0, 1460906779, 1);
+(1, 'admin', 0, '0000-00-00', '', 10, 11, 0, 1460863718, 0, 1460960958, 1);
 
 -- --------------------------------------------------------
 
@@ -1259,7 +1265,7 @@ CREATE TABLE IF NOT EXISTS `ot_ucenter_member` (
 --
 
 INSERT INTO `ot_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
-(1, 'admin', 'ab51f9d10187832ceb782655beae0eb3', '519589356@qq.com', '', 1460863718, 0, 1460906779, 0, 1460863718, 1);
+(1, 'admin', 'ab51f9d10187832ceb782655beae0eb3', '519589356@qq.com', '', 1460863718, 0, 1460960958, 0, 1460863718, 1);
 
 -- --------------------------------------------------------
 
@@ -1310,7 +1316,7 @@ CREATE TABLE IF NOT EXISTS `ot_userdata` (
 --
 DROP TABLE IF EXISTS `ot_bookinfo_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_bookinfo_view` AS select `ot_book`.`callnum` AS `callnum`,`ot_bookid_isbn`.`book_id` AS `book_id`,`ot_bookid_isbn`.`collection` AS `collection`,`ot_bookid_isbn`.`state` AS `state`,`ot_bookid_isbn`.`ISBN` AS `ISBN`,`ot_borrow`.`back_time` AS `back_time` from ((`ot_bookid_isbn` left join `ot_borrow` on((`ot_bookid_isbn`.`book_id` = `ot_borrow`.`book_id`))) join `ot_book`) where (`ot_bookid_isbn`.`ISBN` = `ot_book`.`ISBN`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_bookinfo_view` AS select `ot_book`.`callnum` AS `callnum`,`ot_bookid_isbn`.`book_id` AS `book_id`,`ot_bookid_isbn`.`collection` AS `collection`,`ot_bookid_isbn`.`state` AS `state`,`ot_bookid_isbn`.`ISBN` AS `ISBN`,`ot_borrow`.`back_time` AS `back_time`,`ot_book`.`img` AS `img` from ((`ot_bookid_isbn` left join `ot_borrow` on((`ot_bookid_isbn`.`book_id` = `ot_borrow`.`book_id`))) join `ot_book`) where (`ot_bookid_isbn`.`ISBN` = `ot_book`.`ISBN`);
 
 -- --------------------------------------------------------
 
@@ -1319,7 +1325,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ot_borrowrank_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_borrowrank_view` AS select `ot_book`.`book_name` AS `book_name`,`ot_borrow_history`.`ISBN` AS `ISBN`,count(`ot_borrow_history`.`ISBN`) AS `rank` from (`ot_borrow_history` join `ot_book`) where (`ot_borrow_history`.`ISBN` = `ot_book`.`ISBN`) group by `ot_borrow_history`.`ISBN`,`ot_borrow_history`.`ISBN`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ot_borrowrank_view` AS select `ot_book`.`book_name` AS `book_name`,`ot_borrow_history`.`ISBN` AS `ISBN`,count(`ot_borrow_history`.`ISBN`) AS `rank`,`ot_book`.`img` AS `img` from (`ot_borrow_history` join `ot_book`) where (`ot_borrow_history`.`ISBN` = `ot_book`.`ISBN`) group by `ot_borrow_history`.`ISBN`,`ot_borrow_history`.`ISBN`;
 
 --
 -- 限制导出的表

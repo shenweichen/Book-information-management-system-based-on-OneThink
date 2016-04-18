@@ -10,6 +10,10 @@ $('#submit').click(function(){
     }
 });
 
+$(function(){
+    $(".carousel-inner div:first").addClass('active');
+
+});
 
 $('#null').click(function(){
  var keyword = $('#word').val();
@@ -58,5 +62,3 @@ $('#null').click(function(){
             alert("请输入书籍名称！");
         }
 });
-
-

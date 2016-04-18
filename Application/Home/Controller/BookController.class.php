@@ -6,6 +6,7 @@ class BookController extends HomeController{
 		 $ISBN=I('ISBN');
         $user_id = session('user_id');
         $map['ISBN']=array('EQ',$ISBN);
+        $this->answer=M('bookinfo_view')->where($map)->select();
         $this->info=M('book')->where($map)->find();//find返回一行数据
         $map['user_id']=intval($user_id);
         $book_id=M('borrow')->where($map)->getField('book_id');
@@ -42,7 +43,8 @@ class BookController extends HomeController{
     //将借书记录插入至借阅表
         $map['user_id']=intval($user_id);//session里存的user_id为字符串型，这里需要转换成整型
        $map['borrow_time']=time();//获取当前时间戳
-       $map['back_time']=time()+2592000;//计算应还时间
+       $map['back_time']= $map['borrow_time']+2592000;//计算应还时间
+       $answer['back_time']=$map['back_time'];
        $map['book_name']=$book->where($tmp)->getField('book_name');
         M('borrow')->add($map);
        $this->ajaxReturn($answer);

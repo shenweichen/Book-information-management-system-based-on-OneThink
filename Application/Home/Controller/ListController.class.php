@@ -19,7 +19,17 @@ class ListController extends HomeController{
 
     	$list=$book->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
     	$this->count=$count;
-    	$this->query_field=$query_field;
+        switch ($query_field) {
+            case 'book_name':
+                    $this->query_field="题名";
+                break;
+            case 'author':
+                    $this->query_field="作者";
+                break;
+            case 'ISBN':
+                $this->query_field="ISBN编号";
+            break;
+        }
     	$this->word=$word;
 
  		$this->book=$list;

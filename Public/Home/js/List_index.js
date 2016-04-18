@@ -62,7 +62,7 @@ $('#search_list>p>a').mouseover(function() {
                       var back_time=data[i]['back_time'];
                 var str = ' <tr align="left" class="whitetext">' +
                     '<td width="10%">'+callnum+'</td>' +
-                    '<td align="center"width="15%">'+PrefixInteger(book_id,4)+'</td>' +
+                    '<td align="center"width="15%">'+book_id+'</td>' +
                     '<td width="15%">&nbsp;-</td>' +
                     '<td width="25%" title="'+collection+'">' +
                     '<span class="glyphicon glyphicon-book"></span>'+collection+'</td>' +
@@ -74,16 +74,19 @@ $('#search_list>p>a').mouseover(function() {
                      str+='借出-应还日期：'+datetime;
                     }
                     str+='</td></tr>';
-                        $("div[id="+isbn+"] tbody").append(str);
+
+                        $("#"+isbn+" tbody").append(str);
 
                     }
-    $("div[id="+isbn+"]").css("display","block");
+                     $("#"+isbn).parent().css("height","250px");
+    $("#"+isbn).css("display","block");
                     }
                 });
 });
 
 $('#search_list>p>a').mouseout(function() {
      var isbn=$(this).attr('ISBN');
+        $("#"+isbn).parent().css("height","150px");
     $("div[id="+isbn+"]").css("display","none");
 
 });
