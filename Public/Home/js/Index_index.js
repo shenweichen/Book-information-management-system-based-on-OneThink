@@ -10,8 +10,15 @@ $('#submit').click(function(){
     }
 });
 
-$(function(){
-    $(".carousel-inner div:first").addClass('active');
+$(function(){/*动态加载轮播*/
+    var num=eval($("#count").html());
+    var str="";
+     for (var i = 0; i <num; i++) {
+         str+=' <li data-target="#carousel-book" data-slide-to="'+i+'"></li>';
+     }
+     $(".carousel-indicators").append(str);
+    $(".carousel-inner>div:first").addClass('active');
+    $(".carousel-indicators>li:first").addClass('active');
 
 });
 

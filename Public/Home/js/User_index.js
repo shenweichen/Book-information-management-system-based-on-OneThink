@@ -8,3 +8,15 @@ $(function(){
 		$('#contents>div:eq('+num+')').css("display", "block");
 	});
 });
+
+$('button').click(function(){
+	$('#contents>div:first>table,button').css('display', 'none');
+	$("#list").css('display', 'block');
+
+});
+
+$('#tab>li:first').click(function(event) {
+	$('#contents>div:first>table,button').css('display', 'block');
+	$(':input[value!=修改]').val('');
+	$("#list").css('display', 'none');
+});

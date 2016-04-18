@@ -24,7 +24,8 @@ class IndexController extends HomeController {
      
        //显示热门图书
     	$this->books=M('borrowrank_view')->order('rank desc')->select();
-        $this->userid=$user_id;
+        $this->count=count($this->books);//热门图书数量
+        $this->name=M('reader')->where('user_id=%d',$user_id)->getField('name');//分配用户名用于欢迎语
     	$this->display();
         /*$category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);

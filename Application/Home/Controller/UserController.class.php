@@ -22,9 +22,28 @@ class UserController extends HomeController {
 		$user_id=session('user_id');
 		$this->userid=$user_id;
 
+		$this->reader=M('reader_view')->where('user_id=%d',$user_id)->find();
 		$this->books=M('borrow')->where('user_id=%d',$user_id)->select();//分配当前正在借阅的图书给模板
 		$this->history=M('borrow_history')->where('user_id=%d',$user_id)->select();
+		//分配借阅历史
+		$this->collection=M('collection_view')->where('user_id=%d',$user_id)->select();
+		//分配收藏
 		$this->display();
+	}
+
+	public function update(){
+		$user_id=session('user_id');
+		$mobile=I('mobile');
+		$college=I('college');
+		$major=I('major');
+
+		$map['mobile']=$mobile;
+		$map['college']=$college;
+		$map['major']=$major;
+
+		M('reader')->where('user_id=%d',$user_id)->save($map);
+		$this->success('修改成功', 'index.php?s=/Home/User/index');
+
 	}
 
 	/* 注册页面 */

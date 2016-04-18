@@ -82,7 +82,42 @@ $('#return').click(function() {
     }
 });
 
+$('#collect').click(function() {
+    var book_id = $('#collection').html();
+    if(book_id=="0"){
+            $.ajax({ /*ajax异步刷新*/
+                type: "POST",
+                url: "index.php?s=/Home/Book/collect",
+                data: {
+                    ISBN: ISBN,
+                    type:1,
+                },
+                dataType: "json",
+                success: function(data) {
+                    alert("收藏成功");
+                    $('#collection').html("1");
+                 $('#collect').html("取消收藏");
+                }
+            });
+        }else{
 
+$.ajax({ /*ajax异步刷新*/
+                type: "POST",
+                url: "index.php?s=/Home/Book/collect",
+                data: {
+                    ISBN: ISBN,
+                    type:0,
+                },
+                dataType: "json",
+                success: function(data) {
+                    alert("取消收藏成功");
+                    $('#collection').html("0");
+                   $('#collect').html("收藏");
+                }
+            });
+
+        }
+});
 
 $(function(){
     var tab_child=$("#tab").children();

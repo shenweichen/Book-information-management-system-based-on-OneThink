@@ -12,7 +12,8 @@ class BookController extends HomeController{
         $book_id=M('borrow')->where($map)->getField('book_id');
   
         $this->state=$book_id?$book_id:0;//返回当前用户这本书的借阅状态：已借阅：book_id，未借阅为0
-
+        $this->collection=M('collection')->where($map)->find()?1:0;
+        //返回当前用户这本书的收藏状态：已收藏为1，未收藏为0
         $this->userid=$user_id;
         $this->display();
 	}
@@ -73,7 +74,18 @@ class BookController extends HomeController{
         $this->ajaxReturn($remainnum);
     }
 
+    public function collect(){
+        $ISBN=I('ISBN');
+        $user_id=session('user_id');
+        $map['user_id']=$user_id;
+        $map['ISBN']=$ISBN;
+        if(I('type')==1){
+        M('collection')->add($map);}else{
+            M('collection')->where($map)->delete();
+        }
+        $this->ajaxReturn(true);
 
+    }
 
     
 }

@@ -22,183 +22,175 @@
 
 <block name="body">
 <div class="container-fluid">
+<div class="row-fluid">
 <div class="col-md-12" style="border: solid 1px black">
-<div id="book_pic" style=" float:right;margin-left:10px;">
-    <img id="book_img" width="105" height="155" style=" border:1px solid #efefef; display: block;" src="{$info.img}">
-    <div >
-        <table>
-            <if condition="is_login()">
-                <!-- 用户已经登录 -->
-                <tr>
-                    <th>可借复本</th>
-                    <td id="remainnum">{$info.remainnum}</td>
-                </tr>
-                <tr>
-                    <th>书籍状态</th>
-                    <td id="bookstate">
-                        <eq name="state" value="0">
-                            <eq name="info.remainnum" value="0"> <font color="red">不可借阅-无在馆复本</font>
-                                <else/> <font color="green">可借</font>
-                            </eq>
-                            <else/>
-                            <font color="red">借阅中</font>
+    <div id="book_pic" style=" float:right;margin-left:10px;">
+        <img id="book_img" width="105" height="155" style=" border:1px solid #efefef; display: block;" src="{$info.img}">
+
+        <if condition="is_login()">
+            <!-- 用户已经登录 -->
+            <h4>
+                可借复本&nbsp;
+                <span id=remainnum>{$info.remainnum}</span>
+            </h4>
+            <h4>
+                书籍状态&nbsp;
+                <span id="bookstate">
+                    <eq name="state" value="0">
+                        <eq name="info.remainnum" value="0"> <font color="red">不可借阅-无在馆复本</font>
+                            <else/> <font color="green">可借</font>
                         </eq>
-                    </td>
-                    <td id="state" style="display: none">{$state}</td>
-                    <td id="ISBN" style="display: none;">{$info.isbn}</td>
-                    <td id="userid" style="display: none;">{$userid}</td>
+                        <else/>
+                        <font color="red">借阅中</font>
+                    </eq>
+                </span>
+            </h4>
+            <span id="state" style="display: none">{$state}</span>
+            <span id="ISBN" style="display: none;">{$info.isbn}</span>
+            <span id="userid" style="display: none;">{$userid}</span>
+            <span id="collection" style="display: none;">{$collection}</span>
+            <div class="btn-group">
+                <eq name="state" value="0">
+                    <!-- 尚未借阅 -->
+                    <eq name="info.remainnum" value="0">
+                        <!-- 没有余量 -->
+                        <button  id="borrow" class="btn btn-default" disabled="disabled">借阅</button>
+                        <button  id="return" class="btn btn-default" disabled="disabled">归还</button>
+                        <else/>
+                        <!-- 尚未借阅且可借 -->
+                        <button  id="borrow" class="btn btn-default">借阅</button>
+                        <button  id="return" class="btn btn-default" disabled="disabled">归还</button>
+                    </eq>
+                    <else/>
+                    <!-- 正在借阅 -->
+                    <button  id="borrow" class="btn btn-default" disabled="disabled">借阅</button>
 
-                </tr>
-                <tr>
-                    <td>
-                        <div class="btn-group">
-                            <eq name="state" value="0">
-                                <!-- 尚未借阅 -->
-                                <eq name="info.remainnum" value="0">
-                                    <!-- 没有余量 -->
-                                    <button  id="borrow" class="btn btn-default" disabled="disabled">借阅</button>
-                                    <button  id="return" class="btn btn-default" disabled="disabled">归还</button>
-                                    <else/>
-                                    <!-- 尚未借阅且可借 -->
-                                    <button  id="borrow" class="btn btn-default">借阅</button>
-                                    <button  id="return" class="btn btn-default" disabled="disabled">归还</button>
-                                </eq>
-                                <else/>
-                                <!-- 正在借阅 -->
-                                <button  id="borrow" class="btn btn-default" disabled="disabled">借阅</button>
+                    <button  id="return" class="btn btn-default">归还</button>
+                </eq>
+                <eq name="collection" value="0">
+                    <button  id="collect" class="btn btn-default">收藏</button>
+                    <else/>
+                    <button  id="collect" class="btn btn-default" >取消收藏</button>
+                </eq>
 
-                                <button  id="return" class="btn btn-default">归还</button>
-                            </eq>
-                            <a class="btn btn-default" href="{:U('Home/Index/index')}">返回</a>
-                        </div>
-                    </td>
-                </tr>
-                <else />
-                <!-- 用户尚未登陆 -->
-                <tr>
-                    <th>可借复本</th>
-                    <td id="remainnum">{$info.remainnum}</td>
-                </tr>
-                <tr>
-                    <th>书籍状态</th>
-                    <td id="state">
-                        <eq name="info.remainnum" value="0">
-                            <font color="red">不可借阅-无在馆复本</font>
-                            <else/>
-                            <font color="green">可借</font>
-                        </eq>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="btn-group">
-                            <eq name="info.remainnum" value="0">
-                                <button  id="borrow" class="btn btn-default" disabled="disabled">借阅</button>
-                                <else/>
-                                <button  id="borrow" class="btn btn-default">借阅</button>
-                            </eq>
-                            <button  id="return" class="btn btn-default" disabled="disabled">归还</button>
-                            <a class="btn btn-default" href="{:U('Home/Index/index')}">返回</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        您还未登录,现在
-                        <a href="{:U('User/login')}">登录</a>
-                    </td>
+                <a class="btn btn-default" href="{:U('Home/Index/index')}">返回</a>
+            </div>
+            <else />
+            <!-- 用户尚未登陆 -->
+            <h4>
+                可借复本
+                <span id="remainnum">{$info.remainnum}</span>
+            </h4>
+            <h4>
+                书籍状态
+                <span id="state">
+                    <eq name="info.remainnum" value="0">
+                        <font color="red">不可借阅-无在馆复本</font>
+                        <else/>
+                        <font color="green">可借</font>
+                    </eq>
+                </span>
+            </h4>
 
-                </tr>
-
-            </if>
-        </table>
+            <div class="btn-group">
+                <eq name="info.remainnum" value="0">
+                    <button  id="borrow" class="btn btn-default" disabled="disabled">借阅</button>
+                    <else/>
+                    <button  id="borrow" class="btn btn-default">借阅</button>
+                </eq>
+                <button  id="return" class="btn btn-default" disabled="disabled">归还</button>
+                <button  id="collect" class="btn btn-default" disabled="disabled">收藏</button>
+                <a class="btn btn-default" href="{:U('Home/Index/index')}">返回</a>
+            </div>
+            <h5>
+                您还未登录,现在
+                <a href="{:U('User/login')}">登录</a>
+            </h5>
+        </if>
     </div>
-</div>
-<div id="book_article" style="float:left;width:800px">
-    <div id="book_info" >
-        <dl class="dl-horizontal">
-            <dt>题名/责任者:</dt>
-            <dd>
-                <a href="{:U('Home/List/index',array('keyword'=>
-                    $info['book_name'],'query_field'=>'book_name'))}">{$info.book_name}
-                </a>
-                /{$info.author} 著
-            </dd>
-            <dt>出版发行项:</dt>
-            <dd>{$info.pub},{$info.pub_date|date="Y-m-d",###}</dd>
-            <dt>ISBN及定价:</dt>
-            <dd>{$info.isbn}/CNY25.00</dd>
-            <dt valign="top">内容简介:</dt>
-            <dd style="padding-bottom: 8px;">{$info.introduction}</dd>
-            <dt>载体形态项:</dt>
-            <dd>167页:图;21cm</dd>
-            <dt>个人责任者:</dt>
-            <dd>
-                <a href="{:U('Home/List/index',array('keyword'=>$info['author'],'query_field'=>'author'))}">{$info.author}</a>
-                著
-            </dd>
-            <dt>学科主题:</dt>
-            <dd>
-                <a href="openlink.php?keyword=%E8%AF%AD%E8%A8%80%E8%89%BA%E6%9C%AF">语言艺术</a>
-                -通俗读物
-            </dd>
-            <dt>中图法分类号:</dt>
-            <dd>
-                <a href="openlink.php?coden=H019">H019</a>
-            </dd>
-            <dt>提要文摘附注:</dt>
-            <dd>本书包括40篇精彩短文，介绍如何讨好领导升职加薪；朋友聚会如何炒热气氛；得罪老婆如何求饶等。</dd>
-        </dl>
-    </div>
+    <div id="book_article" style="float:left;width:800px">
+        <div id="book_info" >
+            <dl class="dl-horizontal">
+                <dt>题名/责任者:</dt>
+                <dd>
+                    <a href="{:U('Home/List/index',array('keyword'=>
+                        $info['book_name'],'query_field'=>'book_name'))}">{$info.book_name}
+                    </a>
+                    /{$info.author} 著
+                </dd>
+                <dt>出版发行项:</dt>
+                <dd>{$info.pub},{$info.pub_date|date="Y-m-d",###}</dd>
+                <dt>ISBN及定价:</dt>
+                <dd>{$info.isbn}/CNY25.00</dd>
+                <dt valign="top">内容简介:</dt>
+                <dd style="padding-bottom: 8px;">{$info.introduction}</dd>
+                <dt>载体形态项:</dt>
+                <dd>167页:图;21cm</dd>
+                <dt>个人责任者:</dt>
+                <dd>
+                    <a href="{:U('Home/List/index',array('keyword'=>$info['author'],'query_field'=>'author'))}">{$info.author}</a>
+                    著
+                </dd>
+                <dt>学科主题:</dt>
+                <dd>
+                    <a href="openlink.php?keyword=%E8%AF%AD%E8%A8%80%E8%89%BA%E6%9C%AF">语言艺术</a>
+                    -通俗读物
+                </dd>
+                <dt>中图法分类号:</dt>
+                <dd>
+                    <a href="openlink.php?coden=H019">H019</a>
+                </dd>
+            </dl>
+        </div>
 
-    <div class="">
-        <ul class="nav nav-tabs " id="tab">
-            <li class="active">
-                <a href="##">馆藏信息</a>
-            </li>
-            <li>
-                <a href="##">目录</a>
-            </li>
-        </ul>
-    </div>
-    <div id="tabs"  >
-        <div style="display: block;">
-            <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" id="item" class="table table-condensed">
-                <tbody>
-                    <tr align="left" class="greytext1">
-                        <td>索书号</td>
-                        <td>条码号</td>
-                        <td>年卷期</td>
-                        <td>馆藏地</td>
-                        <td>书刊状态</td>
-                    </tr>
-                    <foreach name='answer' item='v'>
-                        <tr  id="{$v.book_id}" align="left" class="whitetext">
-                            <td width="10%">{$v.callnum}</td>
-                            <td align="center"width="15%">{$v.book_id}</td>
-                            <td width="15%">&nbsp;-</td>
-                            <td width="25%" title="{$v.collection}">
-                                <span class="glyphicon glyphicon-book"></span>
-                                ${$v.collection}
-                            </td>
-                            <td width="%25">
-                                <eq name="v.state" value="1">
-                                    <font color="green">可借</font>
-                                    <else/>
-                                    借出-应还日期:{$v.back_time|date="Y-m-d",###}
-                                </eq>
-                            </td>
+        <div class="">
+            <ul class="nav nav-tabs " id="tab">
+                <li class="active">
+                    <a href="##">馆藏信息</a>
+                </li>
+                <li>
+                    <a href="##">目录</a>
+                </li>
+            </ul>
+        </div>
+        <div id="tabs"  >
+            <div style="display: block;">
+                <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" id="item" class="table table-condensed">
+                    <tbody>
+                        <tr align="left" class="greytext1">
+                            <td>索书号</td>
+                            <td>条码号</td>
+                            <td>年卷期</td>
+                            <td>馆藏地</td>
+                            <td>书刊状态</td>
                         </tr>
-                    </foreach>
-                </tbody>
-            </table>
-        </div>
-         <div style="display: none;">
-          <span style="display: block">{$info.catalog}</span>
+                        <foreach name='answer' item='v'>
+                            <tr  id="{$v.book_id}" align="left" class="whitetext">
+                                <td width="10%">{$v.callnum}</td>
+                                <td align="center"width="15%">{$v.book_id}</td>
+                                <td width="15%">&nbsp;-</td>
+                                <td width="25%" title="{$v.collection}">
+                                    <span class="glyphicon glyphicon-book"></span>
+                                    ${$v.collection}
+                                </td>
+                                <td width="%25">
+                                    <eq name="v.state" value="1">
+                                        <font color="green">可借</font>
+                                        <else/>
+                                        借出-应还日期:{$v.back_time|date="Y-m-d",###}
+                                    </eq>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: none;">
+                <span style="display: block">{$info.catalog}</span>
+            </div>
         </div>
     </div>
 </div>
-
 </div>
 </div>
 <script type="text/javascript" src="__PUBLIC__/Home/js/Book_index.js"></script>

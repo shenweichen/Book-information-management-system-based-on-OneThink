@@ -15,7 +15,7 @@
         <!-- <ul class="nav nav-list bs-docs-sidenav">{:W('Category/lists', array(1, true))}</ul>
     -->
     <if condition="is_login()">
-        <span>当前用户ID为{$userid}</span>
+        <span>欢迎您,{$name}</span>
         <else />
         您还未登录,现在
         <a href="{:U('User/login')}">登录</a>
@@ -23,6 +23,7 @@
     </if>
 
     <h3 align="center" style="color: red">热门借阅</h3>
+    <span id="count" style="display: none;">{$count}</span>
     <table class="table table-striped table-bordered table-hover" style="margin-top: -50px;">
         <th align="center">书名</th>
         <th>借阅次数</th>
@@ -65,12 +66,8 @@
         <div class="col-md-9" align="center" >
             <div class="carousel slide" id="carousel-book">
                 <ol class="carousel-indicators">
-                    <li class="active" data-target="#carousel-book" data-slide-to="0"></li>
-                    <li data-target="#carousel-book" data-slide-to="1"></li>
-                    <li data-target="#carousel-book" data-slide-to="2"></li>
-                      <li data-target="#carousel-book" data-slide-to="3"></li>
-                </ol>
 
+                </ol>
                 <div class="carousel-inner">
                     <foreach name='books' item='v'>
                         <div class="item" style="height: 170px">
