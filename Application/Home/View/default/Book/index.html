@@ -26,7 +26,10 @@
 <div class="col-md-12" style="border: solid 1px black">
     <div id="book_pic" style=" float:right;margin-left:10px;">
         <img id="book_img" width="105" height="155" style=" border:1px solid #efefef; display: block;" src="{$info.img}">
-
+            <span id="state" style="display: none">{$state}</span>
+            <span id="ISBN" style="display: none;">{$info.isbn}</span>
+            <span id="userid" style="display: none;">{$userid}</span>
+            <span id="collection" style="display: none;">{$collection}</span>
         <if condition="is_login()">
             <!-- 用户已经登录 -->
             <h4>
@@ -45,10 +48,6 @@
                     </eq>
                 </span>
             </h4>
-            <span id="state" style="display: none">{$state}</span>
-            <span id="ISBN" style="display: none;">{$info.isbn}</span>
-            <span id="userid" style="display: none;">{$userid}</span>
-            <span id="collection" style="display: none;">{$collection}</span>
             <div class="btn-group">
                 <eq name="state" value="0">
                     <!-- 尚未借阅 -->
