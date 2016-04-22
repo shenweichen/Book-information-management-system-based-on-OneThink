@@ -60,7 +60,7 @@ class BookController extends HomeController{
         $map['book_id']=$book_id;
          M('bookid_isbn')->where($map)->setField('state',1);//将bookid表中的借阅状态设置为1，同时触发器自动更新库存数量
          $tmp['ISBN']=$ISBN;//现在不能直接用$map作为查询条件了，原因有待查证
-        $remainnum=$book->where($tmp)->getField('remainnum');//获取指定字段的值
+        $answer=$book->where($tmp)->getField('remainnum');//获取指定字段的值
 
         $map['user_id']=$user_id;
         $borrow=M('borrow');
@@ -70,8 +70,14 @@ class BookController extends HomeController{
         $record['book_name']=$book->where($tmp)->getField('book_name');
         M('borrow_history')->add($record);//插入到还书表
          $borrow->where($map)->delete();//删除该条借阅记录
-     
-        $this->ajaxReturn($remainnum);
+        
+         $score=I('score');
+         $rank['isbn_id']=1;
+         $rank['user_id']=$user_id;
+         $rank['value']=$score;
+         M('score')->add($rank,$options=array(),$replace=true);//允许覆盖
+
+        $this->ajaxReturn($answer);
     }
 
     public function collect(){

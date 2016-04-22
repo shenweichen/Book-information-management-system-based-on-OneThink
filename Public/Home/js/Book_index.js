@@ -2,7 +2,7 @@ var ISBN = $('#ISBN').html();
 var remainnum = $('#remainnum').html();
 var totalnum = $('#totalnum').html();
 var userid = $('#userid').html();
-
+var score = 0;
 function unix_to_datetime(unix) {
 
     var now = new Date(parseInt(unix) * 1000);
@@ -48,8 +48,8 @@ $('#borrow').click(function() {
 });
 
 $('#return').click(function() {
-    if (userid == 0) {
-        alert("该用户还未登录");
+    if (eval(score) == 0) {
+        alert("请给出您的评分");
     } else {
         var book_id = $('#state').html();
         if (eval(book_id) != 0) {
@@ -60,6 +60,7 @@ $('#return').click(function() {
                 data: {
                     ISBN: ISBN,
                     book_id: book_id,
+                    score:score
                 },
                 dataType: "json",
                 success: function(data) {
@@ -120,6 +121,15 @@ $.ajax({ /*ajax异步刷新*/
 });
 
 $(function(){
+    $("#input-id").rating();
+    $('#input-id').on('rating.change', function(event, value, caption) {
+    score=value;
+});
+
+$('#input-id').on('rating.clear', function(event) {
+    score=0;
+});
+
     var tab_child=$("#tab").children();
     tab_child.click(function() {
         var num=$(this).index();
@@ -129,3 +139,5 @@ $(function(){
         $('#tabs>div:eq('+num+')').css("display", "block");
     });
 });
+
+

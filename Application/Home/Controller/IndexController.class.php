@@ -23,9 +23,14 @@ class IndexController extends HomeController {
         $user_id=session('user_id');
      
        //显示热门图书
-    	$this->books=M('borrowrank_view')->order('rank desc')->select();
+    	$this->books=M('borrowrank_view')->order('rank desc')->limit(3)->select();
         $this->count=count($this->books);//热门图书数量
         $this->name=M('reader')->where('user_id=%d',$user_id)->getField('name');//分配用户名用于欢迎语
+        //显示高分图书
+        $this->highbooks=M('book')->order('avg_score desc')->limit(3)->select();
+        //计算推荐图书
+        system("python recommend.py",$out); 
+        $this->recommend=M('recommend_view')->select();
     	$this->display();
         /*$category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);

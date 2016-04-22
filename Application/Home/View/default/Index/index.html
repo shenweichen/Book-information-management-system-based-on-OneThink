@@ -37,6 +37,23 @@
             </tr>
         </foreach>
     </table>
+
+    <h3 align="center" style="color: red">评分最高</h3>
+    <span id="count" style="display: none;">{$count}</span>
+    <table class="table table-striped table-bordered table-hover" style="margin-top: -50px;">
+        <th align="center">书名</th>
+        <th>评分</th>
+        <foreach name='highbooks' item='v'>
+            <tr>
+                <td align="center">
+                    <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                </td>
+                <td align="center">{$v.avg_score}</td>
+                <br/>
+            </tr>
+        </foreach>
+    </table>
+
 </div>
 </block>
 
@@ -85,8 +102,24 @@
                 <a class="left carousel-control" href="#carousel-book" data-slide="prev">‹</a>
                 <a class="right carousel-control" href="#carousel-book" data-slide="next">›</a>
             </div>
+             <h3 align="center" style="color: red">猜你喜欢</h3>
+    <span id="count" style="display: none;">{$count}</span>
+    <table class="table table-striped table-bordered table-hover" style="margin-top: -50px;">
+        <th align="center">书名</th>
+        <th>评分</th>
+        <foreach name='recommend' item='v'>
+            <tr>
+                <td align="center">
+                    <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                </td>
+                <td align="center">{$v.avg_score}</td>
+                <br/>
+            </tr>
+        </foreach>
+    </table>
         </div>
     </div>
+     
 </div>
 <script type="text/javascript" src="__PUBLIC__/Home/js/Index_index.js"></script>
 </block>
