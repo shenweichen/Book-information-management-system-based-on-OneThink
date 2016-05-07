@@ -72,7 +72,8 @@ class BookController extends HomeController{
          $borrow->where($map)->delete();//删除该条借阅记录
         
          $score=I('score');
-         $rank['isbn_id']=1;
+
+         $rank['isbn_id']=$book->where($tmp)->getField('isbn_id');
          $rank['user_id']=$user_id;
          $rank['value']=$score;
          M('score')->add($rank,$options=array(),$replace=true);//允许覆盖

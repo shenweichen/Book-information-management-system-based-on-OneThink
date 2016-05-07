@@ -2,13 +2,13 @@
 <extend name="Base/common"/>
 
 <block name="header">
-  <header class="jumbotron subhead" id="overview">
-    <div class="container">
-      <h2>基于ThinkPHP的图书信息管理系统</h2>
-      <p class="lead"></p>
-    </div>
-  </header>
+    <header class=" subhead" id="overview" style="margin-top: 60px;margin-bottom: 20px;">
+        <div class="container" >
+            <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----首页</h2>
+        </div>
+    </header>
 </block>
+
 
 <block name="side"  >
   <!--   <div class="col-md-2 bs-docs-sidebar" >
@@ -27,11 +27,6 @@
             <option value="book_name">题名</option>
             <option value="author">作者</option>
             <option value="ISBN">ISBN编号</option>
-          </select>
-          <select id="rule_select" class="form-control">
-            <option >任意匹配</option>
-            <option >完全匹配</option>
-            <option >前方一致</option>
           </select>
           <input type="text" class="form-control" name="keyword" id="word" placeholder="查询条件"/>
           <input type="submit" class="form-control" id="submit" value="检索"/>

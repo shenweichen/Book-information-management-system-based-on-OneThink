@@ -2,13 +2,13 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header class="jumbotron subhead" id="overview">
-        <div class="container">
-            <h2>基于ThinkPHP的图书信息管理系统----个人中心</h2>
-            <p class="lead"></p>
+    <header class=" subhead" id="overview" style="margin-top: 60px;margin-bottom: 20px;">
+        <div class="container" >
+            <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----个人中心</h2>
         </div>
     </header>
 </block>
+
 
 <block name="side" >
     <!--  <div class="col-md-3 bs-docs-sidebar" >
@@ -36,6 +36,7 @@
 
 <block name="body">
 <div class="container-fluid">
+ <div class="row-fluid " >
     <div class="col-md-9" id="contents">
         <div style=" display: block;" >
             <table class="table table-striped table-bordered table-hover table-condensed" style="margin-top: -20px;">
@@ -141,6 +142,7 @@
                 </foreach>
             </table>
         </div>
+    </div>
     </div>
 </div>
 <script type="text/javascript" src="__PUBLIC__/Home/js/User_index.js"></script>
