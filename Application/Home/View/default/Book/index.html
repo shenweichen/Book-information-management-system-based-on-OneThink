@@ -8,7 +8,6 @@
     </header>
 </block>
 
-
 <block name="side" >
     <!-- 左侧 nav
 ================================================== -->
@@ -53,17 +52,16 @@
                         <!-- 尚未借阅 -->
                         <eq name="info.remainnum" value="0">
                             <!-- 没有余量 -->
-                            <button  id="borrow" class="btn btn-primary" disabled="true" >借阅</button>
-                    <button  id="return" class="btn btn-success"  style="display: none">归还</button>
+                            <button  id="borrow" class="btn btn-primary"  >借阅</button>
                             <else/>
                             <!-- 尚未借阅且可借 -->
                             <button  id="borrow" class="btn btn-primary">借阅</button>
-                         <button  id="return" class="btn btn-success" style="display: none;">归还</button>
                         </eq>
+                        <button  id="return" class="btn btn-success" style="display: none;">归还</button>
                         <else/>
                         <!-- 正在借阅 -->
-                         <button  id="borrow" class="btn btn-btn-primary" style="display: none;">借阅</button> 
                         <button  id="return" class="btn  btn-success">归还</button>
+                        <button  id="borrow" class="btn btn-btn-primary" style="display: none;">借阅</button>
                     </eq>
 
                     <eq name="collection" value="0">
@@ -72,17 +70,16 @@
                         <button  id="collect" class="btn btn-danger" >取消收藏</button>
                     </eq>
                     <a class="btn btn-default btn-warning" href="{:U('Home/Index/index')}">返回</a>
-                    </div>
-                    <div>
-                   
+                </div>
+                <div>
+
                     <input id="input-id" type="number" class="rating" min=0 max=5 step=1 data-size="sm"  data-default-caption="{rating} hearts" data-star-captions={
                 1: 'One Star',
                 2: 'Two Stars',
                 3: 'Three Stars',
                 4: 'Four Stars',
                 5: 'Five Stars'
-                }>
-                </div>
+                }></div>
                 <else />
                 <!-- 用户尚未登陆 -->
                 <h4>

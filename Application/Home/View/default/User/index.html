@@ -54,7 +54,7 @@
                         <tr align="center">
                             <td >{$reader.name}</td>
                             <td>
-                                <eq name="$reader.sex" value="1">
+                                <eq name="reader.sex" value="1">
                                     男
                                     <else/>
                                     女
@@ -73,13 +73,19 @@
                 <div class="col-md-5" id="list" style="display: none;">
                     <form  class=" " action="{:U('Home/User/update')}" method="post" id="searchlist" >
                         <div class="form-group" >
-                            <input type="text" class="form-control" name="mobile" placeholder="联系方式"/>
-                            <input type="text" class="form-control" name="college"  placeholder="学院"/>
-                            <input type="text" class="form-control" name="major"  placeholder="专业"/>
+                         <label class="control-label" >姓名</label>
+                         <input type="text" class="form-control" name="name" placeholder="姓名" value="{$reader.name}"/>
+                          <label class="control-label" >联系方式</label>
+                            <input type="text" class="form-control" name="mobile" placeholder="联系方式"value="{$reader.mobile}"/>
+                                <label class="control-label" >学院</label>
+                            <input type="text" class="form-control" name="college"  placeholder="学院" value="{$reader.college}"/>
+                                   <label class="control-label" >专业</label>
+                            <input type="text" class="form-control" name="major"  placeholder="专业" value="{$reader.major}"/>
+                            <label class="control-label" >性别</label>
                             <label class="radio-inline">
                                 <input type="radio"  value="1" name="sex">男</label>
                             <label class="radio-inline">
-                                <input type="radio"  value="1" name="sex">女</label>
+                                <input type="radio"  value="0" name="sex">女</label>
                             <input type="submit" class="form-control btn-primary" id="submit" value="修改"/>
                         </div>
                     </form>
@@ -108,7 +114,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style=" display: none; margin-top:-250px" >
+            <div style=" display: none;" >
                     <table class="table table-striped table-bordered table-hover table-condensed">
                     <thead>
                         <tr align="center">

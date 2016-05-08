@@ -5,7 +5,7 @@ $('#submit').click(function(){
         
         $('form').submit();
     }else{
-        alert("字段不能为空!");
+        alert("请输入查询条件!");
         return false;
     }
 });

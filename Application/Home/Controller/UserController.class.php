@@ -33,14 +33,12 @@ class UserController extends HomeController {
 
 	public function update(){
 		$user_id=session('user_id');
-		$mobile=I('mobile');
-		$college=I('college');
-		$major=I('major');
 
-		$map['mobile']=$mobile;
-		$map['college']=$college;
-		$map['major']=$major;
-
+		$map['name']=I('name');
+		$map['mobile']=I('mobile');
+		$map['college']=I('college');
+		$map['major']=I('major');
+		$map['sex']=I('sex');
 		M('reader')->where('user_id=%d',$user_id)->save($map);
 		$this->success('修改成功', 'index.php?s=/Home/User/index');
 

@@ -34,8 +34,8 @@ $('#borrow').click(function() {
                     $('#remainnum').html(data.remainnum);
                     remainnum = $('#remainnum').html();
                     $('#state').html(book_id);
-                    $('#borrow').attr('disabled', 'disabled');
-                    $('#return').removeAttr('disabled');
+          /*          $('#borrow').attr('disabled', 'disabled');
+                    $('#return').removeAttr('disabled');*/
                     $('#' + book_id + '>td:last').html('借出-应还日期' + back_time);
                     $("#bookstate").html(' <font color="red">借阅中</font>');
 
@@ -76,15 +76,15 @@ $('#return').click(function() {
                     $('#remainnum').html(data);
                     remainnum = $('#remainnum').html();
                     $('#state').html(0);
-                    $('#borrow').removeAttr('disabled');
-                    $('#return').attr('disabled', 'disabled');
+                   /* $('#borrow').removeAttr('disabled');
+                    $('#return').attr('disabled', 'disabled');*/
                     var str = '<font color="green">可借</font>';
                     $('#' + book_id + '>td:last').empty();
                     $('#' + book_id + '>td:last').append(str);
                     $("#bookstate").empty();
                     $("#bookstate").append(str);
 
-                        $('#return').css('display', 'none');   
+                    $('#return').css('display', 'none');   
                   $('#borrow').css('display','block');
                    var temp = $("#return").clone(); 
                     $("#return").remove(); 
