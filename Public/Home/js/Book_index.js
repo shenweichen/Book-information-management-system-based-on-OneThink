@@ -38,6 +38,15 @@ $('#borrow').click(function() {
                     $('#return').removeAttr('disabled');
                     $('#' + book_id + '>td:last').html('借出-应还日期' + back_time);
                     $("#bookstate").html(' <font color="red">借阅中</font>');
+
+                    $('#borrow').css('display','none');
+                    $('#return').css('display','block');
+
+                    var temp = $("#borrow").clone(); 
+                    $("#borrow").remove(); 
+                    $("#return").after(temp);
+
+
                     alert("借阅成功!");
                 }
             });
@@ -74,6 +83,15 @@ $('#return').click(function() {
                     $('#' + book_id + '>td:last').append(str);
                     $("#bookstate").empty();
                     $("#bookstate").append(str);
+
+                        $('#return').css('display', 'none');   
+                  $('#borrow').css('display','block');
+                   var temp = $("#return").clone(); 
+                    $("#return").remove(); 
+                    $("#borrow").after(temp);
+
+
+              
                     alert("还书成功");
                 }
             });
@@ -97,6 +115,8 @@ $('#collect').click(function() {
                 success: function(data) {
                     alert("收藏成功");
                     $('#collection').html("1");
+                    $('#collect').removeClass('btn-info');
+                    $('#collect').addClass('btn-danger');
                  $('#collect').html("取消收藏");
                 }
             });
@@ -113,6 +133,8 @@ $.ajax({ /*ajax异步刷新*/
                 success: function(data) {
                     alert("取消收藏成功");
                     $('#collection').html("0");
+                       $('#collect').removeClass('btn-danger');
+                      $('#collect').addClass('btn-info');
                    $('#collect').html("收藏");
                 }
             });

@@ -25,45 +25,55 @@
             <caption>
                 <h3 align="center" style="color:#ff7600;">热门借阅</h3>
             </caption>
-            <tr align="center">
-                <td > <strong>书名</strong>
-                </td>
-                <td> <strong>借阅次数</strong>
-                </td>
-            </tr>
-            <foreach name='books' item='v'>
+            <thead>
                 <tr align="center">
-                    <td >
-                        <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                    <td > <strong>书名</strong>
                     </td>
-                    <td >{$v.rank}</td>
-                    <br/>
+                    <td> <strong>借阅次数</strong>
+                    </td>
                 </tr>
-            </foreach>
+            </thead>
+            <tbody>
+                <foreach name='books' item='v'>
+                    <tr align="center">
+                        <td >
+                            <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                        </td>
+                        <td >{$v.rank}</td>
+                        <br/>
+                    </tr>
+                </foreach>
+            </tbody>
+
         </table>
 
         <span id="count" style="display: none;">{$count}</span>
         <table class="table table-striped table-bordered table-hover" style="margin-top: -50px;">
             <caption>
-                <h3 align="center" style="color: red">评分最高</h3>
+                <h3 align="center" style="color: #ff7600">评分最高</h3>
             </caption>
-            <tr align="center">
-                <td >
-                    <strong>书名</strong>
-                </td>
-                <td>
-                    <strong>评分</strong>
-                </td>
-            </tr>
-            <foreach name='highbooks' item='v'>
+            <thead>
                 <tr align="center">
-                    <td>
-                        <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                    <td >
+                        <strong>书名</strong>
                     </td>
-                    <td >{$v.avg_score}</td>
-                    <br/>
+                    <td>
+                        <strong>评分</strong>
+                    </td>
                 </tr>
-            </foreach>
+            </thead>
+            <tbody>
+                <foreach name='highbooks' item='v'>
+                    <tr align="center">
+                        <td>
+                            <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                        </td>
+                        <td >{$v.avg_score}</td>
+                        <br/>
+                    </tr>
+                </foreach>
+            </tbody>
+
         </table>
 
     </div>
@@ -82,7 +92,7 @@
                             <option value="ISBN">ISBN编号</option>
                         </select>
                         <input type="text" class="form-control " name="keyword" id="word" placeholder="查询条件"/>
-                        <input type="submit" class="form-control" id="submit"value="检索"/>
+                        <input type="submit" class="form-control btn-primary" id="submit"value="检索"/>
                     </div>
                 </form>
             </div>
@@ -109,25 +119,30 @@
                 <span id="count" style="display: none;">{$count}</span>
                 <table class="table table-striped table-bordered table-hover" style="margin-top: -50px;">
                     <caption>
-                        <h3 align="center" style="color: red">猜你喜欢</h3>
+                        <h3 align="center" style="color: #ff7600">新书推荐</h3>
                     </caption>
-                    <tr align="center">
-                        <td >
-                            <strong>书名</strong>
-                        </td>
-                        <td>
-                            <strong>评分</strong>
-                        </td>
-                    </tr>
-                    <foreach name='recommend' item='v'>
+                    <thead>
                         <tr align="center">
-                            <td>
-                                <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                            <td >
+                                <strong>书名</strong>
                             </td>
-                            <td>{$v.avg_score}</td>
-                            <br/>
+                            <td>
+                                <strong>评分</strong>
+                            </td>
                         </tr>
-                    </foreach>
+                    </thead>
+                    <tbody>
+                        <foreach name='recommend' item='v'>
+                            <tr align="center">
+                                <td>
+                                    <a href="index.php?s=/home/book/index/ISBN/{$v.isbn}">{$v.book_name}</a>
+                                </td>
+                                <td>{$v.avg_score}</td>
+                                <br/>
+                            </tr>
+                        </foreach>
+                    </tbody>
+
                 </table>
             </div>
         </div>
