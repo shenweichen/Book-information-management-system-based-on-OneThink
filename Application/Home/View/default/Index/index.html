@@ -1,12 +1,12 @@
 <!-- 这是Index控制器的index页面 -->
 <extend name="Base/common"/>
 
-<block name="header">
-    <header class=" subhead" id="overview" style="margin-top: 60px;margin-bottom: 20px;">
-        <div class="container" >
-            <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----首页</h2>
-        </div>
-    </header>
+<block name="header" >
+ <header class=" page-header bg-info" id="overview" style="margin-top:30px;margin-bottom: 0px">
+    <div class="container" >
+        <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----首页</h2>
+    </div>
+</header> 
 </block>
 
 <block name="side" >
@@ -87,7 +87,7 @@
                 <form  class=" form-inline" action="{:U('Home/List/index')}" method="post" id="searchlist" >
                     <div class="form-group"style="padding-bottom:20px;">
                         <select id="field_select" class="form-control" name="query_field" >
-                            <option value="book_name">题名</option>
+                            <option value="book_name">书名</option>
                             <option value="author">作者</option>
                             <option value="ISBN">ISBN编号</option>
                         </select>

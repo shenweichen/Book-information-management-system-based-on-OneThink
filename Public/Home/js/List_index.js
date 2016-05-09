@@ -71,7 +71,7 @@ $('#search_list>p>a').mouseover(function() {
                        str+='<font color="green">可借</font>';
                     }else{
                         var datetime = unix_to_datetime(back_time);
-                     str+='借出-应还日期：'+datetime;
+                        str+='<font color="red">借出</font> 应还日期：'+datetime;
                     }
                     str+='</td></tr>';
 

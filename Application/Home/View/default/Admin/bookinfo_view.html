@@ -2,7 +2,7 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header class=" subhead" id="overview" style="margin-top: 60px;margin-bottom: 20px;">
+    <header class=" page-header bg-primary" id="overview" style="margin-top:50px;margin-bottom: 0px;">
         <div class="container" >
             <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----后台管理</h2>
         </div>
@@ -84,10 +84,10 @@
             <div class="col-md-5" id="list" style="display: none;">
                 <form  class=" " action="{:U('Home/Admin/addcopy')}" method="post" id="searchlist" >
                     <div class="form-group" >
-                        <input type="text" class="form-control" name="isbn" placeholder="ISBN" id="tempisbn" readonly="true" />
+                        <input type="text" class="form-control" name="isbn" placeholder="ISBN" id="tempisbn" style="display: none" />
                         <input type="text" class="form-control" name="collection" placeholder="馆藏地" id="tempcollection"/>
                         <input type="text" class="form-control" name="number" placeholder="数量" id="tempnumber"/>
-                        <input type="submit" class="form-control" id="submit" value="执行添加复本"/>
+                        <input type="submit" class="form-control btn-success" id="submit" value="执行添加复本"/>
                     </div>
                 </form>
             </div>

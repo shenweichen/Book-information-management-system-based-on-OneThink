@@ -2,9 +2,9 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header class=" subhead" id="overview" style="margin-top: 60px;margin-bottom: 20px;">
+    <header class=" page-header bg-info" id="overview" style="margin-top:50px;margin-bottom: 0px">
         <div class="container" >
-            <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----首页</h2>
+            <h2 style="text-align: center;">基于ThinkPHP的图书信息管理系统----图书搜索</h2>
         </div>
     </header>
 </block>
@@ -24,7 +24,7 @@
       <form  class=" form-inline" action="{:U('Home/List/index')}" method="post" id="searchlist" >
         <div class="form-group" >
           <select id="field_select" class="form-control" name="query_field" >
-            <option value="book_name">题名</option>
+            <option value="book_name">书名</option>
             <option value="author">作者</option>
             <option value="ISBN">ISBN编号</option>
           </select>
@@ -42,7 +42,7 @@
     <h4 align="center">
       检索到 <strong style="color: red">{$count}</strong>
       条&nbsp;
-      <span style="color: red">{$query_field}={$word}</span>
+      <span style="color: red">{$query_field} 包含 {$word}</span>
       &nbsp;的结果
     </h4>
     <ol id="search_book_list" class="list-group">
@@ -83,7 +83,6 @@
                   <td>馆藏地</td>
                   <td>书刊状态</td>
                 </tr>
-
               </tbody>
             </table>
           </div>
