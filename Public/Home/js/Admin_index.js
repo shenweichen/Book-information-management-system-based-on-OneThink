@@ -43,3 +43,16 @@ $('#submit').click(function(){
         $('form').submit();
     }
 });
+
+$('#searchbook').click(function(){
+
+     var book_name = $('#searchlist input:eq(0)').val();
+
+    if(book_name==""){
+        alert("请输入查询条件");
+        return false;
+        
+    }else{
+        $('form').submit();
+    }
+});

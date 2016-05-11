@@ -12,7 +12,7 @@ namespace Home\Controller;
 
 /**
  * 后台控制器
- * 包括图书管理，用户管理及借阅统计
+ * 包括图书管理，用户管理
  */
 class AdminController extends HomeController {
 

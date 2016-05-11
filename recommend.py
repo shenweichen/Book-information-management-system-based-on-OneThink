@@ -3,12 +3,7 @@ import numpy as np
 from numpy import *
 import MySQLdb
 import sys
-def loadMatrixFromFile(file):
-	lines = np.loadtxt(file,delimiter=',',dtype='str')
-	df = lines[1:,1:].astype('str')
-	df[df == '']=0
-	return df.astype(np.int)
-#myMat=mat(loadMatrixFromFile('train.csv'))
+
 
 def loadMatrixFromMysql(conn):
 	cur = conn.cursor()
