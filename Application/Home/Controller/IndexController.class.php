@@ -38,15 +38,5 @@ class IndexController extends HomeController {
 
     }
 
-    public function search(){
-
-    	$word=I('keyword');
-        $query_field=I('query_field');
-    	$map[$query_field]=array('LIKE','%'.$word.'%');
-    	$result=M('book')->where($map)->select();
-    	$this->ajaxReturn($result);
-    }
-  
-
 
 }
