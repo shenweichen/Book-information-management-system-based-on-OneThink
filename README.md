@@ -1,9 +1,10 @@
-# Local Server Config
+# Installation and configuration instructions
+## Local Server Config
 1. Install `wampserver2.5-Apache-2.4.9-Mysql-5.6.17-php5.5.12-64b` to `D:\wamp`
 2. Install `Firefox 38.0.5`
 3. clone repo to `D:\wamp\www\OnethinkBt3`
 ![s](./docs/local_server_config.png)
-# Create Database and Add User 
+## Create Database and Add User 
 
 **If you have configured the root user and root password, you can install it directly with the root user. You don't need this step.**
 
@@ -16,7 +17,7 @@ select user,host,password from user where user='otbt3_root'; --Verify that the u
 GRANT ALL PRIVILEGES ON otbt3.* TO otbt3_root@localhost IDENTIFIED BY 'otbt3' WITH GRANT OPTION;
 flush privileges;
 ```
-#	Install this version
+## Install this version
 1. Start wamp and make sure the tray is green in the lower right corner of desktop
 ![icon](./docs/status.png)
 1. Open the browser and enter `localhost/onethinkbt3/install.php` or `localhost/onethinkbt3`,appears this
